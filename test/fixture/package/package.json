@@ -4,6 +4,7 @@
 		"eslint": true,
 		"prettier": "recommended",
 		"biome": "recommended",
+		"playwright": true,
 		"tsconfig": {
 			"compilerOptions": {
 				"target": "ES6"

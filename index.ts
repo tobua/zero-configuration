@@ -3,16 +3,21 @@ import { existsSync } from 'node:fs'
 import { join } from 'node:path'
 import { it } from 'avait'
 import Bun from 'bun'
+import { create } from 'logua'
 import * as biome from './configuration/biome'
 import * as eslint from './configuration/eslint'
 import * as ignore from './configuration/gitignore'
+import * as playwright from './configuration/playwright'
 import * as prettier from './configuration/prettier'
 import * as typescript from './configuration/typescript'
 import * as vscode from './configuration/vscode'
+import type { Configuration } from './types'
+
+const log = create('zero-configuration', 'blue')
 
 // TODO validate inputs with zod.
 
-const configurations = [
+const configurations: Configuration[] = [
   {
     name: 'typescript',
     alias: 'tsconfig',
@@ -34,6 +39,10 @@ const configurations = [
     name: 'vscode',
     configuration: vscode,
   },
+  {
+    name: 'playwright',
+    configuration: playwright,
+  },
 ]
 
 const ignores: string[] = []
@@ -43,7 +52,7 @@ const packageJson = await Bun.file('./package.json').json()
 const { value: moduleContents } = await it(import(join(process.cwd(), './configuration.ts')))
 
 if (!(moduleContents || Object.hasOwn(packageJson, 'configuration'))) {
-  console.warn('zero-configuration: No configurations detected')
+  log('No configurations detected', 'error')
 }
 
 const userConfiguration = packageJson.configuration ?? moduleContents
@@ -64,10 +73,16 @@ for (const { name, alias, configuration } of configurations) {
     await Bun.write(file.name, file.contents)
     ignores.push(file.name)
   }
+
+  if (value === true) {
+    const file = configuration.createFile()
+    await Bun.write(file.name, file.contents)
+    ignores.push(file.name)
+  }
 }
 
 if (ignores.length === 0) {
-  console.warn('zero-configuration: No configurations detected')
+  log('No configurations detected', 'error')
 }
 
 let userIgnores: string[] = userConfiguration.ignore ?? userConfiguration.gitignore ?? []

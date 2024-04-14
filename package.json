@@ -1,0 +1,66 @@
+{
+  "name": "zero-configuration",
+  "description": "Manage all your configuration in one location.",
+  "version": "0.0.0-development",
+  "repository": "github:tobua/zero-configuration",
+  "license": "MIT",
+  "author": "Matthias Giger",
+  "scripts": {
+    "format": "bun biome format . --write",
+    "postinstall": "bun index.ts",
+    "lint": "bun biome lint .",
+    "types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "avait": "^1.0.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.6.4",
+    "@types/bun": "^1.0.12",
+    "typescript": "^5.4.5"
+  },
+  "peerDependencies": {
+    "typescript": ">= 5"
+  },
+  "type": "module",
+  "bin": "./index.ts",
+  "files": [
+    "*.ts",
+    "configuration"
+  ],
+  "keywords": [
+    "configuration",
+    "build",
+    "webdevelopment",
+    "zero-config"
+  ],
+  "publishConfig": {
+    "provenance": false
+  },
+  "configuration": {
+    "gitignore": [
+      "node_modules",
+      "bun.lockb",
+      "test/fixture/*/*",
+      "!test/fixture/*/package.json",
+      "!test/fixture/*/configuration.ts"
+    ],
+    "biome": "recommended",
+    "vscode": "recommended",
+    "typescript": {
+      "compilerOptions": {
+        "strict": true,
+        "skipLibCheck": true,
+        "target": "ES2020",
+        "lib": [
+          "DOM",
+          "ES2020"
+        ],
+        "module": "Preserve"
+      },
+      "files": [
+        "index.ts"
+      ]
+    }
+  }
+}

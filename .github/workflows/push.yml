@@ -1,0 +1,22 @@
+name: push
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  publish-release:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v1
+      - run: bun install
+      - run: bun lint
+      - run: bun types
+      - name: 📢 Release
+        uses: tobua/release-npm-action@v3
+        with:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

@@ -1,0 +1,40 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"title": "JSON schema for package.json files to be used with the papua build tool.",
+	"allOf": [{ "$ref": "https://json.schemastore.org/package.json" }],
+	"properties": {
+		"configuration": {
+			"description": "List of configurations applied through zero-configuration.",
+			"type": "object",
+			"properties": {
+				"eslint": {
+					"description": "Folder where the bundled assets should be emitted.",
+					"type": "string"
+				},
+				"prettier": {
+					"type": "string",
+					"properties": {
+						"ignore": {
+							"type": "array",
+							"items": {
+								"type": "string"
+							}
+						}
+					}
+				},
+				"tsconfig": {
+					"allOf": [{ "$ref": "https://json.schemastore.org/tsconfig.json" }]
+				},
+				"jsconfig": {
+					"allOf": [{ "$ref": "https://json.schemastore.org/jsconfig.json" }]
+				},
+				"gitignore": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				}
+			}
+		}
+	}
+}

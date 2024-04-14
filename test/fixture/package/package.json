@@ -1,0 +1,13 @@
+{
+	"name": "package",
+	"configuration": {
+		"eslint": true,
+		"prettier": "recommended",
+		"biome": "recommended",
+		"tsconfig": {
+			"compilerOptions": {
+				"target": "ES6"
+			}
+		}
+	}
+}

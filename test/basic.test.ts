@@ -14,3 +14,14 @@ test('Adds configuration files for basic package setup.', () => {
   expect(existsSync(join(fixturePath, 'prettier.config.js'))).toBe(true)
   expect(existsSync(join(fixturePath, 'biome.json'))).toBe(true)
 })
+
+test('Adds configuration files for basic file setup.', () => {
+  const fixturePath = './test/fixture/file'
+
+  execSync('bun ./../../../index.ts', {
+    cwd: fixturePath,
+    stdio: 'inherit',
+  })
+
+  expect(existsSync(join(fixturePath, 'prettier.config.js'))).toBe(true)
+})

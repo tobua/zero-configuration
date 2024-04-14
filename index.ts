@@ -1,5 +1,6 @@
 #!/usr/bin/env bun
 import { existsSync } from 'node:fs'
+import { join } from 'node:path'
 import { it } from 'avait'
 import Bun from 'bun'
 import * as biome from './configuration/biome'
@@ -39,14 +40,16 @@ const ignores: string[] = []
 
 const packageJson = await Bun.file('./package.json').json()
 // @ts-ignore
-const { value: configurationFile } = await it(import('./configuration.ts'))
+const { value: moduleContents } = await it(import(join(process.cwd(), './configuration.ts')))
 
-if (!(configurationFile || Object.hasOwn(packageJson, 'configuration'))) {
+if (!(moduleContents || Object.hasOwn(packageJson, 'configuration'))) {
   console.warn('zero-configuration: No configurations detected')
 }
 
+const userConfiguration = packageJson.configuration ?? moduleContents
+
 for (const { name, alias, configuration } of configurations) {
-  const value = packageJson.configuration[name] ?? (alias && packageJson.configuration[alias])
+  const value = userConfiguration[name] ?? (alias && userConfiguration[alias])
   if (!value) continue
 
   if (typeof value === 'string' && Object.hasOwn(configuration.templates, value)) {
@@ -67,7 +70,7 @@ if (ignores.length === 0) {
   console.warn('zero-configuration: No configurations detected')
 }
 
-let userIgnores: string[] = packageJson.configuration.ignore ?? packageJson.configuration.gitignore ?? []
+let userIgnores: string[] = userConfiguration.ignore ?? userConfiguration.gitignore ?? []
 
 if (typeof userIgnores === 'string' && Object.hasOwn(ignore.templates, userIgnores)) {
   userIgnores = ignore.templates[userIgnores]

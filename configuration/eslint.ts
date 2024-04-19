@@ -4,6 +4,8 @@ export const templates = {
   },
 }
 
+export const extension = (path: string) => ({ extends: path })
+
 export function createFile(configuration: object) {
-  return { name: 'eslint.config.js', contents: `export default [${configuration}]` }
+  return { name: 'eslint.config.js', contents: `export default [${JSON.stringify(configuration, null, 2)}]` }
 }

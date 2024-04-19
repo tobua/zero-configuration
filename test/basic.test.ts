@@ -25,3 +25,15 @@ test('Adds configuration files for basic file setup.', () => {
 
   expect(existsSync(join(fixturePath, 'prettier.config.js'))).toBe(true)
 })
+
+test('Extends existing configurations.', () => {
+  const fixturePath = './test/fixture/extends'
+
+  execSync('bun ./../../../index.ts', {
+    cwd: fixturePath,
+    stdio: 'inherit',
+  })
+
+  expect(existsSync(join(fixturePath, 'eslint.config.js'))).toBe(true)
+  expect(existsSync(join(fixturePath, 'tsconfig.json'))).toBe(true)
+})

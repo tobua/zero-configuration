@@ -1,6 +1,6 @@
 export const templates = {
   recommended: {
-    $schema: 'https://biomejs.dev/schemas/1.6.4/schema.json',
+    $schema: 'node_modules/@biomejs/biome/configuration_schema.json',
     organizeImports: {
       enabled: true,
     },
@@ -10,6 +10,7 @@ export const templates = {
         all: true,
         style: {
           useBlockStatements: 'off',
+          noNamespaceImport: 'off',
         },
       },
     },

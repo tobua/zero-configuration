@@ -1,4 +1,4 @@
-import { devices } from '@playwright/test'
+// NOTE imports will fail in fixture.
 
 export const prettier = 'recommended'
 
@@ -8,7 +8,6 @@ export const playwright = {
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
     },
   ],
   webServer: {

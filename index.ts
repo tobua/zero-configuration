@@ -11,6 +11,7 @@ import * as playwright from './configuration/playwright'
 import * as prettier from './configuration/prettier'
 import * as typescript from './configuration/typescript'
 import * as vscode from './configuration/vscode'
+import { parse } from './parse'
 import type { Configuration } from './types'
 
 const log = create('zero-configuration', 'blue')
@@ -60,25 +61,10 @@ const userConfiguration = packageJson.configuration ?? moduleContents
 for (const { name, alias, configuration } of configurations) {
   const value = userConfiguration[name] ?? (alias && userConfiguration[alias])
   if (!value) continue
-
-  if (typeof value === 'string' && Object.hasOwn(configuration.templates, value)) {
-    const configurationTemplate = configuration.templates[value as keyof typeof configuration.templates]
-    const file = configuration.createFile(configurationTemplate)
-    await Bun.write(file.name, file.contents)
-    ignores.push(file.name)
-  }
-
-  if (typeof value === 'object') {
-    const file = configuration.createFile(value)
-    await Bun.write(file.name, file.contents)
-    ignores.push(file.name)
-  }
-
-  if (value === true) {
-    const file = configuration.createFile()
-    await Bun.write(file.name, file.contents)
-    ignores.push(file.name)
-  }
+  const file = await parse(value, configuration)
+  if (!file) continue
+  await Bun.write(file.name, file.contents)
+  ignores.push(file.name)
 }
 
 if (ignores.length === 0) {

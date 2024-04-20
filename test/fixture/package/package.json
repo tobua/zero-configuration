@@ -1,10 +1,14 @@
 {
 	"name": "package",
+	"author": {
+		"name": "Matthias Giger"
+	},
 	"configuration": {
 		"eslint": true,
 		"prettier": "recommended",
 		"biome": "recommended",
 		"playwright": true,
+		"license": "MIT",
 		"tsconfig": {
 			"compilerOptions": {
 				"target": "ES6"

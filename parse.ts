@@ -1,7 +1,7 @@
 import { existsSync } from 'node:fs'
 import { join } from 'node:path'
 import { it } from 'avait'
-import type { Configuration } from './types'
+import type { Configuration, PackageJson } from './types'
 
 const isExtension = async (value: string) => {
   // NOTE dynamic import in tests will resolve relative to project node_modules and not fixture.
@@ -13,10 +13,11 @@ const isExtension = async (value: string) => {
   return false
 }
 
-export async function parse(value: string | object | boolean, configuration: Configuration['configuration']) {
+export async function parse(value: string | object | boolean, configuration: Configuration['configuration'], packageJson: PackageJson) {
   // Template.
-  if (typeof value === 'string' && Object.hasOwn(configuration.templates, value)) {
-    const configurationTemplate = configuration.templates[value as keyof typeof configuration.templates]
+  if (typeof value === 'string' && configuration.templates && Object.hasOwn(configuration.templates, value)) {
+    const template = configuration.templates[value as keyof typeof configuration.templates]
+    const configurationTemplate = typeof template === 'function' ? (template as (value: PackageJson) => string)(packageJson) : template
     return configuration.createFile(configurationTemplate)
   }
 

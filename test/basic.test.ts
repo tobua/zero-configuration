@@ -13,6 +13,7 @@ test('Adds configuration files for basic package setup.', () => {
 
   expect(existsSync(join(fixturePath, 'prettier.config.js'))).toBe(true)
   expect(existsSync(join(fixturePath, 'biome.json'))).toBe(true)
+  expect(existsSync(join(fixturePath, 'LICENSE.md'))).toBe(true)
 })
 
 test('Adds configuration files for basic file setup.', () => {

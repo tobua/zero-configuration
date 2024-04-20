@@ -13,7 +13,8 @@
   },
   "dependencies": {
     "avait": "^1.0.0",
-    "logua": "^3.0.3"
+    "logua": "^3.0.3",
+    "zod": "^3.22.5"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.7.0",

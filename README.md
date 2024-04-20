@@ -6,6 +6,8 @@ Many web development projects often contain numerous configuration files in the 
 
 - No configuration files in your source code.
 - Support for **gitignore**, **TypeScript**, **ESLint**, **Prettier**, **Biome**, **VS Code** and **Playwright**.
+- Quickly configure bundlers like **Vite** and **Rsbuild**.
+- Generate boilerplate before publishing: **LICENSE.md**.
 - JSON based configuration in `package.json`.
 - Optional typed programmatic interface in `configuration.ts`.
 - Recommended configurations to easily extend.

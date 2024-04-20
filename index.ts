@@ -3,53 +3,13 @@ import { existsSync } from 'node:fs'
 import { join } from 'node:path'
 import { it } from 'avait'
 import Bun from 'bun'
-import { create } from 'logua'
-import * as biome from './configuration/biome'
-import * as eslint from './configuration/eslint'
-import * as ignore from './configuration/gitignore'
-import * as playwright from './configuration/playwright'
-import * as prettier from './configuration/prettier'
-import * as typescript from './configuration/typescript'
-import * as vscode from './configuration/vscode'
+import { configurations, ignore } from './configuration'
+import { log, validate } from './helper'
 import { parse } from './parse'
-import type { Configuration } from './types'
-
-const log = create('zero-configuration', 'blue')
-
-// TODO validate inputs with zod.
-
-const configurations: Configuration[] = [
-  {
-    name: 'typescript',
-    alias: 'tsconfig',
-    configuration: typescript,
-  },
-  {
-    name: 'biome',
-    configuration: biome,
-  },
-  {
-    name: 'eslint',
-    configuration: eslint,
-  },
-  {
-    name: 'prettier',
-    configuration: prettier,
-  },
-  {
-    name: 'vscode',
-    configuration: vscode,
-  },
-  {
-    name: 'playwright',
-    configuration: playwright,
-  },
-]
 
 const ignores: string[] = []
 
 const packageJson = await Bun.file('./package.json').json()
-// @ts-ignore
 const { value: moduleContents } = await it(import(join(process.cwd(), './configuration.ts')))
 
 if (!(moduleContents || Object.hasOwn(packageJson, 'configuration'))) {
@@ -58,10 +18,12 @@ if (!(moduleContents || Object.hasOwn(packageJson, 'configuration'))) {
 
 const userConfiguration = packageJson.configuration ?? moduleContents
 
+validate(userConfiguration)
+
 for (const { name, alias, configuration } of configurations) {
   const value = userConfiguration[name] ?? (alias && userConfiguration[alias])
   if (!value) continue
-  const file = await parse(value, configuration)
+  const file = await parse(value, configuration, packageJson)
   if (!file) continue
   await Bun.write(file.name, file.contents)
   ignores.push(file.name)

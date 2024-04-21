@@ -7,7 +7,7 @@ import { state } from './state'
 
 const ignores: string[] = []
 
-findConfiguration()
+await findConfiguration()
 
 for (const { name, alias, configuration } of configurations) {
   const value = state.options[name] ?? (alias && state.options[alias])

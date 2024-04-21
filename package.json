@@ -14,11 +14,13 @@
   "dependencies": {
     "avait": "^1.0.0",
     "logua": "^3.0.3",
+    "parse-gitignore": "^2.0.0",
     "zod": "^3.22.5"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.7.0",
     "@types/bun": "^1.1.0",
+    "@types/parse-gitignore": "^1.0.2",
     "eslint-config-airbnb": "^19.0.4",
     "typescript": "^5.4.5"
   },
@@ -29,7 +31,8 @@
   "bin": "./index.ts",
   "files": [
     "*.ts",
-    "configuration"
+    "configuration",
+    "*.md"
   ],
   "keywords": [
     "configuration",
@@ -48,6 +51,7 @@
       "!test/fixture/*/package.json",
       "!test/fixture/*/configuration.ts"
     ],
+    "license": "MIT",
     "biome": "recommended",
     "vscode": "recommended",
     "typescript": {

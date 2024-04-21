@@ -3,6 +3,7 @@ import { join } from 'node:path'
 import { it } from 'avait'
 import Bun from 'bun'
 import { create } from 'logua'
+import { parse } from 'parse-gitignore'
 import { z } from 'zod'
 import { configurations, ignore } from './configuration'
 import { state } from './state'
@@ -42,6 +43,23 @@ export async function findConfiguration() {
   state.options = userConfiguration
 }
 
+async function addAdditionalGitignoreEntries(file: { name: string; contents: string }) {
+  const addedIgnores: string[] = []
+  const existingFileContents = await Bun.file(file.name).text()
+  const { patterns: existingIgnores } = parse(existingFileContents)
+  const { patterns: updatedIgnores } = parse(file.contents)
+
+  for (const pattern of updatedIgnores) {
+    if (!(existingIgnores.includes(pattern) || existingIgnores.includes(`!${pattern}`))) {
+      addedIgnores.push(pattern)
+    }
+  }
+
+  if (addedIgnores.length) {
+    await Bun.write(file.name, `${existingFileContents}${existingFileContents.endsWith('\n') ? '' : '\n'}${addedIgnores.join('\n')}\n`)
+  }
+}
+
 export async function writeGitIgnore(ignores: string[]) {
   let userIgnores = state.options.ignore ?? state.options.gitignore ?? []
 
@@ -53,8 +71,11 @@ export async function writeGitIgnore(ignores: string[]) {
     userIgnores.push(...ignores)
   }
 
-  if (!existsSync('./.gitignore')) {
-    const file = ignore.createFile(userIgnores as string[])
+  const file = ignore.createFile(userIgnores as string[])
+
+  if (existsSync(file.name)) {
+    await addAdditionalGitignoreEntries(file)
+  } else {
     await Bun.write(file.name, file.contents)
   }
 }

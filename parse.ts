@@ -1,6 +1,7 @@
 import { existsSync } from 'node:fs'
 import { join } from 'node:path'
 import { it } from 'avait'
+import { merge } from 'ts-deepmerge'
 import type { Configuration, Options } from './types'
 
 const isExtension = async (value: string) => {
@@ -11,6 +12,31 @@ const isExtension = async (value: string) => {
   const fileExists = paths.some(existsSync)
   if (fileExists) return true
   return false
+}
+
+function extendTemplate(value: Options, configuration: Configuration['configuration']) {
+  if (
+    typeof value !== 'object' ||
+    !(typeof value.extends === 'string' && configuration.templates && Object.hasOwn(configuration.templates, value.extends))
+  ) {
+    return value
+  }
+
+  let template = configuration.templates[value.extends]
+
+  if (typeof template === 'string') {
+    value.extends = template
+  }
+  if (typeof template === 'function') {
+    template = template()
+  }
+  if (typeof template === 'object') {
+    // biome-ignore lint/performance/noDelete: We don't want the key to show up in the user configuration.
+    delete value.extends
+    return merge(template, value)
+  }
+
+  return value
 }
 
 export async function parse(value: Options, configuration: Configuration['configuration']) {
@@ -26,11 +52,12 @@ export async function parse(value: Options, configuration: Configuration['config
     return configuration.createFile(configuration.extension(value))
   }
 
-  if (typeof value === 'object') {
-    return configuration.createFile(value)
-  }
-
   if (value === true) {
     return configuration.createFile()
   }
+
+  // biome-ignore lint/style/noParameterAssign: Easier in this case.
+  value = extendTemplate(value, configuration)
+
+  return configuration.createFile(value)
 }

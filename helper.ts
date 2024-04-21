@@ -30,16 +30,21 @@ export const validate = (configuration: unknown) => {
 
 export async function findConfiguration() {
   const packageJson = await Bun.file('./package.json').json()
-  const { value: moduleContents } = await it(import(join(process.cwd(), './configuration.ts')))
+  const { value: typeScriptModuleContents } = await it(import(join(process.cwd(), './configuration.ts')))
+  const { value: javaScriptModuleContents } = await it(import(join(process.cwd(), './configuration.js')))
 
-  if (!(moduleContents || Object.hasOwn(packageJson, 'configuration'))) {
-    log('No configurations detected', 'error')
+  if (!(typeScriptModuleContents || javaScriptModuleContents || Object.hasOwn(packageJson, 'configuration'))) {
+    log('No configuration found', 'error')
   }
 
-  const userConfiguration = packageJson.configuration ?? moduleContents
+  if (!packageJson.configuration && typeScriptModuleContents) {
+    state.language = 'typescript'
+  } else if (!packageJson.configuration && javaScriptModuleContents) {
+    state.language = 'javascript'
+  }
 
+  const userConfiguration = packageJson.configuration ?? typeScriptModuleContents ?? javaScriptModuleContents
   validate(userConfiguration)
-
   state.options = userConfiguration
 }
 
@@ -61,10 +66,10 @@ async function addAdditionalGitignoreEntries(file: { name: string; contents: str
 }
 
 export async function writeGitIgnore(ignores: string[]) {
-  let userIgnores = state.options.ignore ?? state.options.gitignore ?? []
+  let userIgnores = state.options.ignore ?? state.options.gitignore ?? ([] as string[])
 
   if (typeof userIgnores === 'string' && Object.hasOwn(ignore.templates, userIgnores)) {
-    userIgnores = ignore.templates[userIgnores]
+    userIgnores = ignore.templates[userIgnores] as string[]
   }
 
   if (userIgnores && Array.isArray(userIgnores)) {
@@ -78,4 +83,6 @@ export async function writeGitIgnore(ignores: string[]) {
   } else {
     await Bun.write(file.name, file.contents)
   }
+
+  return Object.hasOwn(state.options, 'ignore') || Object.hasOwn(state.options, 'gitignore')
 }

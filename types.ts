@@ -15,7 +15,7 @@ export type Configuration = {
   }
 }
 
-export type Options = string | object | true
+export type Options = string | { extends?: string } | true
 
 export interface State {
   options: { [Key in ConfigurationKeys]?: Options }

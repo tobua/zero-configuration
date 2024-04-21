@@ -8,10 +8,6 @@ export const templates = {
       enabled: true,
       rules: {
         all: true,
-        style: {
-          useBlockStatements: 'off',
-          noNamespaceImport: 'off',
-        },
       },
     },
     javascript: {

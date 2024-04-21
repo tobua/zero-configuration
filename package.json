@@ -15,6 +15,7 @@
     "avait": "^1.0.0",
     "logua": "^3.0.3",
     "parse-gitignore": "^2.0.0",
+    "ts-deepmerge": "^7.0.0",
     "zod": "^3.22.5"
   },
   "devDependencies": {
@@ -49,10 +50,26 @@
       "bun.lockb",
       "test/fixture/*/*",
       "!test/fixture/*/package.json",
-      "!test/fixture/*/configuration.ts"
+      "!test/fixture/*/configuration.ts",
+      "!test/fixture/*/configuration.js"
     ],
     "license": "MIT",
-    "biome": "recommended",
+    "biome": {
+      "extends": "recommended",
+      "linter": {
+        "rules": {
+          "style": {
+            "useBlockStatements": "off",
+            "noNamespaceImport": "off"
+          }
+        }
+      },
+      "files": {
+        "ignore": [
+          "test/fixture"
+        ]
+      }
+    },
     "vscode": "recommended",
     "typescript": {
       "compilerOptions": {

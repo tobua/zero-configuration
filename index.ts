@@ -18,8 +18,8 @@ for (const { name, alias, configuration } of configurations) {
   ignores.push(file.name)
 }
 
-if (ignores.length === 0) {
-  log('No configurations detected', 'error')
-}
+const gitUserConfigured = await writeGitIgnore(ignores)
 
-writeGitIgnore(ignores)
+if (!gitUserConfigured && ignores.length === 0) {
+  log('No configuration to add', 'warning')
+}

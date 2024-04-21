@@ -2,6 +2,20 @@
 	"name": "extends",
 	"configuration": {
 		"eslint": "eslint-config-airbnb",
-		"typescript": "my-shared-tsconfig/tsconfig.json"
+		"typescript": "my-shared-tsconfig/tsconfig.json",
+		"biome": {
+			"extends": "recommended",
+			"linter": {
+				"rules": {
+					"style": {
+						"useBlockStatements": "off",
+						"noNamespaceImport": "off"
+					}
+				}
+			},
+			"files": {
+				"ignore": ["test/fixture"]
+			}
+		}
 	}
 }

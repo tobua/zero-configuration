@@ -1,6 +1,6 @@
 import type { Template } from '../types'
 
-export const templates: Template = {} // Has no templates, highly customizable.
+export const templates: Template<object> = {} // Has no templates, highly customizable.
 
 export function createFile() {
   return {

@@ -1,14 +1,26 @@
-export type Template<T = object> = { [key: string]: T }
+import type { ConfigurationKeys } from './configuration'
+
+export type Template<T> = { [key: string]: T | (() => T) }
 
 export type PackageJson = { name: string; author?: string | { name: string } }
 
 export type Configuration = {
-  name: string
-  alias?: string
+  name: ConfigurationKeys
+  alias?: ConfigurationKeys
   configuration: {
-    templates?: Template | ((packageJson: PackageJson) => string)
+    templates?: Template<string | object | string[]>
     // biome-ignore lint/suspicious/noExplicitAny: Will be specified in file explicitly.
     createFile: (value?: any) => { name: string; contents: string }
     extension?: (path: string) => object
   }
+}
+
+export type Options = string | object | true
+
+export interface State {
+  options: { [Key in ConfigurationKeys]?: Options }
+  // Where does the configuration come from package.json => configuration: JSON
+  // configuration.js: JavaScript, configuration.ts: TypeScript
+  language: 'json' | 'javascript' | 'typescript'
+  packageJson: PackageJson
 }

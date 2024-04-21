@@ -1,6 +1,6 @@
 import type { Template } from '../types'
 
-export const templates: Template = {
+export const templates: Template<object> = {
   recommended: {
     'editor.defaultFormatter': 'biomejs.biome',
     'editor.codeActionsOnSave': {

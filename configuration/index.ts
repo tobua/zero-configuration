@@ -12,6 +12,21 @@ import * as vscode from './vscode'
 
 export { ignore }
 
+export type ConfigurationKeys =
+  | 'typescript'
+  | 'tsconfig'
+  | 'biome'
+  | 'eslint'
+  | 'prettier'
+  | 'vscode'
+  | 'playwright'
+  | 'vite'
+  | 'rsbuild'
+  | 'license'
+  // Require separate logic, not found in configuraitons below.
+  | 'ignore'
+  | 'gitignore'
+
 export const configurations: Configuration[] = [
   {
     name: 'typescript',

@@ -1,7 +1,7 @@
 import type { Template } from '../types'
 
 /** @type {import("prettier").Config} */
-export const templates: Template = {
+export const templates: Template<object> = {
   recommended: {
     semi: false,
     singleQuote: true,

@@ -10,6 +10,9 @@ import { state } from './state'
 
 export const log = create('zero-configuration', 'blue')
 
+export const root = (file: string) =>
+  process.cwd().includes('node_modules') ? join(process.cwd(), '../..', file) : join(process.cwd(), file)
+
 const keys = Object.fromEntries(configurations.map((current) => [current.name, z.union([z.string(), z.object({}), z.boolean()])]))
 
 for (const configuration of configurations) {
@@ -29,9 +32,9 @@ export const validate = (configuration: unknown) => {
 }
 
 export async function findConfiguration() {
-  const packageJson = await Bun.file('./package.json').json()
-  const { value: typeScriptModuleContents } = await it(import(join(process.cwd(), './configuration.ts')))
-  const { value: javaScriptModuleContents } = await it(import(join(process.cwd(), './configuration.js')))
+  const packageJson = await Bun.file(root('./package.json')).json()
+  const { value: typeScriptModuleContents } = await it(import(root('./configuration.ts')))
+  const { value: javaScriptModuleContents } = await it(import(root('./configuration.js')))
 
   if (!(typeScriptModuleContents || javaScriptModuleContents || Object.hasOwn(packageJson, 'configuration'))) {
     log('No configuration found', 'error')
@@ -50,7 +53,7 @@ export async function findConfiguration() {
 
 async function addAdditionalGitignoreEntries(file: { name: string; contents: string }) {
   const addedIgnores: string[] = []
-  const existingFileContents = await Bun.file(file.name).text()
+  const existingFileContents = await Bun.file(root(file.name)).text()
   const { patterns: existingIgnores } = parse(existingFileContents)
   const { patterns: updatedIgnores } = parse(file.contents)
 
@@ -61,7 +64,10 @@ async function addAdditionalGitignoreEntries(file: { name: string; contents: str
   }
 
   if (addedIgnores.length) {
-    await Bun.write(file.name, `${existingFileContents}${existingFileContents.endsWith('\n') ? '' : '\n'}${addedIgnores.join('\n')}\n`)
+    await Bun.write(
+      root(file.name),
+      `${existingFileContents}${existingFileContents.endsWith('\n') ? '' : '\n'}${addedIgnores.join('\n')}\n`,
+    )
   }
 }
 
@@ -81,7 +87,7 @@ export async function writeGitIgnore(ignores: string[]) {
   if (existsSync(file.name)) {
     await addAdditionalGitignoreEntries(file)
   } else {
-    await Bun.write(file.name, file.contents)
+    await Bun.write(root(file.name), file.contents)
   }
 
   return Object.hasOwn(state.options, 'ignore') || Object.hasOwn(state.options, 'gitignore')

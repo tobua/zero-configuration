@@ -1,6 +1,6 @@
 # zero-configuration
 
-<img align="right" src="https://github.com/tobua/zero-configuration/raw/main/logo.png" width="30%" alt="zero-configuration Logo" />
+<img align="right" src="https://github.com/tobua/zero-configuration/raw/main/logo.png" width="20%" alt="zero-configuration Logo" />
 
 Many web development projects often contain numerous configuration files in the project's root directory, with little to no actual source code. While many plugins nowadays require configuration files, this plugin aims to generate them without the necessity of committing anything to the source code.
 

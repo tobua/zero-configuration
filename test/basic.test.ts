@@ -54,7 +54,7 @@ test('Extends existing configurations.', async () => {
 
   const biome = await Bun.file(join(fixturePath, 'biome.json')).json()
 
-  expect(biome.files.ignore[0]).toBe('test/fixture')
+  expect(biome.files.ignore[2]).toBe('test/fixture')
   expect(biome.linter.rules.all).toBe(true)
   expect(biome.linter.rules.style.useBlockStatements).toBe('off')
 })

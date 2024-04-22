@@ -18,7 +18,7 @@ export const templates = {
       },
     },
     files: {
-      ignore: ['test/fixture', 'node_modules', 'package.json'],
+      ignore: ['node_modules', 'package.json'],
     },
     formatter: {
       lineWidth: 140,

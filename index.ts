@@ -1,7 +1,7 @@
 #!/usr/bin/env bun
 import Bun from 'bun'
 import { configurations } from './configuration'
-import { findConfiguration, log, writeGitIgnore } from './helper'
+import { findConfiguration, log, root, writeGitIgnore } from './helper'
 import { parse } from './parse'
 import { state } from './state'
 
@@ -14,7 +14,7 @@ for (const { name, alias, configuration } of configurations) {
   if (!value) continue
   const file = await parse(value, configuration)
   if (!file) continue
-  await Bun.write(file.name, file.contents)
+  await Bun.write(root(file.name), file.contents)
   ignores.push(file.name)
 }
 

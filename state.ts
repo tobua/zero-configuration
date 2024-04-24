@@ -5,3 +5,5 @@ export const state: State = {
   language: 'json',
   packageJson: { name: 'missing-package-name' },
 }
+
+export const fileExtension = () => (state.language === 'javascript' ? 'js' : 'ts')

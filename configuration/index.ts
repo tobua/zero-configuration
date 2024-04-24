@@ -3,6 +3,7 @@ import * as biome from './biome'
 import * as eslint from './eslint'
 import * as ignore from './gitignore'
 import * as license from './license'
+import * as next from './next'
 import * as playwright from './playwright'
 import * as prettier from './prettier'
 import * as rsbuild from './rsbuild'
@@ -22,6 +23,7 @@ export type ConfigurationKeys =
   | 'playwright'
   | 'vite'
   | 'rsbuild'
+  | 'next'
   | 'license'
   // Require separate logic, not found in configuraitons below.
   | 'ignore'
@@ -60,6 +62,10 @@ export const configurations: Configuration[] = [
   {
     name: 'rsbuild',
     configuration: rsbuild,
+  },
+  {
+    name: 'next',
+    configuration: next,
   },
   {
     name: 'license',

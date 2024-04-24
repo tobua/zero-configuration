@@ -69,3 +69,16 @@ test('Empty project will exit and not add default gitignore.', () => {
 
   expect(existsSync(join(fixturePath, '.gitignore'))).toBe(false)
 })
+
+test('Creates configuration files for various build-tool configurations.', () => {
+  const fixturePath = './test/fixture/build'
+
+  execSync('bun ./../../../index.ts', {
+    cwd: fixturePath,
+    stdio: 'inherit',
+  })
+
+  expect(existsSync(join(fixturePath, 'next.config.js'))).toBe(true)
+  expect(existsSync(join(fixturePath, 'rsbuild.config.ts'))).toBe(true)
+  expect(existsSync(join(fixturePath, 'vite.config.ts'))).toBe(true)
+})

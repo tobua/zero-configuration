@@ -82,3 +82,16 @@ test('Creates configuration files for various build-tool configurations.', () =>
   expect(existsSync(join(fixturePath, 'rsbuild.config.ts'))).toBe(true)
   expect(existsSync(join(fixturePath, 'vite.config.ts'))).toBe(true)
 })
+
+test('Creates configuration files in all workspaces including the root.', () => {
+  const fixturePath = './test/fixture/workspaces'
+
+  execSync('bun ./../../../index.ts', {
+    cwd: fixturePath,
+    stdio: 'inherit',
+  })
+
+  expect(existsSync(join(fixturePath, 'tsconfig.json'))).toBe(true)
+  expect(existsSync(join(fixturePath, 'demo/react/tsconfig.json'))).toBe(true)
+  expect(existsSync(join(fixturePath, 'plugin/tsconfig.json'))).toBe(true)
+})

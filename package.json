@@ -50,6 +50,15 @@
       "bun.lockb",
       "test/fixture/*/*",
       "!test/fixture/*/package.json",
+      "!test/fixture/workspaces/package.json",
+      "!test/fixture/workspaces/plugin",
+      "test/fixture/workspaces/plugin/*",
+      "!test/fixture/workspaces/plugin/package.json",
+      "!test/fixture/workspaces/demo",
+      "test/fixture/workspaces/demo/*",
+      "!test/fixture/workspaces/demo/react",
+      "test/fixture/workspaces/demo/react/*",
+      "!test/fixture/workspaces/demo/react/package.json",
       "!test/fixture/*/configuration.ts",
       "!test/fixture/*/configuration.js"
     ],
@@ -70,18 +79,9 @@
         ]
       }
     },
-    "vscode": "recommended",
+    "vscode": "biome",
     "typescript": {
-      "compilerOptions": {
-        "strict": true,
-        "skipLibCheck": true,
-        "target": "ES2020",
-        "lib": [
-          "DOM",
-          "ES2020"
-        ],
-        "module": "Preserve"
-      },
+      "extends": "plugin",
       "files": [
         "index.ts"
       ]

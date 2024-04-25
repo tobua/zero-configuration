@@ -1,25 +1,32 @@
 #!/usr/bin/env bun
 import Bun from 'bun'
 import { configurations } from './configuration'
-import { findConfiguration, log, root, writeGitIgnore } from './helper'
+import { findConfiguration, getWorkspaces, log, writeGitIgnore } from './helper'
 import { parse } from './parse'
-import { state } from './state'
+import { reset, root, state } from './state'
 
-const ignores: string[] = []
+async function configureProject() {
+  const ignores: string[] = []
 
-await findConfiguration()
+  await findConfiguration()
 
-for (const { name, alias, configuration } of configurations) {
-  const value = state.options[name] ?? (alias && state.options[alias])
-  if (!value) continue
-  const file = await parse(value, configuration)
-  if (!file) continue
-  await Bun.write(root(file.name), file.contents)
-  ignores.push(file.name)
+  for (const { name, alias, configuration } of configurations) {
+    const value = state.options[name] ?? (alias && state.options[alias])
+    if (!value) continue
+    const file = await parse(value, configuration)
+    if (!file) continue
+    await Bun.write(root(file.name), file.contents)
+    ignores.push(file.name)
+  }
+
+  const gitUserConfigured = await writeGitIgnore(ignores)
+
+  if (!gitUserConfigured && ignores.length === 0) {
+    log('No configuration to add', 'warning')
+  }
 }
 
-const gitUserConfigured = await writeGitIgnore(ignores)
-
-if (!gitUserConfigured && ignores.length === 0) {
-  log('No configuration to add', 'warning')
+for (const workspace of await getWorkspaces()) {
+  reset(workspace)
+  await configureProject()
 }

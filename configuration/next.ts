@@ -13,7 +13,7 @@ export function createFile(configuration: object | string) {
 
 export default next`
 
-  if (typeof configuration === 'object') {
+  if (typeof configuration === 'object' && state.language === 'json') {
     contents = `export default ${JSON.stringify(configuration, null, 2)}`
   }
 

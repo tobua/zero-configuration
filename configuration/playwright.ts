@@ -1,13 +1,15 @@
-import type { Template } from '../types'
+import { fileExtension, state } from '../state'
 
-export const templates: Template<object> = {} // Has no templates, highly customizable.
+export const extension = (path: string) => ({ extends: path })
 
-export function createFile() {
-  return {
-    name: 'playwright.config.ts',
-    contents: `import { defineConfig } from '@playwright/test'
-import { playwright } from './configuration.ts'
+export function createFile(configuration: object | string) {
+  let contents = `import { playwright } from './configuration.${fileExtension()}'
 
-export default defineConfig(playwright)`,
+export default playwright`
+
+  if (typeof configuration === 'object' && state.language === 'json') {
+    contents = `export default ${JSON.stringify(configuration, null, 2)}`
   }
+
+  return { name: `playwright.config.${fileExtension()}`, contents }
 }

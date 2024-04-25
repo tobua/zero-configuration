@@ -1,4 +1,4 @@
-import { fileExtension } from '../state'
+import { fileExtension, state } from '../state'
 
 export const extension = (path: string) => ({ extends: path })
 
@@ -7,7 +7,7 @@ export function createFile(configuration: object | string) {
 
 export default vite`
 
-  if (typeof configuration === 'object') {
+  if (typeof configuration === 'object' && state.language === 'json') {
     contents = `export default ${JSON.stringify(configuration, null, 2)}`
   }
 

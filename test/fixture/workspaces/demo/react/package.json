@@ -1,0 +1,7 @@
+{
+    "name": "demo-react",
+    "configuration": {
+        "typescript": "plugin",
+        "vite": true
+    }
+}

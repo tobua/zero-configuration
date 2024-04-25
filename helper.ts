@@ -1,17 +1,13 @@
-import { existsSync } from 'node:fs'
-import { join } from 'node:path'
+import { existsSync, lstatSync } from 'node:fs'
 import { it } from 'avait'
-import Bun from 'bun'
+import Bun, { Glob } from 'bun'
 import { create } from 'logua'
 import { parse } from 'parse-gitignore'
 import { z } from 'zod'
 import { configurations, ignore } from './configuration'
-import { state } from './state'
+import { root, state } from './state'
 
 export const log = create('zero-configuration', 'blue')
-
-export const root = (file: string) =>
-  process.cwd().includes('node_modules') ? join(process.cwd(), '../..', file) : join(process.cwd(), file)
 
 const keys = Object.fromEntries(configurations.map((current) => [current.name, z.union([z.string(), z.object({}), z.boolean()])]))
 
@@ -84,11 +80,31 @@ export async function writeGitIgnore(ignores: string[]) {
 
   const file = ignore.createFile(userIgnores as string[])
 
-  if (existsSync(file.name)) {
+  if (existsSync(root(file.name))) {
     await addAdditionalGitignoreEntries(file)
-  } else {
+  } else if (state.root) {
     await Bun.write(root(file.name), file.contents)
   }
 
   return Object.hasOwn(state.options, 'ignore') || Object.hasOwn(state.options, 'gitignore')
+}
+
+export async function getWorkspaces() {
+  const packageJson = await Bun.file(root('./package.json')).json()
+  const workspaces: { path: string; root: boolean }[] = []
+
+  if (Array.isArray(packageJson.workspaces)) {
+    for (const workspaceGlob of packageJson.workspaces) {
+      const glob = new Glob(workspaceGlob)
+      for await (const file of glob.scan({ cwd: root('/'), dot: false, onlyFiles: false })) {
+        if (lstatSync(file).isDirectory()) {
+          workspaces.push({ path: file, root: false })
+        }
+      }
+    }
+  }
+
+  workspaces.push({ path: '/', root: true }) // Always run in root, root should run last.
+
+  return workspaces
 }

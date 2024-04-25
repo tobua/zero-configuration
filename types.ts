@@ -23,4 +23,6 @@ export interface State {
   // configuration.js: JavaScript, configuration.ts: TypeScript
   language: 'json' | 'javascript' | 'typescript'
   packageJson: PackageJson
+  directory: string
+  root: boolean
 }

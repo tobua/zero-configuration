@@ -4,6 +4,15 @@ export const templates = {
       strict: true,
     },
   },
+  plugin: {
+    compilerOptions: {
+      strict: true,
+      skipLibCheck: true,
+      target: 'ES2020',
+      lib: ['DOM', 'ES2020'],
+      module: 'Preserve',
+    },
+  },
 }
 
 export const extension = (path: string) => ({ extends: path })

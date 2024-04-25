@@ -2,6 +2,7 @@ import { existsSync } from 'node:fs'
 import { join } from 'node:path'
 import { it } from 'avait'
 import { merge } from 'ts-deepmerge'
+import { state } from './state'
 import type { Configuration, Options } from './types'
 
 const isExtension = async (value: string) => {
@@ -54,6 +55,10 @@ export async function parse(value: Options, configuration: Configuration['config
 
   if (value === true) {
     return configuration.createFile()
+  }
+
+  if (typeof value === 'object' && state.language !== 'json') {
+    return configuration.createFile(value)
   }
 
   // biome-ignore lint/style/noParameterAssign: Easier in this case.

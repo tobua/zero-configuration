@@ -1,4 +1,5 @@
-import { existsSync, lstatSync, symlinkSync } from 'node:fs'
+import { existsSync, lstatSync, mkdirSync, symlinkSync } from 'node:fs'
+import { dirname, join } from 'node:path'
 import { it } from 'avait'
 import Bun from 'bun'
 import glob from 'fast-glob'
@@ -115,6 +116,26 @@ export async function getWorkspaces() {
   return workspaces
 }
 
+function findNearestNodeModules() {
+  let currentDirectory = root('.')
+  while (true) {
+    const nodeModulesPath = join(currentDirectory, 'node_modules')
+    if (existsSync(nodeModulesPath)) {
+      return nodeModulesPath
+    }
+    const parentDirectory = dirname(currentDirectory)
+    if (parentDirectory === currentDirectory) {
+      break
+    }
+    currentDirectory = parentDirectory
+  }
+
+  const localModuleDirectory = root('node_modules')
+
+  mkdirSync(localModuleDirectory, { recursive: true })
+  return localModuleDirectory
+}
+
 export function installLocalDependencies() {
   const { localDependencies } = state.packageJson
   if (!localDependencies || typeof localDependencies !== 'object' || Object.keys(localDependencies).length === 0) {
@@ -123,7 +144,7 @@ export function installLocalDependencies() {
 
   for (const [name, folder] of Object.entries(localDependencies)) {
     const absolutePath = root(folder)
-    const targetPath = root(`node_modules/${name}`)
+    const targetPath = join(findNearestNodeModules(), name)
     if (existsSync(absolutePath) && !existsSync(targetPath)) {
       try {
         symlinkSync(absolutePath, targetPath)

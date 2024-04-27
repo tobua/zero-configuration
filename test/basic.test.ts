@@ -17,7 +17,7 @@ test('Adds configuration files for basic package setup.', () => {
   expect(existsSync(join(fixturePath, 'LICENSE.md'))).toBe(true)
 })
 
-test('Adds configuration files for basic file setup.', () => {
+test('Adds configuration files for basic file setup.', async () => {
   const fixturePath = './test/fixture/file'
 
   execSync('bun ./../../../index.ts', {
@@ -26,6 +26,10 @@ test('Adds configuration files for basic file setup.', () => {
   })
 
   expect(existsSync(join(fixturePath, 'prettier.config.js'))).toBe(true)
+  expect(existsSync(join(fixturePath, 'playwright.config.ts'))).toBe(true)
+  expect(existsSync(join(fixturePath, 'biome.json'))).toBe(true)
+
+  expect(await Bun.file(join(fixturePath, 'biome.json')).text()).not.toContain('recommended')
 })
 
 test('Also parses JavaScript configuration.', async () => {

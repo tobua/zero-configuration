@@ -16,3 +16,13 @@ export const playwright = {
     reuseExistingServer: !process.env.CI,
   },
 }
+
+export const biome = {
+  extends: 'recommended',
+  linter: {
+    ignore: ['public'],
+  },
+  formatter: {
+    ignore: ['public'],
+  },
+}

@@ -9,7 +9,7 @@
     "format": "bun biome format . --write",
     "postinstall": "bun index.ts",
     "lint": "bun biome lint .",
-    "types": "tsc --noEmit"
+    "types": "tsc"
   },
   "dependencies": {
     "avait": "^1.0.0",

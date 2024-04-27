@@ -1,5 +1,6 @@
 import { join } from 'node:path'
-import type { PackageJson, State } from './types'
+import Bun from 'bun'
+import type { State } from './types'
 
 export const state: State = {
   options: {},
@@ -14,10 +15,13 @@ export const fileExtension = () => (state.language === 'javascript' ? 'js' : 'ts
 export const root = (file: string) =>
   process.cwd().includes('node_modules') ? join(process.cwd(), '../..', state.directory, file) : join(process.cwd(), state.directory, file)
 
-export const reset = ({ path, root }: { path: string; root: boolean }, packageJson: PackageJson) => {
+export async function reset({ path, root: isRoot }: { path: string; root: boolean }) {
   state.options = {}
   state.language = 'json'
-  state.packageJson = packageJson
   state.directory = path
-  state.root = root
+  state.root = isRoot
+
+  const packageJson = await Bun.file(root('./package.json')).json()
+
+  state.packageJson = packageJson
 }

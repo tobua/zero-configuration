@@ -29,7 +29,6 @@ async function configureProject() {
 }
 
 for (const workspace of await getWorkspaces()) {
-  const packageJson = await Bun.file(root('./package.json')).json()
-  reset(workspace, packageJson)
+  await reset(workspace)
   await configureProject()
 }

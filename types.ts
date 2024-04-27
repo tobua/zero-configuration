@@ -2,7 +2,14 @@ import type { ConfigurationKeys } from './configuration'
 
 export type Template<T> = { [key: string]: T | (() => T) }
 
-export type PackageJson = { name: string; author?: string | { name: string } }
+type Dependencies = { [key: string]: string }
+
+export type PackageJson = {
+  name: string
+  author?: string | { name: string }
+  localDependencies?: Dependencies
+  configuration?: { [key: string]: string | object | string[] }
+}
 
 export type Configuration = {
   name: ConfigurationKeys

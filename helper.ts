@@ -1,6 +1,7 @@
-import { existsSync, lstatSync } from 'node:fs'
+import { existsSync, lstatSync, symlinkSync } from 'node:fs'
 import { it } from 'avait'
-import Bun, { Glob } from 'bun'
+import Bun from 'bun'
+import glob from 'fast-glob'
 import { create } from 'logua'
 import { parse } from 'parse-gitignore'
 import { z } from 'zod'
@@ -28,21 +29,20 @@ export const validate = (configuration: unknown) => {
 }
 
 export async function findConfiguration() {
-  const packageJson = await Bun.file(root('./package.json')).json()
   const { value: typeScriptModuleContents } = await it(import(root('./configuration.ts')))
   const { value: javaScriptModuleContents } = await it(import(root('./configuration.js')))
 
-  if (!(typeScriptModuleContents || javaScriptModuleContents || Object.hasOwn(packageJson, 'configuration'))) {
+  if (!(typeScriptModuleContents || javaScriptModuleContents || Object.hasOwn(state.packageJson, 'configuration'))) {
     log('No configuration found', 'error')
   }
 
-  if (!packageJson.configuration && typeScriptModuleContents) {
+  if (!state.packageJson.configuration && typeScriptModuleContents) {
     state.language = 'typescript'
-  } else if (!packageJson.configuration && javaScriptModuleContents) {
+  } else if (!state.packageJson.configuration && javaScriptModuleContents) {
     state.language = 'javascript'
   }
 
-  const userConfiguration = packageJson.configuration ?? typeScriptModuleContents ?? javaScriptModuleContents
+  const userConfiguration = state.packageJson.configuration ?? typeScriptModuleContents ?? javaScriptModuleContents
   validate(userConfiguration)
   state.options = userConfiguration
 }
@@ -95,9 +95,15 @@ export async function getWorkspaces() {
 
   if (Array.isArray(packageJson.workspaces)) {
     for (const workspaceGlob of packageJson.workspaces) {
-      const glob = new Glob(workspaceGlob)
-      for await (const file of glob.scan({ cwd: root('/'), dot: false, onlyFiles: false })) {
-        if (lstatSync(file).isDirectory()) {
+      const files = await glob(workspaceGlob, {
+        cwd: root('/'),
+        dot: false,
+        onlyFiles: false,
+        followSymbolicLinks: false,
+        ignore: ['node_modules'],
+      })
+      for await (const file of files) {
+        if (lstatSync(root(file)).isDirectory()) {
           workspaces.push({ path: file, root: false })
         }
       }
@@ -107,4 +113,26 @@ export async function getWorkspaces() {
   workspaces.push({ path: '/', root: true }) // Always run in root, root should run last.
 
   return workspaces
+}
+
+export function installLocalDependencies() {
+  const { localDependencies } = state.packageJson
+  if (!localDependencies || typeof localDependencies !== 'object' || Object.keys(localDependencies).length === 0) {
+    return
+  }
+
+  for (const [name, folder] of Object.entries(localDependencies)) {
+    const absolutePath = root(folder)
+    const targetPath = root(`node_modules/${name}`)
+    if (existsSync(absolutePath) && !existsSync(targetPath)) {
+      try {
+        symlinkSync(absolutePath, targetPath)
+      } catch (_error) {
+        // Symlinks only allowed for administrators on Windows.
+        log(`Failed to create symlink for localDependency ${name}`, 'warning')
+      }
+    } else if (!existsSync(absolutePath)) {
+      log(`localDependency "${name}" is pointing to a non-existing location: ${absolutePath}`, 'warning')
+    }
+  }
 }

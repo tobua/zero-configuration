@@ -1,4 +1,18 @@
 import { fileExtension, state } from '../state'
+import type { Template } from '../types'
+
+export const templates: Template<object> = {
+  web: {
+    tools: {
+      rspack: {
+        resolve: {
+          // Resolve absolute imports relative to project root first.
+          modules: ['.', 'node_modules'],
+        },
+      },
+    },
+  },
+}
 
 export const extension = (path: string) => ({ extends: path })
 

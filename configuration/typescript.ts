@@ -8,9 +8,22 @@ export const templates = {
     compilerOptions: {
       strict: true,
       skipLibCheck: true,
+      verbatimModuleSyntax: true,
       target: 'ES2020',
       lib: ['DOM', 'ES2020'],
       module: 'Preserve',
+      noEmit: true,
+    },
+  },
+  web: {
+    compilerOptions: {
+      skipLibCheck: true,
+      baseUrl: '.',
+      target: 'ESNext',
+      lib: ['DOM', 'ESNext'],
+      module: 'Preserve',
+      jsx: 'react-jsx',
+      noEmit: true,
     },
   },
 }

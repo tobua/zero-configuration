@@ -12,7 +12,7 @@ export const templates: Template<object> = {
   'prettier-eslint': {
     'editor.defaultFormatter': 'esbenp.prettier-vscode',
     'editor.codeActionsOnSave': {
-      'source.fixAll.eslint': true,
+      'source.fixAll.eslint': 'always',
     },
     'editor.formatOnSave': true,
   },

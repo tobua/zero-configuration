@@ -1,7 +1,7 @@
 #!/usr/bin/env bun
 import Bun from 'bun'
 import { configurations } from './configuration'
-import { findConfiguration, getWorkspaces, log, writeGitIgnore } from './helper'
+import { findConfiguration, getWorkspaces, installLocalDependencies, log, writeGitIgnore } from './helper'
 import { parse } from './parse'
 import { reset, root, state } from './state'
 
@@ -24,9 +24,12 @@ async function configureProject() {
   if (!gitUserConfigured && ignores.length === 0) {
     log('No configuration to add', 'warning')
   }
+
+  installLocalDependencies()
 }
 
 for (const workspace of await getWorkspaces()) {
-  reset(workspace)
+  const packageJson = await Bun.file(root('./package.json')).json()
+  reset(workspace, packageJson)
   await configureProject()
 }

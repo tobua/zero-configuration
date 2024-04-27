@@ -95,3 +95,16 @@ test('Creates configuration files in all workspaces including the root.', () => 
   expect(existsSync(join(fixturePath, 'demo/react/tsconfig.json'))).toBe(true)
   expect(existsSync(join(fixturePath, 'plugin/tsconfig.json'))).toBe(true)
 })
+
+test('Will also install local dependencies if listed.', () => {
+  const fixturePath = './test/fixture/local-dependencies'
+
+  execSync('bun ./../../../index.ts', {
+    cwd: fixturePath,
+    stdio: 'inherit',
+  })
+
+  expect(existsSync(join(fixturePath, 'tsconfig.json'))).toBe(true)
+  expect(existsSync(join(fixturePath, 'node_modules/keep/package.json'))).toBe(true)
+  expect(existsSync(join(fixturePath, 'node_modules/empty-dependency/package.json'))).toBe(true)
+})

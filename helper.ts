@@ -69,6 +69,10 @@ async function addAdditionalGitignoreEntries(file: { name: string; contents: str
 }
 
 export async function writeGitIgnore(ignores: string[]) {
+  // Add wildcard to ignore in workspace directories as well.
+  // biome-ignore lint/style/noParameterAssign: Easier in this case.
+  ignores = ignores.map((ignore) => (ignore.includes('/') ? `**/${ignore}` : ignore))
+
   let userIgnores = state.options.ignore ?? state.options.gitignore ?? ([] as string[])
 
   if (typeof userIgnores === 'string' && Object.hasOwn(ignore.templates, userIgnores)) {
@@ -76,7 +80,7 @@ export async function writeGitIgnore(ignores: string[]) {
   }
 
   if (userIgnores && Array.isArray(userIgnores)) {
-    userIgnores.push(...ignores)
+    userIgnores = [...userIgnores, ...ignores] // .push() for some reason added the elements twice...
   }
 
   const file = ignore.createFile(userIgnores as string[])

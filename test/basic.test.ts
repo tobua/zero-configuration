@@ -87,7 +87,7 @@ test('Creates configuration files for various build-tool configurations.', () =>
   expect(existsSync(join(fixturePath, 'vite.config.ts'))).toBe(true)
 })
 
-test('Creates configuration files in all workspaces including the root.', () => {
+test('Creates configuration files in all workspaces including the root.', async () => {
   const fixturePath = './test/fixture/workspaces'
 
   execSync('bun ./../../../index.ts', {
@@ -98,6 +98,14 @@ test('Creates configuration files in all workspaces including the root.', () => 
   expect(existsSync(join(fixturePath, 'tsconfig.json'))).toBe(true)
   expect(existsSync(join(fixturePath, 'demo/react/tsconfig.json'))).toBe(true)
   expect(existsSync(join(fixturePath, 'plugin/tsconfig.json'))).toBe(true)
+
+  // Ignores are merged into root and not duplicated.
+  const gitignore = await Bun.file(join(fixturePath, '.gitignore')).text()
+  expect(gitignore.match(/tsconfig\.json/g)).toHaveLength(1)
+  expect(gitignore.match(/vite\.config\.ts/g)).toHaveLength(1)
+  expect(gitignore.match(/\*\*\/\.vscode\/settings\.json/g)).toHaveLength(1)
+  expect(gitignore.match(/dist/g)).toHaveLength(1)
+  expect(gitignore.match(/node_modules/g)).toHaveLength(1)
 })
 
 test('Will also install local dependencies if listed.', () => {

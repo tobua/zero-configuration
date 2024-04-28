@@ -8,6 +8,7 @@ export const state: State = {
   packageJson: { name: 'missing-package-name' },
   directory: '/',
   root: true,
+  pendingIgnores: [],
 }
 
 export const fileExtension = () => (state.language === 'javascript' ? 'js' : 'ts')

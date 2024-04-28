@@ -32,4 +32,5 @@ export interface State {
   packageJson: PackageJson
   directory: string
   root: boolean
+  pendingIgnores: string[]
 }

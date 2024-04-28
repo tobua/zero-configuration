@@ -2,6 +2,8 @@
     "name": "demo-react",
     "configuration": {
         "typescript": "plugin",
-        "vite": true
+        "vite": true,
+        "vscode": "prettier-eslint",
+        "ignore": "bundle"
     }
 }

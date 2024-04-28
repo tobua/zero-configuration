@@ -68,6 +68,8 @@ async function addAdditionalGitignoreEntries(file: { name: string; contents: str
   }
 }
 
+const removeDuplicates = (input: string[]) => Array.from(new Set(input))
+
 export async function writeGitIgnore(ignores: string[]) {
   // Add wildcard to ignore in workspace directories as well.
   // biome-ignore lint/style/noParameterAssign: Easier in this case.
@@ -79,16 +81,22 @@ export async function writeGitIgnore(ignores: string[]) {
     userIgnores = ignore.templates[userIgnores] as string[]
   }
 
-  if (userIgnores && Array.isArray(userIgnores)) {
-    userIgnores = [...userIgnores, ...ignores] // .push() for some reason added the elements twice...
+  if (!(userIgnores && Array.isArray(userIgnores))) {
+    log('Invalid gitignore configuration, must be an array', 'error')
+    return false
   }
+
+  userIgnores = removeDuplicates([...userIgnores, ...ignores, ...(state.root ? state.pendingIgnores : [])])
 
   const file = ignore.createFile(userIgnores as string[])
 
+  // .gitignore file creation is only forced in root.
   if (existsSync(root(file.name))) {
     await addAdditionalGitignoreEntries(file)
   } else if (state.root) {
     await Bun.write(root(file.name), file.contents)
+  } else {
+    state.pendingIgnores.push(...userIgnores)
   }
 
   return Object.hasOwn(state.options, 'ignore') || Object.hasOwn(state.options, 'gitignore')

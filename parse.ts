@@ -53,7 +53,7 @@ export async function parse(value: Options, configuration: Configuration['config
   }
 
   if (value === true) {
-    return configuration.createFile()
+    return configuration.createFile(configuration.templates?.recommended)
   }
 
   // biome-ignore lint/style/noParameterAssign: Easier in this case.

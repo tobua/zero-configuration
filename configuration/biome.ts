@@ -22,6 +22,7 @@ export const templates = {
     },
     formatter: {
       lineWidth: 140,
+      formatWithErrors: true,
     },
   },
 }

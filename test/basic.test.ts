@@ -28,8 +28,16 @@ test('Adds configuration files for basic file setup.', async () => {
   expect(existsSync(join(fixturePath, 'prettier.config.js'))).toBe(true)
   expect(existsSync(join(fixturePath, 'playwright.config.ts'))).toBe(true)
   expect(existsSync(join(fixturePath, 'biome.json'))).toBe(true)
+  expect(existsSync(join(fixturePath, 'vitest.config.ts'))).toBe(true)
+  expect(existsSync(join(fixturePath, 'cypress.config.ts'))).toBe(true)
+  // TODO should not work with TS.
+  expect(existsSync(join(fixturePath, 'eslint.config.js'))).toBe(true)
 
   expect(await Bun.file(join(fixturePath, 'biome.json')).text()).not.toContain('recommended')
+
+  const cypressConfig = await import(join('..', fixturePath, 'cypress.config.ts'))
+  // Configuration not serialized.
+  expect(typeof cypressConfig.default.e2e.dynamic === 'function').toBe(true)
 })
 
 test('Also parses JavaScript configuration.', async () => {

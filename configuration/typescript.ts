@@ -6,11 +6,18 @@ export const templates = {
   },
   plugin: {
     compilerOptions: {
+      // Maximum strictness for compatibility.
       strict: true,
+      noUncheckedIndexedAccess: true,
+      noImplicitOverride: true,
+      // Many existing definitions will error.
       skipLibCheck: true,
+      // Force type annotations for imports.
       verbatimModuleSyntax: true,
+      // Reasonably current target.
       target: 'ES2020',
       lib: ['DOM', 'ES2020'],
+      // Implies module resolution through bundler.
       module: 'Preserve',
       noEmit: true,
     },

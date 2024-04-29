@@ -5,7 +5,7 @@
 Many web development projects often contain numerous configuration files in the project's root directory, with little to no actual source code. While many plugins nowadays require configuration files, this plugin aims to generate them without the necessity of committing anything to the source code.
 
 - No configuration files in your source code.
-- Support for **gitignore**, **TypeScript**, **ESLint**, **Prettier**, **Biome**, **VS Code** and **Playwright**.
+- Support for **gitignore**, **TypeScript**, **ESLint**, **Prettier**, **Biome**, **VS Code**, **Playwright**, **Cypress** and **Vitest**.
 - Quickly configure bundlers like **Vite** and **Rsbuild**.
 - Generate boilerplate before publishing: **LICENSE.md**.
 - JSON based configuration in `package.json`.
@@ -21,7 +21,7 @@ Add the plugin to an existing project using `bun install zero-configuration`. In
 {
     "name": "my-web-application",
     "configuration": {
-        "prettier": "recommended"
+        "biome": "recommended"
     }
 }
 ```
@@ -49,4 +49,24 @@ export const typescript = {
         lib: ['ES2020', 'DOM']
     }
 }
+```
+
+### All Available Options
+
+```ts
+export const typescript = true | 'recommended' | 'plugin' | 'web' | { extends: 'web', include: ['index.tsx' ] }
+export const tsconfig // Alias for typescript
+export const biome = true | 'recommended' | { extends: 'recommended', files: { ignore: ['demo'] } }
+export const eslint = true | 'recommended' | [{ rules: { semi: 'error' } }]
+export const prettier = true | 'recommended' | { extends: 'recommended', printWidth: 140 }
+export const vscode = true | 'biome' | 'prettier-eslint' | { 'editor.defaultFormatter': 'biomejs.biome' }
+export const playwright = object | File
+export const vite = object | File
+export const rsbuild = object | File
+export const next = object | File
+export const vitest = object | File
+export const cypress = object | File
+export const license = 'MIT' | 'mit'
+export const ignore = true | 'recommended' | 'bundle' | string[]
+export const gitignore = // Alias for ignore
 ```

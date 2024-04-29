@@ -1,5 +1,6 @@
 import type { Configuration } from '../types'
 import * as biome from './biome'
+import * as cypress from './cypress'
 import * as eslint from './eslint'
 import * as ignore from './gitignore'
 import * as license from './license'
@@ -9,6 +10,7 @@ import * as prettier from './prettier'
 import * as rsbuild from './rsbuild'
 import * as typescript from './typescript'
 import * as vite from './vite'
+import * as vitest from './vitest'
 import * as vscode from './vscode'
 
 export { ignore }
@@ -24,6 +26,8 @@ export type ConfigurationKeys =
   | 'vite'
   | 'rsbuild'
   | 'next'
+  | 'vitest'
+  | 'cypress'
   | 'license'
   // Require separate logic, not found in configuraitons below.
   | 'ignore'
@@ -66,6 +70,14 @@ export const configurations: Configuration[] = [
   {
     name: 'next',
     configuration: next,
+  },
+  {
+    name: 'vitest',
+    configuration: vitest,
+  },
+  {
+    name: 'cypress',
+    configuration: cypress,
   },
   {
     name: 'license',

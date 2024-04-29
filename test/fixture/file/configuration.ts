@@ -26,3 +26,18 @@ export const biome = {
     ignore: ['public'],
   },
 }
+
+export const cypress = {
+  e2e: {
+    baseUrl: 'http://localhost:1234',
+    dynamic: () => console.log("I'm not serializable."),
+  },
+}
+
+export const vitest = {
+  test: {
+    globals: true,
+  },
+}
+
+export const eslint = true

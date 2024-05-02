@@ -66,6 +66,7 @@ export const rsbuild = object | File
 export const next = object | File
 export const vitest = object | File
 export const cypress = object | File
+export const vercel = 'spa' | 'SPA' | 'single-page-application' | 'spa-routes' | 'github-silent' | { extends: 'spa', routes: { ... }}
 export const license = 'MIT' | 'mit'
 export const ignore = true | 'recommended' | 'bundle' | string[]
 export const gitignore = // Alias for ignore

@@ -20,8 +20,8 @@
     "zod": "^3.23.5"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.7.1",
-    "@types/bun": "^1.1.0",
+    "@biomejs/biome": "^1.7.2",
+    "@types/bun": "^1.1.1",
     "@types/parse-gitignore": "^1.0.2",
     "eslint-config-airbnb": "^19.0.4",
     "typescript": "^5.4.5"
@@ -49,22 +49,7 @@
     "gitignore": [
       "node_modules",
       "bun.lockb",
-      "test/fixture/*/*",
-      "!test/fixture/*/package.json",
-      "!test/fixture/workspaces/package.json",
-      "!test/fixture/workspaces/plugin",
-      "test/fixture/workspaces/plugin/*",
-      "!test/fixture/workspaces/plugin/package.json",
-      "!test/fixture/workspaces/demo",
-      "test/fixture/workspaces/demo/*",
-      "!test/fixture/workspaces/demo/react",
-      "test/fixture/workspaces/demo/react/*",
-      "!test/fixture/workspaces/demo/react/package.json",
-      "!test/fixture/local-dependencies/node_modules",
-      "test/fixture/local-dependencies/node_modules/*",
-      "!test/fixture/local-dependencies/node_modules/keep",
-      "!test/fixture/*/configuration.ts",
-      "!test/fixture/*/configuration.js"
+      "test/fixture/**/*"
     ],
     "license": "MIT",
     "biome": {

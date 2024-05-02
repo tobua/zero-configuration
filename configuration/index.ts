@@ -9,6 +9,7 @@ import * as playwright from './playwright'
 import * as prettier from './prettier'
 import * as rsbuild from './rsbuild'
 import * as typescript from './typescript'
+import * as vercel from './vercel'
 import * as vite from './vite'
 import * as vitest from './vitest'
 import * as vscode from './vscode'
@@ -28,6 +29,7 @@ export type ConfigurationKeys =
   | 'next'
   | 'vitest'
   | 'cypress'
+  | 'vercel'
   | 'license'
   // Require separate logic, not found in configuraitons below.
   | 'ignore'
@@ -78,6 +80,10 @@ export const configurations: Configuration[] = [
   {
     name: 'cypress',
     configuration: cypress,
+  },
+  {
+    name: 'vercel',
+    configuration: vercel,
   },
   {
     name: 'license',

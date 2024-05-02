@@ -4,6 +4,8 @@ import { existsSync } from 'node:fs'
 import { join } from 'node:path'
 import Bun from 'bun'
 
+// To include additional files in fixtures remove the ignore entries temporarly from .gitignore in root and fixtures and add the specific files needed.
+
 test('Adds configuration files for basic package setup.', () => {
   const fixturePath = './test/fixture/package'
 
@@ -69,6 +71,10 @@ test('Extends existing configurations.', async () => {
   expect(biome.files.ignore[2]).toBe('test/fixture')
   expect(biome.linter.rules.all).toBe(true)
   expect(biome.linter.rules.style.useBlockStatements).toBe('off')
+
+  const tsconfig = await Bun.file(join(fixturePath, 'tsconfig.json')).json()
+
+  expect(tsconfig.extends).toContain('my-shared-tsconfig')
 })
 
 test('Empty project will exit and not add default gitignore.', () => {

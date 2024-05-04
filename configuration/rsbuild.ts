@@ -3,13 +3,9 @@ import type { Template } from '../types'
 
 export const templates: Template<object> = {
   web: {
-    tools: {
-      rspack: {
-        resolve: {
-          // Resolve absolute imports relative to project root first.
-          modules: ['.', 'node_modules'],
-        },
-      },
+    output: {
+      overrideBrowserslist: ['last 2 versions', '> 3%', 'not dead'],
+      legalComments: 'none',
     },
   },
 }

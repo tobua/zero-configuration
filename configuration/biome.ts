@@ -18,7 +18,8 @@ export const templates = {
       },
     },
     files: {
-      ignore: ['node_modules', 'package.json'],
+      // Bundled dist files will make Biome hang forever.
+      ignore: ['node_modules', 'dist', 'package.json'],
     },
     formatter: {
       lineWidth: 140,

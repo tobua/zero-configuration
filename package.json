@@ -17,7 +17,7 @@
     "logua": "^3.0.3",
     "parse-gitignore": "^2.0.0",
     "ts-deepmerge": "^7.0.0",
-    "zod": "^3.23.5"
+    "zod": "^3.23.6"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.7.2",
@@ -43,7 +43,7 @@
     "zero-config"
   ],
   "publishConfig": {
-    "provenance": false
+    "provenance": true
   },
   "configuration": {
     "gitignore": [

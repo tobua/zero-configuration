@@ -13,6 +13,17 @@ Many web development projects often contain numerous configuration files in the 
 - Recommended configurations to easily extend.
 - Add your own shared configurations.
 
+## Templates
+
+The easiest way to get started is through a template.
+
+```sh
+bun create now zero-configuration # Default template (React app built and served with Bun)
+bun create now web # Fully featured React application using Rsbuild
+bun create now plugin # TypeScript plugin
+bun create now plugin-react # Plugin with JSX
+```
+
 ## Integration and Usage
 
 Add the plugin to an existing project using `bun install zero-configuration`. In your `package.json` list the configurations you would like to have added.

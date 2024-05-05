@@ -1,0 +1,50 @@
+{
+    "scripts": {
+      "check": "biome check --apply .",
+      "types": "tsc"
+    },
+    "devDependencies": {
+      "@biomejs/biome": "^1.7.1",
+      "@types/react": "^18.3.1",
+      "typescript": "^5.4.5",
+      "zero-configuration": "^0.6.0"
+    },
+    "peerDependencies": {
+      "react": ">= 18",
+      "typescript": ">= 5"
+    },
+    "peerDependenciesMeta": {
+      "react": {
+        "optional": true
+      }
+    },
+    "trustedDependencies": [
+      "zero-configuration"
+    ],
+    "type": "module",
+    "sideEffects": false,
+    "main": "./index.tsx",
+    "exports": {
+      ".": {
+        "default": "./index.tsx"
+      }
+    },
+    "files": [
+      "*.ts",
+      "*.tsx"
+    ],
+    "configuration": {
+      "gitignore": "recommended",
+      "vscode": "biome",
+      "typescript": {
+        "extends": "plugin",
+        "compilerOptions": {
+          "jsx": "react-jsx"
+        },
+        "files": [
+          "index.tsx"
+        ]
+      },
+      "biome": "recommended"
+    }
+  }

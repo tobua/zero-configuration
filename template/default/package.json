@@ -1,7 +1,10 @@
 {
   "scripts": {
     "check": "biome check --apply .",
-    "start": "bun build ./index.tsx --outdir ./dist && bun --watch server.ts",
+    "build": "bun build index.tsx --outdir public",
+    "watch": "bun build index.tsx --outdir public --watch",
+    "server": "bun --watch server.ts",
+    "start": "bun watch & bun server",
     "types": "tsc"
   },
   "dependencies": {
@@ -18,5 +21,28 @@
   "trustedDependencies": [
     "zero-configuration"
   ],
-  "type": "module"
+  "type": "module",
+  "configuration": {
+    "gitignore": "bundle",
+    "vscode": "biome",
+    "biome": {
+        "extends": "recommended",
+        "linter": {
+          "rules": {
+            "style": {
+              "useFilenamingConvention": "off",
+              "noImplicitBoolean": "off",
+              "useNamingConvention": "off"
+            }
+          }
+        },
+        "files": {
+          "ignore": ["dist", "rsbuild.config.ts"]
+        }
+      },
+    "typescript": {
+      "extends": "web",
+      "include": ["index.tsx"]
+    }
+  }
 }

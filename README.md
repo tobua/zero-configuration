@@ -19,9 +19,9 @@ The easiest way to get started is through a template.
 
 ```sh
 bun create now zero-configuration # Default template (React app built and served with Bun)
-bun create now web # Fully featured React application using Rsbuild
-bun create now plugin # TypeScript plugin
-bun create now plugin-react # Plugin with JSX
+bun create now zero-configuration web # Fully featured React application using Rsbuild
+bun create now zero-configuration plugin # TypeScript plugin
+bun create now zero-configuration plugin-react # Plugin with JSX
 ```
 
 ## Integration and Usage
@@ -45,6 +45,8 @@ Run `bunx zero-configuration` to create the necessary configuration files in you
     "trustedDependencies": ["zero-configuration"]
 }
 ```
+
+When using the automatic Vercel build cache postinstall will only be called if the dependency has updated. To ensure your project is ready after installation use `bun install && bunx zero-configuration` as the **Install Command**.
 
 ## Configuration
 

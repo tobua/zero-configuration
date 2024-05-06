@@ -1,4 +1,6 @@
 import { staticPlugin } from '@elysiajs/static'
 import { Elysia } from 'elysia'
 
-new Elysia().use(staticPlugin({ assets: 'dist' })).listen(3000)
+new Elysia().use(staticPlugin({ prefix: '/' })).listen(3000)
+
+console.log('Serving /public on localhost:3000')

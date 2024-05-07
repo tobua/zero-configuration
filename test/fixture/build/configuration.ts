@@ -1,23 +1,28 @@
 // NOTE imports will fail in fixture.
+const defineConfig = (configuration: unknown) => configuration
 
 /** @type {import('vite').UserConfig} */
-export const vite = {
+export const vite = defineConfig({
   publicDir: 'files',
-}
+})
 
 // import { defineConfig } from '@rsbuild/core'
-export const rsbuild = {
+export const rsbuild = defineConfig({
+  extends: 'web',
   source: {
     entry: 'index.ts',
   },
-}
+  output: {
+    legalComments: 'linked',
+  },
+})
 
 /** @type {import('next').NextConfig} */
-export const next = {
+export const next = defineConfig({
   appDir: 'application',
-}
+})
 
-export const playwright = {
+export const playwright = defineConfig({
   fullyParallel: true,
   workers: process.env.CI ? 1 : undefined,
   projects: [
@@ -30,4 +35,4 @@ export const playwright = {
     url: 'http://localhost:3000',
     reuseExistingServer: !process.env.CI,
   },
-}
+})

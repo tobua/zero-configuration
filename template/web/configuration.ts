@@ -2,6 +2,7 @@ import { defineConfig } from '@rsbuild/core'
 import { pluginReact } from '@rsbuild/plugin-react'
 
 export const rsbuild = defineConfig({
+  // @ts-ignore Defaults added by zero-configuration.
   extends: 'web',
   plugins: [pluginReact()],
   source: {

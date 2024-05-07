@@ -6,9 +6,8 @@
   "license": "MIT",
   "author": "Matthias Giger",
   "scripts": {
-    "format": "bun biome format . --write",
+    "check": "biome check --apply .",
     "postinstall": "bun index.ts",
-    "lint": "bun biome lint .",
     "types": "tsc"
   },
   "dependencies": {
@@ -30,6 +29,11 @@
     "typescript": ">= 5"
   },
   "type": "module",
+  "exports": {
+    ".": {
+      "default": "./extend.ts"
+    }
+  },
   "bin": "./index.ts",
   "files": [
     "*.ts",
@@ -64,7 +68,8 @@
       },
       "files": {
         "ignore": [
-          "test/fixture"
+          "test/fixture",
+          "template"
         ]
       }
     },

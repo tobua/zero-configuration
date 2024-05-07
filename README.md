@@ -19,9 +19,9 @@ The easiest way to get started is through a template.
 
 ```sh
 bun create now zero-configuration # Default template (React app built and served with Bun)
-bun create now zero-configuration web # Fully featured React application using Rsbuild
-bun create now zero-configuration plugin # TypeScript plugin
-bun create now zero-configuration plugin-react # Plugin with JSX
+bun create now zero-configuration . web # Fully featured React application using Rsbuild
+bun create now zero-configuration . plugin-bun # TypeScript plugin
+bun create now zero-configuration . plugin-react # Plugin with JSX
 ```
 
 ## Integration and Usage

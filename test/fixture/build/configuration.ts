@@ -20,6 +20,7 @@ export const rsbuild = defineConfig({
 /** @type {import('next').NextConfig} */
 export const next = defineConfig({
   appDir: 'application',
+  serializable: () => false,
 })
 
 export const playwright = defineConfig({
@@ -36,3 +37,13 @@ export const playwright = defineConfig({
     reuseExistingServer: !process.env.CI,
   },
 })
+
+/** @type {import('tailwindcss').Config} */
+export const tailwind = {
+  // Globs which include node_modules will lead to poor performance here.
+  content: ['./*.tsx', './markup/**/*.tsx'],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}

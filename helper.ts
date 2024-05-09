@@ -3,13 +3,12 @@ import { dirname, join } from 'node:path'
 import { it } from 'avait'
 import Bun from 'bun'
 import glob from 'fast-glob'
-import { create } from 'logua'
 import { parse } from 'parse-gitignore'
+import { merge } from 'ts-deepmerge'
 import { z } from 'zod'
 import { configurations, ignore } from './configuration'
+import { log } from './log'
 import { root, state } from './state'
-
-export const log = create('zero-configuration', 'blue')
 
 const keys = Object.fromEntries(configurations.map((current) => [current.name, z.union([z.string(), z.object({}), z.boolean()])]))
 
@@ -37,13 +36,20 @@ export async function findConfiguration() {
     log('No configuration found', 'error')
   }
 
-  if (!state.packageJson.configuration && typeScriptModuleContents) {
+  if (typeScriptModuleContents) {
     state.language = 'typescript'
-  } else if (!state.packageJson.configuration && javaScriptModuleContents) {
+  } else if (javaScriptModuleContents) {
     state.language = 'javascript'
+  } else {
+    state.language = 'json'
   }
 
-  const userConfiguration = state.packageJson.configuration ?? typeScriptModuleContents ?? javaScriptModuleContents
+  const multipleConfigurations = (typeScriptModuleContents || javaScriptModuleContents) && state.packageJson.configuration
+  const userConfiguration = multipleConfigurations
+    ? // Merge package configuration onto file configuration.
+      merge(typeScriptModuleContents ?? javaScriptModuleContents, state.packageJson.configuration)
+    : state.packageJson.configuration ?? typeScriptModuleContents ?? javaScriptModuleContents
+
   validate(userConfiguration)
   state.options = userConfiguration
 }

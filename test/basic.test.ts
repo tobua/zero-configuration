@@ -96,9 +96,14 @@ test('Creates configuration files for various build-tool configurations.', () =>
     stdio: 'inherit',
   })
 
-  expect(existsSync(join(fixturePath, 'next.config.js'))).toBe(true)
   expect(existsSync(join(fixturePath, 'rsbuild.config.ts'))).toBe(true)
   expect(existsSync(join(fixturePath, 'vite.config.ts'))).toBe(true)
+  expect(existsSync(join(fixturePath, 'tailwind.config.ts'))).toBe(true)
+  // Only work with JavaScript configuration or serializable configuration.
+  // Not serializable in this case.
+  expect(existsSync(join(fixturePath, 'next.config.js'))).toBe(false)
+  // JavaScript only, but defined in package.json.
+  expect(existsSync(join(fixturePath, 'postcss.config.js'))).toBe(true)
 })
 
 test('Creates configuration files in all workspaces including the root.', async () => {

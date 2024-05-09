@@ -6,8 +6,10 @@ import * as ignore from './gitignore'
 import * as license from './license'
 import * as next from './next'
 import * as playwright from './playwright'
+import * as postcss from './postcss'
 import * as prettier from './prettier'
 import * as rsbuild from './rsbuild'
+import * as tailwind from './tailwind'
 import * as typescript from './typescript'
 import * as vercel from './vercel'
 import * as vite from './vite'
@@ -29,6 +31,9 @@ export type ConfigurationKeys =
   | 'next'
   | 'vitest'
   | 'cypress'
+  | 'tailwind'
+  | 'tailwindcss'
+  | 'postcss'
   | 'vercel'
   | 'license'
   // Require separate logic, not found in configuraitons below.
@@ -80,6 +85,15 @@ export const configurations: Configuration[] = [
   {
     name: 'cypress',
     configuration: cypress,
+  },
+  {
+    name: 'tailwind',
+    alias: 'tailwindcss',
+    configuration: tailwind,
+  },
+  {
+    name: 'postcss',
+    configuration: postcss,
   },
   {
     name: 'vercel',

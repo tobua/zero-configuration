@@ -1,7 +1,8 @@
 #!/usr/bin/env bun
 import Bun from 'bun'
 import { configurations } from './configuration'
-import { findConfiguration, getWorkspaces, installLocalDependencies, log, writeGitIgnore } from './helper'
+import { findConfiguration, getWorkspaces, installLocalDependencies, writeGitIgnore } from './helper'
+import { log } from './log'
 import { parse } from './parse'
 import { reset, root, state } from './state'
 

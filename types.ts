@@ -17,7 +17,7 @@ export type Configuration = {
   configuration: {
     templates?: Template<string | object | string[]>
     // biome-ignore lint/suspicious/noExplicitAny: Will be specified in file explicitly.
-    createFile: (value?: any) => { name: string; contents: string }
+    createFile: (value?: any) => { name: string; contents: string } | undefined
     extension?: (path: string) => object
   }
 }

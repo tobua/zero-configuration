@@ -76,6 +76,10 @@
     },
     "vscode": "biome",
     "typescript": {
+      "compilerOptions": {
+        "target": "ES2022",
+        "lib": ["DOM", "ES2022"]
+      },
       "extends": "plugin",
       "files": [
         "index.ts"

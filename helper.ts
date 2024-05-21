@@ -9,6 +9,7 @@ import { z } from 'zod'
 import { configurations, ignore } from './configuration'
 import { log } from './log'
 import { root, state } from './state'
+import type { File } from './types'
 
 const keys = Object.fromEntries(configurations.map((current) => [current.name, z.union([z.string(), z.object({}), z.boolean()])]))
 
@@ -174,4 +175,9 @@ export function installLocalDependencies() {
       log(`localDependency "${name}" is pointing to a non-existing location: ${absolutePath}`, 'warning')
     }
   }
+}
+
+export async function writeFile(file: File) {
+  await Bun.write(root(file.name), file.contents)
+  return file.name
 }

@@ -6,10 +6,25 @@ export const templates: Template<object> = {
     semi: false,
     singleQuote: true,
     printWidth: 120,
+    ignore: ['dist'],
   },
 }
 
-export function createFile(configuration: object) {
-  // TODO use prettier to format the whole file.
-  return { name: 'prettier.config.js', contents: `export default ${JSON.stringify(configuration, null, 2)}` }
+// biome-ignore lint/suspicious/noExplicitAny: Various configuration options.
+export function createFile(configuration: Record<string, any>) {
+  const ignores = configuration.ignore
+
+  // biome-ignore lint/performance/noDelete: Not valid prettier property.
+  delete configuration.ignore
+
+  const files = [
+    // TODO use prettier to format the whole file.
+    { name: 'prettier.config.js', contents: `export default ${JSON.stringify(configuration, null, 2)}` },
+  ]
+
+  if (Array.isArray(ignores) && ignores.length) {
+    files.push({ name: '.prettierignore', contents: ignores.join('\n') })
+  }
+
+  return files
 }

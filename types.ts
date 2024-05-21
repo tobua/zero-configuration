@@ -11,13 +11,15 @@ export type PackageJson = {
   configuration?: { [key: string]: string | object | string[] }
 }
 
+export type File = { name: string; contents: string }
+
 export type Configuration = {
   name: ConfigurationKeys
   alias?: ConfigurationKeys
   configuration: {
     templates?: Template<string | object | string[]>
     // biome-ignore lint/suspicious/noExplicitAny: Will be specified in file explicitly.
-    createFile: (value?: any) => { name: string; contents: string } | undefined
+    createFile: (value?: any) => File | (File | undefined)[] | undefined
     extension?: (path: string) => object
   }
 }

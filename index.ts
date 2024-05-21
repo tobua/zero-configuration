@@ -1,10 +1,10 @@
 #!/usr/bin/env bun
-import Bun from 'bun'
 import { configurations } from './configuration'
-import { findConfiguration, getWorkspaces, installLocalDependencies, writeGitIgnore } from './helper'
+import { findConfiguration, getWorkspaces, installLocalDependencies, writeFile, writeGitIgnore } from './helper'
 import { log } from './log'
 import { parse } from './parse'
-import { reset, root, state } from './state'
+import { reset, state } from './state'
+import type { File } from './types'
 
 async function configureProject() {
   const ignores: string[] = []
@@ -14,10 +14,17 @@ async function configureProject() {
   for (const { name, alias, configuration } of configurations) {
     const value = state.options[name] ?? (alias && state.options[alias])
     if (!value) continue
-    const file = await parse(value, configuration)
-    if (!file) continue
-    await Bun.write(root(file.name), file.contents)
-    ignores.push(file.name)
+    const files = await parse(value, configuration)
+    if (!files) continue
+    if (Array.isArray(files)) {
+      for (const file of files.filter((item) => item?.name)) {
+        const name = await writeFile(file as File)
+        ignores.push(name)
+      }
+    } else {
+      const name = await writeFile(files as File)
+      ignores.push(name)
+    }
   }
 
   const gitUserConfigured = await writeGitIgnore(ignores)

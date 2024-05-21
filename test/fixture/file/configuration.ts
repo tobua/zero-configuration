@@ -1,6 +1,6 @@
 // NOTE imports will fail in fixture.
 
-export const prettier = 'recommended'
+export const prettier = { extends: 'recommended', ignore: ['test'] }
 
 export const playwright = {
   fullyParallel: true,

@@ -11,7 +11,7 @@ export type PackageJson = {
   configuration?: { [key: string]: string | object | string[] }
 }
 
-export type File = { name: string; contents: string }
+export type File = { name: string; contents: string; showInCi?: boolean }
 
 export type Configuration = {
   name: ConfigurationKeys

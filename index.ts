@@ -18,12 +18,10 @@ async function configureProject() {
     if (!files) continue
     if (Array.isArray(files)) {
       for (const file of files.filter((item) => item?.name)) {
-        const name = await writeFile(file as File)
-        ignores.push(name)
+        await writeFile(file as File, ignores)
       }
     } else {
-      const name = await writeFile(files as File)
-      ignores.push(name)
+      await writeFile(files as File, ignores)
     }
   }
 

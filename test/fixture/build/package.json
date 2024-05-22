@@ -1,6 +1,6 @@
 {
 	"name": "build",
-	"configuratidon": {
+	"configuration": {
 		"postcss": {
 			"plugins": {
 				"tailwindcss": {}

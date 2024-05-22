@@ -13,6 +13,11 @@
 			"compilerOptions": {
 				"target": "ES6"
 			}
+		},
+		"vercel": {
+			"github": {
+				"silent": true
+			}
 		}
 	}
 }

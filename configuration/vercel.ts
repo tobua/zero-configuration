@@ -21,5 +21,5 @@ export const templates = {
 export const extension = (path: string) => ({ extends: path })
 
 export function createFile(configuration: object) {
-  return { name: 'vercel.json', contents: JSON.stringify(configuration, null, 2) }
+  return { name: 'vercel.json', contents: JSON.stringify(configuration, null, 2), showInCi: true }
 }

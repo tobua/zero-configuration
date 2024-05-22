@@ -1,12 +1,12 @@
 import { expect, test } from 'bun:test'
 import { execSync } from 'node:child_process'
-import { existsSync } from 'node:fs'
+import { existsSync, rmSync } from 'node:fs'
 import { join } from 'node:path'
 import Bun from 'bun'
 
 // To include additional files in fixtures remove the ignore entries temporarly from .gitignore in root and fixtures and add the specific files needed.
 
-test('Adds configuration files for basic package setup.', () => {
+test('Adds configuration files for basic package setup.', async () => {
   const fixturePath = './test/fixture/package'
 
   execSync('bun ./../../../index.ts', {
@@ -18,6 +18,13 @@ test('Adds configuration files for basic package setup.', () => {
   expect(existsSync(join(fixturePath, '.prettierignore'))).toBe(true)
   expect(existsSync(join(fixturePath, 'biome.json'))).toBe(true)
   expect(existsSync(join(fixturePath, 'LICENSE.md'))).toBe(true)
+  expect(existsSync(join(fixturePath, 'vercel.json'))).toBe(true)
+  expect(existsSync(join(fixturePath, '.gitignore'))).toBe(true)
+
+  const gitignoreFile = await Bun.file(join(fixturePath, '.gitignore')).text()
+
+  expect(gitignoreFile).toContain('vercel.json')
+  expect(gitignoreFile).toContain('biome.json')
 })
 
 test('Adds configuration files for basic file setup.', async () => {
@@ -144,4 +151,29 @@ test('Will also install local dependencies if listed.', () => {
   expect(existsSync(join(fixturePath, 'tsconfig.json'))).toBe(true)
   expect(existsSync(join(fixturePath, 'node_modules/keep/package.json'))).toBe(true)
   expect(existsSync(join(fixturePath, 'node_modules/empty-dependency/package.json'))).toBe(true)
+})
+
+test("Doesn't add deployment files to gitignore in CI.", async () => {
+  const fixturePath = './test/fixture/package'
+
+  // TODO existing ignores should not be taken over.
+  rmSync(join(fixturePath, '.gitignore'))
+
+  execSync('bun ./../../../index.ts', {
+    cwd: fixturePath,
+    stdio: 'inherit',
+    env: {
+      ...process.env,
+      // biome-ignore lint/style/useNamingConvention: Casing used by Node.js.
+      CI: 'true',
+    },
+  })
+
+  expect(existsSync(join(fixturePath, 'vercel.json'))).toBe(true)
+  expect(existsSync(join(fixturePath, '.gitignore'))).toBe(true)
+
+  const gitignoreFile = await Bun.file(join(fixturePath, '.gitignore')).text()
+
+  expect(gitignoreFile).not.toContain('vercel.json')
+  expect(gitignoreFile).toContain('biome.json')
 })

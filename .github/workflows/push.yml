@@ -16,6 +16,7 @@ jobs:
       - run: bun install
       - run: bun check
       - run: bun types
+      - run: bun test
       - name: 📢 Release
         uses: tobua/release-npm-action@v3
         with:

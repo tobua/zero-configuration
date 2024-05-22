@@ -3,6 +3,7 @@ import { execSync } from 'node:child_process'
 import { existsSync, rmSync } from 'node:fs'
 import { join } from 'node:path'
 import Bun from 'bun'
+import isCI from 'is-ci'
 
 // To include additional files in fixtures remove the ignore entries temporarly from .gitignore in root and fixtures and add the specific files needed.
 
@@ -23,7 +24,7 @@ test('Adds configuration files for basic package setup.', async () => {
 
   const gitignoreFile = await Bun.file(join(fixturePath, '.gitignore')).text()
 
-  expect(gitignoreFile).toContain('vercel.json')
+  expect(gitignoreFile.includes('vercel.json')).toBe(!isCI)
   expect(gitignoreFile).toContain('biome.json')
 })
 

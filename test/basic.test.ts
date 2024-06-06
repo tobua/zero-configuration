@@ -137,7 +137,7 @@ test('Creates configuration files in all workspaces including the root.', async 
   const gitignore = await Bun.file(join(fixturePath, '.gitignore')).text()
   expect(gitignore.match(/tsconfig\.json/g)).toHaveLength(1)
   expect(gitignore.match(/vite\.config\.ts/g)).toHaveLength(1)
-  expect(gitignore.match(/\*\*\/\.vscode\/settings\.json/g)).toHaveLength(1)
+  expect(gitignore.match(/\.vscode/g)).toHaveLength(1)
   expect(gitignore.match(/dist/g)).toHaveLength(1)
   expect(gitignore.match(/node_modules/g)).toHaveLength(1)
 })

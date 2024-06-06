@@ -79,9 +79,9 @@ async function addAdditionalGitignoreEntries(file: { name: string; contents: str
 const removeDuplicates = (input: string[]) => Array.from(new Set(input))
 
 export async function writeGitIgnore(ignores: string[]) {
-  // Add wildcard to ignore in workspace directories as well.
+  // For files in specific configuration folders (like .vscode/settings.json), ignore the directory everywhere.
   // biome-ignore lint/style/noParameterAssign: Easier in this case.
-  ignores = ignores.map((ignore) => (ignore.includes('/') ? `**/${ignore}` : ignore))
+  ignores = ignores.map((ignore) => (ignore.includes('/') ? (ignore.split('/')[0] as string) : ignore))
 
   let userIgnores = state.options.ignore ?? state.options.gitignore ?? ([] as string[])
 

@@ -3,7 +3,7 @@ import { execSync } from 'node:child_process'
 import { existsSync, rmSync } from 'node:fs'
 import { join } from 'node:path'
 import Bun from 'bun'
-import isCI from 'is-ci'
+import isCi from 'is-ci'
 
 // To include additional files in fixtures remove the ignore entries temporarly from .gitignore in root and fixtures and add the specific files needed.
 
@@ -24,7 +24,7 @@ test('Adds configuration files for basic package setup.', async () => {
 
   const gitignoreFile = await Bun.file(join(fixturePath, '.gitignore')).text()
 
-  expect(gitignoreFile.includes('vercel.json')).toBe(!isCI)
+  expect(gitignoreFile.includes('vercel.json')).toBe(!isCi)
   expect(gitignoreFile).toContain('biome.json')
 })
 
@@ -79,6 +79,8 @@ test('Extends existing configurations.', async () => {
   expect(existsSync(join(fixturePath, 'eslint.config.js'))).toBe(true)
   expect(existsSync(join(fixturePath, 'tsconfig.json'))).toBe(true)
   expect(existsSync(join(fixturePath, 'biome.json'))).toBe(true)
+  expect(existsSync(join(fixturePath, '.vscode/settings.json'))).toBe(true)
+  expect(existsSync(join(fixturePath, '.vscode/extensions.json'))).toBe(true)
 
   const biome = await Bun.file(join(fixturePath, 'biome.json')).json()
 

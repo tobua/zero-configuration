@@ -21,5 +21,6 @@ export const templates = {
 export const extension = (path: string) => ({ extends: path })
 
 export function createFile(configuration: object) {
-  return { name: 'vercel.json', contents: JSON.stringify(configuration, null, 2), showInCi: true }
+  // NOTE files needs to be committed to source by the user to apply when deployed to Vercel.
+  return { name: 'vercel.json', contents: JSON.stringify(configuration, null, 2), commitFile: true }
 }

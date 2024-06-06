@@ -3,7 +3,6 @@ import { dirname, join } from 'node:path'
 import { it } from 'avait'
 import Bun from 'bun'
 import glob from 'fast-glob'
-import isCi from 'is-ci'
 import { parse } from 'parse-gitignore'
 import { merge } from 'ts-deepmerge'
 import { z } from 'zod'
@@ -180,7 +179,7 @@ export function installLocalDependencies() {
 
 export async function writeFile(file: File, ignores: string[]) {
   await Bun.write(root(file.name), file.contents)
-  if (!(file.showInCi && isCi)) {
+  if (!file.commitFile) {
     ignores.push(file.name)
   }
 }

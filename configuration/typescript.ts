@@ -33,6 +33,13 @@ export const templates = {
       noEmit: true,
     },
   },
+  'react-native': {
+    extends: '@react-native/typescript-config/tsconfig.json',
+    compilerOptions: {
+      module: 'NodeNext',
+      moduleResolution: 'node',
+    },
+  },
 }
 
 export const extension = (path: string) => ({ extends: path })

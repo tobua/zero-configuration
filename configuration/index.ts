@@ -10,6 +10,7 @@ import * as next from './next'
 import * as playwright from './playwright'
 import * as postcss from './postcss'
 import * as prettier from './prettier'
+import * as reactNative from './react-native'
 import * as rsbuild from './rsbuild'
 import * as tailwind from './tailwind'
 import * as typescript from './typescript'
@@ -38,6 +39,8 @@ export type ConfigurationKeys =
   | 'postcss'
   | 'babel'
   | 'metro'
+  | 'react-native'
+  | 'reactNative'
   | 'vercel'
   | 'license'
   // Require separate logic, not found in configuraitons below.
@@ -106,6 +109,11 @@ export const configurations: Configuration[] = [
   {
     name: 'metro',
     configuration: metro,
+  },
+  {
+    name: 'react-native',
+    alias: 'reactNative',
+    configuration: reactNative,
   },
   {
     name: 'vercel',

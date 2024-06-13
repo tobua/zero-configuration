@@ -41,3 +41,8 @@ export const vitest = {
 }
 
 export const eslint = true
+
+export const reactNative = {
+  name: "break'a'bit",
+  displayName: "break'a'bit",
+}

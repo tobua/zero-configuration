@@ -19,6 +19,10 @@
 				"silent": true
 			}
 		},
-		"metro": "react-native"
+		"metro": "react-native",
+		"react-native": {
+			"name": "hairplan",
+			"displayName": "hairplan"
+		}
 	}
 }

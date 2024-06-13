@@ -41,6 +41,7 @@ test('Adds configuration files for basic file setup.', async () => {
   expect(existsSync(join(fixturePath, 'biome.json'))).toBe(true)
   expect(existsSync(join(fixturePath, 'vitest.config.ts'))).toBe(true)
   expect(existsSync(join(fixturePath, 'cypress.config.ts'))).toBe(true)
+  expect(existsSync(join(fixturePath, 'app.json'))).toBe(true)
   // TODO should not work with TS.
   expect(existsSync(join(fixturePath, 'eslint.config.js'))).toBe(true)
 
@@ -175,6 +176,7 @@ test("Doesn't add deployment files to gitignore in CI.", async () => {
   expect(existsSync(join(fixturePath, 'vercel.json'))).toBe(true)
   expect(existsSync(join(fixturePath, 'metro.config.cjs'))).toBe(true)
   expect(existsSync(join(fixturePath, '.gitignore'))).toBe(true)
+  expect(existsSync(join(fixturePath, 'app.json'))).toBe(true)
 
   const gitignoreFile = await Bun.file(join(fixturePath, '.gitignore')).text()
 

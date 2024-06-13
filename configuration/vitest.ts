@@ -11,5 +11,5 @@ export default vitest`
     contents = `export default ${JSON.stringify(configuration, null, 2)}`
   }
 
-  return { name: `vitest.config.${state.extension}`, contents }
+  return { name: `vitest.config.${state.extension === 'json' ? 'js' : state.extension}`, contents }
 }

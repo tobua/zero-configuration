@@ -17,5 +17,5 @@ module.exports = babel`
     contents = `module.exports = ${JSON.stringify(configuration, null, 2)}`
   }
 
-  return { name: `babel.config.${state.extension}`, contents }
+  return { name: `babel.config.${state.extension === 'json' ? 'js' : state.extension}`, contents }
 }

@@ -21,5 +21,5 @@ export default postcss`
     contents = `export default ${JSON.stringify(configuration, null, 2)}`
   }
 
-  return { name: `postcss.config.${state.extension}`, contents }
+  return { name: `postcss.config.${state.extension === 'json' ? 'js' : state.extension}`, contents }
 }

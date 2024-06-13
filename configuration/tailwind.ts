@@ -11,5 +11,5 @@ export default tailwind`
     contents = `export default ${JSON.stringify(configuration, null, 2)}`
   }
 
-  return { name: `tailwind.config.${state.extension}`, contents }
+  return { name: `tailwind.config.${state.extension === 'json' ? 'js' : state.extension}`, contents }
 }

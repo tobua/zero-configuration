@@ -11,5 +11,5 @@ export default cypress`
     contents = `export default ${JSON.stringify(configuration, null, 2)}`
   }
 
-  return { name: `cypress.config.${state.extension}`, contents }
+  return { name: `cypress.config.${state.extension === 'json' ? 'js' : state.extension}`, contents }
 }

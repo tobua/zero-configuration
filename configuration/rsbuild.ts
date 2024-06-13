@@ -12,5 +12,5 @@ export default extendConfiguration('rsbuild', rsbuild)`
     contents = `export default ${JSON.stringify(configuration, null, 2)}`
   }
 
-  return { name: `rsbuild.config.${state.extension}`, contents }
+  return { name: `rsbuild.config.${state.extension === 'json' ? 'js' : state.extension}`, contents }
 }

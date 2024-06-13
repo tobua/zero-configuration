@@ -29,5 +29,5 @@ module.exports = mergeConfig(getDefaultConfig(__dirname), metro)`
 module.exports = mergeConfig(getDefaultConfig(__dirname), ${JSON.stringify(configuration, null, 2)})`
   }
 
-  return { name: 'metro.config.cjs', contents }
+  return { name: `metro.config.${state.extension === 'json' ? 'js' : state.extension}`, contents }
 }

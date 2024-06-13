@@ -11,5 +11,5 @@ export default playwright`
     contents = `export default ${JSON.stringify(configuration, null, 2)}`
   }
 
-  return { name: `playwright.config.${state.extension}`, contents }
+  return { name: `playwright.config.${state.extension === 'json' ? 'js' : state.extension}`, contents }
 }

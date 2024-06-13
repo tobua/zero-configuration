@@ -11,5 +11,5 @@ export default vite`
     contents = `export default ${JSON.stringify(configuration, null, 2)}`
   }
 
-  return { name: `vite.config.${state.extension}`, contents }
+  return { name: `vite.config.${state.extension === 'json' ? 'ts' : state.extension}`, contents }
 }

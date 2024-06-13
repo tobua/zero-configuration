@@ -66,7 +66,7 @@ test('Also parses JavaScript configuration.', async () => {
 
   expect(existsSync(join(fixturePath, '.gitignore'))).toBe(true)
   expect(await Bun.file(join(fixturePath, '.gitignore')).text()).toContain('please-ignore.js')
-  expect(existsSync(join(fixturePath, 'babel.config.cjs'))).toBe(true)
+  expect(existsSync(join(fixturePath, 'babel.config.js'))).toBe(true)
 })
 
 test('Extends existing configurations.', async () => {
@@ -120,7 +120,7 @@ test('Creates configuration files for various build-tool configurations.', () =>
   // Not serializable in this case.
   expect(existsSync(join(fixturePath, 'next.config.js'))).toBe(false)
   // JavaScript only, but defined in package.json.
-  expect(existsSync(join(fixturePath, 'postcss.config.js'))).toBe(true)
+  expect(existsSync(join(fixturePath, 'postcss.config.ts'))).toBe(true)
 })
 
 test('Creates configuration files in all workspaces including the root.', async () => {

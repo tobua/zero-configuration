@@ -35,7 +35,7 @@ test('Adds configuration files for basic file setup.', async () => {
     stdio: 'inherit',
   })
 
-  expect(existsSync(join(fixturePath, 'prettier.config.js'))).toBe(true)
+  expect(existsSync(join(fixturePath, 'prettier.config.ts'))).toBe(true)
   expect(existsSync(join(fixturePath, '.prettierignore'))).toBe(true)
   expect(existsSync(join(fixturePath, 'playwright.config.ts'))).toBe(true)
   expect(existsSync(join(fixturePath, 'biome.json'))).toBe(true)
@@ -174,7 +174,7 @@ test("Doesn't add deployment files to gitignore in CI.", async () => {
   })
 
   expect(existsSync(join(fixturePath, 'vercel.json'))).toBe(true)
-  expect(existsSync(join(fixturePath, 'metro.config.cjs'))).toBe(true)
+  expect(existsSync(join(fixturePath, 'metro.config.js'))).toBe(true)
   expect(existsSync(join(fixturePath, '.gitignore'))).toBe(true)
   expect(existsSync(join(fixturePath, 'app.json'))).toBe(true)
 

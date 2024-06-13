@@ -1,9 +1,11 @@
 import type { Configuration } from '../types'
+import * as babel from './babel'
 import * as biome from './biome'
 import * as cypress from './cypress'
 import * as eslint from './eslint'
 import * as ignore from './gitignore'
 import * as license from './license'
+import * as metro from './metro'
 import * as next from './next'
 import * as playwright from './playwright'
 import * as postcss from './postcss'
@@ -34,6 +36,8 @@ export type ConfigurationKeys =
   | 'tailwind'
   | 'tailwindcss'
   | 'postcss'
+  | 'babel'
+  | 'metro'
   | 'vercel'
   | 'license'
   // Require separate logic, not found in configuraitons below.
@@ -94,6 +98,14 @@ export const configurations: Configuration[] = [
   {
     name: 'postcss',
     configuration: postcss,
+  },
+  {
+    name: 'babel',
+    configuration: babel,
+  },
+  {
+    name: 'metro',
+    configuration: metro,
   },
   {
     name: 'vercel',

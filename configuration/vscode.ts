@@ -24,7 +24,8 @@ export const templates: Template<object> = {
 }
 
 export function createFile(configuration: { settings?: object; extensions?: object }) {
-  const files = []
+  const files: { name: string; contents: string }[] = []
+
   if (configuration.settings) {
     files.push({ name: '.vscode/settings.json', contents: JSON.stringify(configuration.settings, null, 2) })
   }

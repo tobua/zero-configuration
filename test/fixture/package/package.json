@@ -18,6 +18,7 @@
 			"github": {
 				"silent": true
 			}
-		}
+		},
+		"metro": "react-native"
 	}
 }

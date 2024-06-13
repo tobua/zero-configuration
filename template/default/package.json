@@ -1,22 +1,22 @@
 {
   "scripts": {
-    "check": "biome check --apply .",
     "build": "bun build index.tsx --outdir public",
-    "watch": "bun build index.tsx --outdir public --watch",
+    "check": "biome check --apply .",
     "server": "bun --watch server.ts",
     "start": "bun watch & bun server",
-    "types": "tsc"
+    "types": "tsc",
+    "watch": "bun build index.tsx --outdir public --watch"
   },
   "dependencies": {
-    "@biomejs/biome": "^1.7.2",
-    "@types/react": "^18.3.1",
+    "@biomejs/biome": "^1.8.1",
+    "@elysiajs/static": "^1.0.3",
+    "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
+    "elysia": "^1.0.23",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "typescript": "^5.4.5",
-    "zero-configuration": "^0.7.1",
-    "@elysiajs/static": "^1.0.3",
-    "elysia": "^1.0.16"
+    "zero-configuration": "^0.10.1"
   },
   "trustedDependencies": [
     "zero-configuration"
@@ -26,23 +26,28 @@
     "gitignore": "bundle",
     "vscode": "biome",
     "biome": {
-        "extends": "recommended",
-        "linter": {
-          "rules": {
-            "style": {
-              "useFilenamingConvention": "off",
-              "noImplicitBoolean": "off",
-              "useNamingConvention": "off"
-            }
+      "extends": "recommended",
+      "linter": {
+        "rules": {
+          "style": {
+            "useFilenamingConvention": "off",
+            "noImplicitBoolean": "off",
+            "useNamingConvention": "off"
           }
-        },
-        "files": {
-          "ignore": ["dist", "rsbuild.config.ts"]
         }
       },
+      "files": {
+        "ignore": [
+          "dist",
+          "rsbuild.config.ts"
+        ]
+      }
+    },
     "typescript": {
       "extends": "web",
-      "include": ["index.tsx"]
+      "include": [
+        "index.tsx"
+      ]
     }
   }
 }

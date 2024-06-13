@@ -1,39 +1,39 @@
 {
-    "scripts": {
-      "format": "biome check --apply .",
-      "types": "tsc"
-    },
-    "devDependencies": {
-      "@biomejs/biome": "^1.7.1",
-      "typescript": "^5.4.5",
-      "zero-configuration": "^0.6.0"
-    },
-    "peerDependencies": {
-      "typescript": ">= 5"
-    },
-    "trustedDependencies": [
-      "zero-configuration"
-    ],
-    "type": "module",
-    "sideEffects": false,
-    "main": "./index.ts",
-    "exports": {
-      ".": {
-        "default": "./index.ts"
-      }
-    },
-    "files": [
-      "*.ts"
-    ],
-    "configuration": {
-      "gitignore": "recommended",
-      "vscode": "biome",
-      "typescript": {
-        "extends": "plugin",
-        "files": [
-          "index.ts"
-        ]
-      },
-      "biome": "recommended"
+  "scripts": {
+    "format": "biome check --apply .",
+    "types": "tsc"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.8.1",
+    "typescript": "^5.4.5",
+    "zero-configuration": "^0.10.1"
+  },
+  "peerDependencies": {
+    "typescript": ">= 5"
+  },
+  "trustedDependencies": [
+    "zero-configuration"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "main": "./index.ts",
+  "exports": {
+    ".": {
+      "default": "./index.ts"
     }
+  },
+  "files": [
+    "*.ts"
+  ],
+  "configuration": {
+    "gitignore": "recommended",
+    "vscode": "biome",
+    "typescript": {
+      "extends": "plugin",
+      "files": [
+        "index.ts"
+      ]
+    },
+    "biome": "recommended"
   }
+}

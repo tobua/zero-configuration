@@ -65,6 +65,7 @@ test('Also parses JavaScript configuration.', async () => {
 
   expect(existsSync(join(fixturePath, '.gitignore'))).toBe(true)
   expect(await Bun.file(join(fixturePath, '.gitignore')).text()).toContain('please-ignore.js')
+  expect(existsSync(join(fixturePath, 'babel.config.cjs'))).toBe(true)
 })
 
 test('Extends existing configurations.', async () => {
@@ -172,6 +173,7 @@ test("Doesn't add deployment files to gitignore in CI.", async () => {
   })
 
   expect(existsSync(join(fixturePath, 'vercel.json'))).toBe(true)
+  expect(existsSync(join(fixturePath, 'metro.config.cjs'))).toBe(true)
   expect(existsSync(join(fixturePath, '.gitignore'))).toBe(true)
 
   const gitignoreFile = await Bun.file(join(fixturePath, '.gitignore')).text()

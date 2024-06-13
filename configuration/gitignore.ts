@@ -1,10 +1,11 @@
 import type { Template } from '../types'
 
-const recommended = ['node_modules', 'bun.lockb', '.env']
+const base = ['node_modules', 'bun.lockb', '.env']
 
 export const templates: Template<string[]> = {
-  recommended: recommended,
-  bundle: [...recommended, 'dist'],
+  recommended: base,
+  bundle: [...base, 'dist'],
+  numic: [...base, '.numic', 'android', 'ios', 'android-bundle.aab'],
 }
 
 export function createFile(values: string[]) {

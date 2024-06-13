@@ -4,11 +4,11 @@ import { state } from '../state'
 export const extension = (path: string) => ({ extends: path })
 
 export function createFile(configuration: object | string) {
-  let contents = `import { next } from './configuration.js'
+  let contents = `import { next } from './configuration.${state.extension}'
 
 export default next`
 
-  if (state.language === 'typescript') {
+  if (state.extension === 'ts') {
     if (typeof configuration === 'object' && isSerializable(configuration)) {
       contents = `export default ${JSON.stringify(configuration, null, 2)}`
     } else {
@@ -17,7 +17,7 @@ export default next`
     }
   }
 
-  if (typeof configuration === 'object' && state.language === 'json') {
+  if (typeof configuration === 'object' && state.extension === 'json') {
     contents = `export default ${JSON.stringify(configuration, null, 2)}`
   }
 

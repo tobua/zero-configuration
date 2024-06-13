@@ -1,14 +1,14 @@
 import { isSerializable, log } from '../log'
-import { fileExtension, state } from '../state'
+import { state } from '../state'
 
 export const extension = (path: string) => ({ extends: path })
 
 export function createFile(configuration: object | string) {
-  let contents = `import { postcss } from './configuration.${fileExtension()}'
+  let contents = `import { postcss } from './configuration.${state.extension}'
 
 export default postcss`
 
-  if (state.language === 'typescript') {
+  if (state.extension === 'ts') {
     if (typeof configuration === 'object' && isSerializable(configuration)) {
       contents = `export default ${JSON.stringify(configuration, null, 2)}`
     } else {
@@ -17,9 +17,9 @@ export default postcss`
     }
   }
 
-  if (typeof configuration === 'object' && state.language === 'json') {
+  if (typeof configuration === 'object' && state.extension === 'json') {
     contents = `export default ${JSON.stringify(configuration, null, 2)}`
   }
 
-  return { name: 'postcss.config.js', contents }
+  return { name: `postcss.config.${state.extension}`, contents }
 }

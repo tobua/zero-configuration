@@ -183,3 +183,20 @@ test("Doesn't add deployment files to gitignore in CI.", async () => {
   expect(gitignoreFile).not.toContain('vercel.json')
   expect(gitignoreFile).toContain('biome.json')
 })
+
+test('Also parses JavaScript configuration.', async () => {
+  const fixturePath = './test/fixture/file-commonjs'
+
+  execSync('bun ./../../../index.ts', {
+    cwd: fixturePath,
+    stdio: 'inherit',
+  })
+
+  expect(existsSync(join(fixturePath, '.gitignore'))).toBe(true)
+  expect(await Bun.file(join(fixturePath, '.gitignore')).text()).toContain('numic')
+  expect(existsSync(join(fixturePath, 'babel.config.cjs'))).toBe(true)
+  expect(existsSync(join(fixturePath, 'metro.config.cjs'))).toBe(true)
+  expect(existsSync(join(fixturePath, 'tsconfig.json'))).toBe(true)
+  expect(await Bun.file(join(fixturePath, 'tsconfig.json')).text()).toContain('react-native')
+  expect(existsSync(join(fixturePath, 'app.json'))).toBe(true)
+})

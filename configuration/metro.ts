@@ -13,17 +13,17 @@ export const templates = {
 export const extension = (path: string) => ({ extends: path })
 
 export function createFile(configuration: object | string) {
-  if (state.language === 'typescript') {
+  if (state.extension === 'ts') {
     log('Using metro configuration requires the a JavaScript file (configuration.js)', 'warning')
     return
   }
 
   let contents = `const { getDefaultConfig, mergeConfig } = require('@react-native/metro-config')
-const { metro } = require('./configuration.js')
+const { metro } = require('./configuration.${state.extension}')
 
 module.exports = mergeConfig(getDefaultConfig(__dirname), metro)`
 
-  if (typeof configuration === 'object' && state.language === 'json') {
+  if (typeof configuration === 'object' && state.extension === 'json') {
     contents = `const { getDefaultConfig, mergeConfig } = require('@react-native/metro-config')
 
 module.exports = mergeConfig(getDefaultConfig(__dirname), ${JSON.stringify(configuration, null, 2)})`

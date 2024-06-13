@@ -29,27 +29,36 @@ export const validate = (configuration: unknown) => {
   }
 }
 
-export async function findConfiguration() {
-  const { value: typeScriptModuleContents } = await it(import(root('./configuration.ts')))
-  const { value: javaScriptModuleContents } = await it(import(root('./configuration.js')))
+const extensions = ['ts', 'js', 'json', 'cjs', 'mjs']
 
-  if (!(typeScriptModuleContents || javaScriptModuleContents || Object.hasOwn(state.packageJson, 'configuration'))) {
+export async function findConfiguration() {
+  let moduleContents: object | undefined
+
+  for (const extension of extensions) {
+    const filePath = root(`./configuration.${extension}`)
+    if (existsSync(filePath)) {
+      const contents = await it(import(filePath))
+
+      if (contents?.value) {
+        moduleContents = contents.value as object
+        state.extension = extension as 'ts' | 'js' | 'json' | 'cjs' | 'mjs'
+      }
+    }
+  }
+
+  if (!(moduleContents || Object.hasOwn(state.packageJson, 'configuration'))) {
     log('No configuration found', 'error')
   }
 
-  if (typeScriptModuleContents) {
-    state.language = 'typescript'
-  } else if (javaScriptModuleContents) {
-    state.language = 'javascript'
-  } else {
-    state.language = 'json'
+  if (!moduleContents && Object.hasOwn(state.packageJson, 'configuration')) {
+    state.extension === 'json'
   }
 
-  const multipleConfigurations = (typeScriptModuleContents || javaScriptModuleContents) && state.packageJson.configuration
+  const multipleConfigurations = moduleContents && state.packageJson.configuration
   const userConfiguration = multipleConfigurations
     ? // Merge package configuration onto file configuration.
-      merge(typeScriptModuleContents ?? javaScriptModuleContents, state.packageJson.configuration)
-    : state.packageJson.configuration ?? typeScriptModuleContents ?? javaScriptModuleContents
+      merge(moduleContents as object, state.packageJson.configuration as object)
+    : state.packageJson.configuration ?? (moduleContents as object)
 
   validate(userConfiguration)
   state.options = userConfiguration

@@ -28,9 +28,8 @@ export type Options = string | { extends?: string } | true
 
 export interface State {
   options: { [Key in ConfigurationKeys]?: Options }
-  // Where does the configuration come from package.json => configuration: JSON
-  // configuration.js: JavaScript, configuration.ts: TypeScript
-  language: 'json' | 'javascript' | 'typescript'
+  // Where does the configuration come from package.json => configuration: json
+  extension: 'ts' | 'js' | 'json' | 'cjs' | 'mjs'
   packageJson: PackageJson
   directory: string
   root: boolean

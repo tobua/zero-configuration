@@ -36,8 +36,8 @@ export const templates = {
   'react-native': {
     extends: '@react-native/typescript-config/tsconfig.json',
     compilerOptions: {
-      module: 'NodeNext',
-      moduleResolution: 'node',
+      module: 'Preserve',
+      moduleResolution: 'Bundler',
     },
   },
 }

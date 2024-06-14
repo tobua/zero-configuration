@@ -1,4 +1,4 @@
-import { log } from '../log'
+import { isSerializable, log } from '../log'
 import { state } from '../state'
 
 export const templates = {
@@ -23,7 +23,7 @@ const { metro } = require('./configuration.${state.extension}')
 
 module.exports = mergeConfig(getDefaultConfig(__dirname), metro)`
 
-  if (typeof configuration === 'object' && state.extension === 'json') {
+  if (typeof configuration === 'object' && (state.extension === 'json' || isSerializable(configuration))) {
     contents = `const { getDefaultConfig, mergeConfig } = require('@react-native/metro-config')
 
 module.exports = mergeConfig(getDefaultConfig(__dirname), ${JSON.stringify(configuration, null, 2)})`

@@ -199,4 +199,8 @@ test('Also parses JavaScript configuration.', async () => {
   expect(existsSync(join(fixturePath, 'tsconfig.json'))).toBe(true)
   expect(await Bun.file(join(fixturePath, 'tsconfig.json')).text()).toContain('react-native')
   expect(existsSync(join(fixturePath, 'app.json'))).toBe(true)
+
+  const metroFile = await Bun.file(join(fixturePath, 'metro.config.cjs')).text()
+
+  expect(metroFile).toContain('unstable_enablePackageExports')
 })

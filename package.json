@@ -8,7 +8,8 @@
   "scripts": {
     "check": "biome check --write .",
     "postinstall": "bun index.ts",
-    "types": "tsc"
+    "types": "tsc",
+    "test": "bun test ./test/*.test.ts"
   },
   "dependencies": {
     "avait": "^1.0.0",

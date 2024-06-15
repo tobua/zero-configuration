@@ -6,7 +6,7 @@
   "devDependencies": {
     "@biomejs/biome": "^1.8.1",
     "typescript": "^5.4.5",
-    "zero-configuration": "^0.10.1"
+    "zero-configuration": "^0.11.3"
   },
   "peerDependencies": {
     "typescript": ">= 5"

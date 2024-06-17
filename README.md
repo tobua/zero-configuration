@@ -15,7 +15,7 @@ Many web development projects often contain numerous configuration files in the 
 
 ## Templates
 
-The easiest way to get started is through a template.
+The easiest way to get started is through a template. The following templates will be installed using [create-now](https://github.com/tobua/create-now) and are taken from the [`/template`](https://github.com/tobua/zero-configuration/tree/main/template) directory in this repository. The first argument specifies the destination directory and the second the template to pick.
 
 ```sh
 bun create now zero-configuration # Default template (React app built and served with Bun)

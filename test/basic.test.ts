@@ -204,3 +204,20 @@ test('Also parses JavaScript configuration.', async () => {
 
   expect(metroFile).toContain('unstable_enablePackageExports')
 })
+
+test('Can add multiple files.', async () => {
+  const fixturePath = './test/fixture/multiple'
+
+  execSync('bun ./../../../index.ts', {
+    cwd: fixturePath,
+    stdio: 'inherit',
+  })
+
+  expect(existsSync(join(fixturePath, 'tsconfig.json'))).toBe(true)
+  expect(await Bun.file(join(fixturePath, 'tsconfig.json')).text()).toContain('"strict": true')
+  expect(existsSync(join(fixturePath, 'test/tsconfig.json'))).toBe(true)
+  expect(await Bun.file(join(fixturePath, 'test/tsconfig.json')).text()).toContain('noUncheckedIndexedAccess')
+  expect(existsSync(join(fixturePath, 'demo/web/tsconfig.json'))).toBe(true)
+  // Make sure folder is removed.
+  expect(await Bun.file(join(fixturePath, 'demo/web/tsconfig.json')).text()).not.toContain('demo/web')
+})

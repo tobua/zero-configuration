@@ -2,7 +2,7 @@ import { existsSync } from 'node:fs'
 import { join } from 'node:path'
 import { it } from 'avait'
 import { merge } from 'ts-deepmerge'
-import type { Configuration, Options } from './types'
+import type { Configuration, File, Option, Options } from './types'
 
 const isExtension = async (value: string) => {
   // NOTE dynamic import in tests will resolve relative to project node_modules and not fixture.
@@ -14,50 +14,87 @@ const isExtension = async (value: string) => {
   return false
 }
 
-function extendTemplate(value: Options, configuration: Configuration['configuration']) {
+function extendTemplate(option: Option, configuration: Configuration['configuration']) {
   if (
-    typeof value !== 'object' ||
-    !(typeof value.extends === 'string' && configuration.templates && Object.hasOwn(configuration.templates, value.extends))
+    typeof option !== 'object' ||
+    !(typeof option.extends === 'string' && configuration.templates && Object.hasOwn(configuration.templates, option.extends))
   ) {
-    return value
+    return option
   }
 
-  let template = configuration.templates[value.extends]
+  let template = configuration.templates[option.extends]
 
   if (typeof template === 'string') {
-    value.extends = template
+    option.extends = template
   }
   if (typeof template === 'function') {
     template = template()
   }
   if (typeof template === 'object') {
-    // biome-ignore lint/performance/noDelete: We don't want the key to show up in the user configuration.
-    delete value.extends
-    return merge(template, value)
+    const optionWithoutPluginProperties = Object.fromEntries(Object.entries(option).filter(([key]) => !['extends', 'folder'].includes(key)))
+    return merge(template, optionWithoutPluginProperties)
   }
 
-  return value
+  return option
 }
 
-export async function parse(value: Options, configuration: Configuration['configuration']) {
+function addFolderToFile(file: File | undefined, folder?: string | false) {
+  if (file?.name && folder) {
+    file.name = join(folder, file.name)
+  }
+
+  return file
+}
+
+async function parseOption(option: Option, configuration: Configuration['configuration']) {
+  const folder = typeof option === 'object' && option.folder
+  let files: File | (File | undefined)[] | undefined = []
   // Template.
-  if (typeof value === 'string' && configuration.templates && Object.hasOwn(configuration.templates, value)) {
-    const template = configuration.templates[value as keyof typeof configuration.templates]
+  if (typeof option === 'string' && configuration.templates && Object.hasOwn(configuration.templates, option)) {
+    const template = configuration.templates[option as keyof typeof configuration.templates]
     const configurationTemplate = typeof template === 'function' ? template() : template
-    return configuration.createFile(configurationTemplate)
+    files = configuration.createFile(configurationTemplate)
+  } else if (typeof option === 'string' && (await isExtension(option)) && typeof configuration.extension === 'function') {
+    // File extension.
+    files = configuration.createFile(configuration.extension(option))
+  } else if (option === true) {
+    files = configuration.createFile(configuration.templates?.recommended)
+  } else {
+    // biome-ignore lint/style/noParameterAssign: Easier in this case.
+    option = extendTemplate(option, configuration)
+    files = configuration.createFile(option)
   }
 
-  // File extension.
-  if (typeof value === 'string' && (await isExtension(value)) && typeof configuration.extension === 'function') {
-    return configuration.createFile(configuration.extension(value))
+  if (Array.isArray(files)) {
+    files = files.map((file) => {
+      return addFolderToFile(file, folder)
+    })
+  } else if (typeof files === 'object') {
+    files = addFolderToFile(files, folder)
   }
 
-  if (value === true) {
-    return configuration.createFile(configuration.templates?.recommended)
+  return files
+}
+
+const unnestFileArray = (values: (File | (File | undefined)[] | undefined)[]): File[] => {
+  if (values.length === 1 && !values[0]) {
+    return []
   }
 
-  // biome-ignore lint/style/noParameterAssign: Easier in this case.
-  value = extendTemplate(value, configuration)
+  return values.reduce((result, value) => {
+    if (value === undefined) return result
+    if (Array.isArray(value)) {
+      const nestedClean = value.filter((innerValue): innerValue is File => innerValue !== undefined)
+      return (result as File[]).concat(nestedClean)
+    }
+    return (result as File[]).concat(value)
+  }, []) as File[]
+}
 
-  return configuration.createFile(value)
+export async function parse(options: Options, configuration: Configuration['configuration']): Promise<File[]> {
+  if (!Array.isArray(options)) {
+    return unnestFileArray([await parseOption(options, configuration)])
+  }
+
+  return unnestFileArray(await Promise.all(options.map((option) => parseOption(option, configuration))))
 }

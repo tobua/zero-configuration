@@ -16,12 +16,8 @@ async function configureProject() {
     if (!value) continue
     const files = await parse(value, configuration)
     if (!files) continue
-    if (Array.isArray(files)) {
-      for (const file of files.filter((item) => item?.name)) {
-        await writeFile(file as File, ignores)
-      }
-    } else {
-      await writeFile(files as File, ignores)
+    for (const file of files.filter((item) => item?.name)) {
+      await writeFile(file as File, ignores)
     }
   }
 

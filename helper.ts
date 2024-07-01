@@ -11,11 +11,14 @@ import { log } from './log'
 import { root, state } from './state'
 import type { File } from './types'
 
-const keys = Object.fromEntries(configurations.map((current) => [current.name, z.union([z.string(), z.object({}), z.boolean()])]))
+const FileSchema = z.union([z.string(), z.object({}), z.boolean()])
+const NestedFileSchema = z.union([FileSchema, z.array(FileSchema), z.undefined()])
+
+const keys = Object.fromEntries(configurations.map((current) => [current.name, NestedFileSchema]))
 
 for (const configuration of configurations) {
   if (configuration.alias) {
-    keys[configuration.alias] = z.union([z.string(), z.object({}), z.boolean()])
+    keys[configuration.alias] = NestedFileSchema
   }
 }
 
@@ -91,7 +94,7 @@ export async function writeGitIgnore(ignores: string[]) {
   // biome-ignore lint/style/noParameterAssign: Easier in this case.
   ignores = ignores.map((ignore) => (ignore.includes('/') ? (ignore.split('/')[0] as string) : ignore))
 
-  let userIgnores = state.options.ignore ?? state.options.gitignore ?? ([] as string[])
+  let userIgnores = (state.options.ignore ?? state.options.gitignore ?? []) as string[]
 
   if (typeof userIgnores === 'string' && Object.hasOwn(ignore.templates, userIgnores)) {
     userIgnores = ignore.templates[userIgnores] as string[]

@@ -9,10 +9,11 @@
     "check": "biome check --write .",
     "postinstall": "bun index.ts",
     "types": "tsc",
-    "test": "bun test ./test/*.test.ts"
+    "test": "bun test ./test/*.test.ts",
+    "clean": "git clean -fdx test/fixture"
   },
   "dependencies": {
-    "avait": "^1.0.0",
+    "avait": "^1.0.1",
     "fast-glob": "^3.3.2",
     "logua": "^3.0.3",
     "parse-gitignore": "^2.0.0",
@@ -20,11 +21,11 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.8.1",
-    "@types/bun": "^1.1.4",
+    "@biomejs/biome": "^1.8.3",
+    "@types/bun": "^1.1.6",
     "@types/parse-gitignore": "^1.0.2",
     "eslint-config-airbnb": "^19.0.4",
-    "typescript": "^5.4.5"
+    "typescript": "^5.5.2"
   },
   "peerDependencies": {
     "typescript": ">= 5"
@@ -90,6 +91,9 @@
       "extends": "plugin",
       "files": [
         "index.ts"
+      ],
+      "exclude": [
+        "test/fixture"
       ]
     }
   }

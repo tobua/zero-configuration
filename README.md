@@ -64,6 +64,21 @@ export const typescript = {
         lib: ['ES2020', 'DOM']
     }
 }
+// Generate multiple files.
+export const tsconfig = [
+    {
+        extends: 'recommended'
+    },
+    {
+        extends: 'web',
+        folder: 'test/demo', // <= Specify folder!
+        compilerOptions: { skipLibCheck: false }
+    },
+    {
+        extends: 'react-native',
+        folder: 'app'
+    }
+]
 ```
 
 ### All Available Options
@@ -91,3 +106,5 @@ export const license = 'MIT' | 'mit'
 export const ignore = true | 'recommended' | 'bundle' | string[]
 export const gitignore = // Alias for ignore
 ```
+
+For any configuration it also passible to pass an array to generate multiple files. Using the `folder` property the destination of the configuration file can be set.

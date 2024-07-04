@@ -3,6 +3,7 @@ import { dirname, join } from 'node:path'
 import { it } from 'avait'
 import Bun from 'bun'
 import glob from 'fast-glob'
+import isCi from 'is-ci'
 import { parse } from 'parse-gitignore'
 import { merge } from 'ts-deepmerge'
 import { z } from 'zod'
@@ -197,6 +198,10 @@ export async function writeFile(file: File, ignores: string[]) {
 }
 
 export function checkDependency(dependency: string) {
+  if (isCi || process.env.NODE_ENV === 'test') {
+    return
+  }
+
   const packageJsonPath = root('./package.json')
 
   if (!existsSync(packageJsonPath)) {

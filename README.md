@@ -86,7 +86,7 @@ export const tsconfig = [
 ```ts
 export const typescript = true | 'recommended' | 'plugin' | 'web' | { extends: 'web', include: ['index.tsx' ] }
 export const tsconfig // Alias for typescript
-export const biome = true | 'recommended' | { extends: 'recommended', files: { ignore: ['demo'] } }
+export const biome = true | 'recommended' | 'ninja' | { extends: 'recommended', files: { ignore: ['demo'] } }
 export const eslint = true | 'recommended' | [{ rules: { semi: 'error' } }]
 export const prettier = true | 'recommended' | { extends: 'recommended', printWidth: 140, ignore: ['test/fixture'] }
 export const vscode = true | 'biome' | 'prettier-eslint' | { settings: { ... }, extensions: { ... } } | { settings: { 'editor.defaultFormatter': 'biomejs.biome' } }
@@ -103,7 +103,7 @@ export const metro = object | 'react-native' | File (JavaScript only)
 export const reactNative = object | File
 export const vercel = 'spa' | 'SPA' | 'single-page-application' | 'spa-routes' | 'github-silent' | { extends: 'spa', routes: { ... }}
 export const license = 'MIT' | 'mit'
-export const ignore = true | 'recommended' | 'bundle' | string[]
+export const ignore = true | 'recommended' | 'bundle' | 'numic' | string[] | ['extends:bundle', ...]
 export const gitignore = // Alias for ignore
 ```
 

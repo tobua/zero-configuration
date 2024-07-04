@@ -92,6 +92,13 @@ test('Extends existing configurations.', async () => {
   const tsconfig = await Bun.file(join(fixturePath, 'tsconfig.json')).json()
 
   expect(tsconfig.extends).toContain('my-shared-tsconfig')
+
+  const gitignore = await Bun.file(join(fixturePath, '.gitignore')).text()
+
+  expect(gitignore.match(/test-results/g)).toHaveLength(1)
+  expect(gitignore.match(/dist/g)).toHaveLength(1)
+  expect(gitignore.match(/node_modules/g)).toHaveLength(1)
+  expect(gitignore.match(/extends:bundle/g)).toBe(null)
 })
 
 test('Empty project will exit and not add default gitignore.', () => {

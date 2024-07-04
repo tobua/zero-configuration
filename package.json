@@ -15,6 +15,7 @@
   "dependencies": {
     "avait": "^1.0.1",
     "fast-glob": "^3.3.2",
+    "is-ci": "^3.0.1",
     "logua": "^3.0.3",
     "parse-gitignore": "^2.0.0",
     "ts-deepmerge": "^7.0.0",

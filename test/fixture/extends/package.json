@@ -1,6 +1,7 @@
 {
 	"name": "extends",
 	"configuration": {
+		"gitignore": ["extends:bundle", "test-results"],
 		"eslint": "eslint-config-airbnb",
 		"typescript": "my-shared-tsconfig/tsconfig.json",
 		"biome": {

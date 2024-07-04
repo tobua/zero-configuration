@@ -9,5 +9,14 @@ export const templates: Template<string[]> = {
 }
 
 export function createFile(values: string[]) {
+  if (values.length > 0 && values[0]?.startsWith('extends:')) {
+    const templateName = values[0].split(':')[1]
+    values.shift()
+    if (templateName && templates[templateName]) {
+      // biome-ignore lint/style/noParameterAssign: Seems fine.
+      values = [...(templates[templateName] as string[]), ...values]
+    }
+  }
+
   return { name: '.gitignore', contents: `${values.join('\n')}\n` }
 }

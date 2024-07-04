@@ -1,3 +1,5 @@
+import { checkDependency } from '../helper'
+
 export const templates = {
   recommended: {
     compilerOptions: {
@@ -45,5 +47,6 @@ export const templates = {
 export const extension = (path: string) => ({ extends: path })
 
 export function createFile(configuration: object) {
+  checkDependency('typescript')
   return { name: 'tsconfig.json', contents: JSON.stringify(configuration, null, 2) }
 }

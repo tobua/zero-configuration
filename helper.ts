@@ -1,4 +1,4 @@
-import { existsSync, lstatSync, mkdirSync, symlinkSync } from 'node:fs'
+import { existsSync, lstatSync, mkdirSync, readFileSync, symlinkSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { it } from 'avait'
 import Bun from 'bun'
@@ -11,20 +11,20 @@ import { log } from './log'
 import { root, state } from './state'
 import type { File } from './types'
 
-const FileSchema = z.union([z.string(), z.object({}), z.boolean()])
-const NestedFileSchema = z.union([FileSchema, z.array(FileSchema), z.undefined()])
-
-const keys = Object.fromEntries(configurations.map((current) => [current.name, NestedFileSchema]))
-
-for (const configuration of configurations) {
-  if (configuration.alias) {
-    keys[configuration.alias] = NestedFileSchema
-  }
-}
-
-const schema = z.object(keys).partial().strip()
-
 export const validate = (configuration: unknown) => {
+  const FileSchema = z.union([z.string(), z.object({}), z.boolean()])
+  const NestedFileSchema = z.union([FileSchema, z.array(FileSchema), z.undefined()])
+
+  const keys = Object.fromEntries(configurations.map((current) => [current.name, NestedFileSchema]))
+
+  for (const configuration of configurations) {
+    if (configuration.alias) {
+      keys[configuration.alias] = NestedFileSchema
+    }
+  }
+
+  const schema = z.object(keys).partial().strip()
+
   try {
     return schema.parse(configuration)
   } catch (error) {
@@ -193,5 +193,26 @@ export async function writeFile(file: File, ignores: string[]) {
   await Bun.write(root(file.name), file.contents)
   if (!file.commitFile) {
     ignores.push(file.name)
+  }
+}
+
+export function checkDependency(dependency: string) {
+  const packageJsonPath = root('./package.json')
+
+  if (!existsSync(packageJsonPath)) {
+    log(`package.json not found in ${root('.')}`, 'warning')
+    return
+  }
+
+  const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf-8'))
+  const dependencies = {
+    ...packageJson.dependencies,
+    ...packageJson.devDependencies,
+    ...packageJson.peerDependencies,
+    ...packageJson.optionalDependencies,
+  }
+
+  if (!Object.hasOwn(dependencies, dependency)) {
+    log(`Dependency ${dependency} not installed in project but configuration exists`, 'warning')
   }
 }

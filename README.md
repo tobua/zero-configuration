@@ -5,7 +5,7 @@
 Many web development projects often contain numerous configuration files in the project's root directory, with little to no actual source code. While many plugins nowadays require configuration files, this plugin aims to generate them without the necessity of committing anything to the source code.
 
 - No configuration files in your source code.
-- Support for **gitignore**, **TypeScript**, **ESLint**, **Prettier**, **Biome**, **VS Code**, **Playwright**, **Cypress**, **Tailwind**, **PostCSS**, **babel**, **Metro**, **Vercel** and **Vitest**.
+- Support for **gitignore**, **TypeScript**, **ESLint**, **Prettier**, **Biome**, **VS Code**, **Playwright**, **Cypress**, **Tailwind**, **PostCSS**, **babel**, **Metro**, **Drizzle**, **Vercel** and **Vitest**.
 - Quickly configure bundlers like **Vite** and **Rsbuild**.
 - Generate boilerplate before publishing: **LICENSE.md**.
 - JSON based configuration in `package.json`.
@@ -101,6 +101,7 @@ export const postcss = object | File
 export const babel = object | File (JavaScript only)
 export const metro = object | 'react-native' | File (JavaScript only)
 export const reactNative = object | File
+export const drizzle = 'basic' | object | File
 export const vercel = 'spa' | 'SPA' | 'single-page-application' | 'spa-routes' | 'github-silent' | { extends: 'spa', routes: { ... }}
 export const license = 'MIT' | 'mit'
 export const ignore = true | 'recommended' | 'bundle' | 'numic' | string[] | ['extends:bundle', ...]

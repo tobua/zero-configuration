@@ -2,6 +2,7 @@ import type { Configuration } from '../types'
 import * as babel from './babel'
 import * as biome from './biome'
 import * as cypress from './cypress'
+import * as drizzle from './drizzle'
 import * as eslint from './eslint'
 import * as ignore from './gitignore'
 import * as license from './license'
@@ -41,6 +42,7 @@ export type ConfigurationKeys =
   | 'metro'
   | 'react-native'
   | 'reactNative'
+  | 'drizzle'
   | 'vercel'
   | 'license'
   // Require separate logic, not found in configuraitons below.
@@ -109,6 +111,10 @@ export const configurations: Configuration[] = [
   {
     name: 'metro',
     configuration: metro,
+  },
+  {
+    name: 'drizzle',
+    configuration: drizzle,
   },
   {
     name: 'react-native',

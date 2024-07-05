@@ -1,5 +1,3 @@
-import { checkDependency } from '../helper'
-
 const base = (rules: object) => ({
   $schema: 'node_modules/@biomejs/biome/configuration_schema.json',
   organizeImports: {
@@ -41,6 +39,5 @@ export const templates = {
 }
 
 export function createFile(configuration: object) {
-  checkDependency('@biomejs/biome')
   return { name: 'biome.json', contents: JSON.stringify(configuration, null, 2) }
 }

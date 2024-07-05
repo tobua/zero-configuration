@@ -46,3 +46,7 @@ export const reactNative = {
   name: "break'a'bit",
   displayName: "break'a'bit",
 }
+
+export const drizzle = {
+  dialect: 'postgresql'
+}

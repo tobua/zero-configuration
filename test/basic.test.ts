@@ -41,6 +41,7 @@ test('Adds configuration files for basic file setup.', async () => {
   expect(existsSync(join(fixturePath, 'biome.json'))).toBe(true)
   expect(existsSync(join(fixturePath, 'vitest.config.ts'))).toBe(true)
   expect(existsSync(join(fixturePath, 'cypress.config.ts'))).toBe(true)
+  expect(existsSync(join(fixturePath, 'drizzle.config.ts'))).toBe(true)
   expect(existsSync(join(fixturePath, 'app.json'))).toBe(true)
   // TODO should not work with TS.
   expect(existsSync(join(fixturePath, 'eslint.config.js'))).toBe(true)

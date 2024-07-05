@@ -1,10 +1,8 @@
-import { checkDependency } from '../helper'
 import { state } from '../state'
 
 export const extension = (path: string) => ({ extends: path })
 
 export function createFile(configuration: object | string) {
-  checkDependency('@rsbuild/core')
   let contents = `import { rsbuild } from './configuration.${state.extension}'
 import { extendConfiguration } from 'zero-configuration'
 

@@ -1,9 +1,8 @@
-import { existsSync, lstatSync, mkdirSync, readFileSync, symlinkSync } from 'node:fs'
+import { existsSync, lstatSync, mkdirSync, symlinkSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { it } from 'avait'
 import Bun from 'bun'
 import glob from 'fast-glob'
-import isCi from 'is-ci'
 import { parse } from 'parse-gitignore'
 import { merge } from 'ts-deepmerge'
 import { z } from 'zod'
@@ -194,30 +193,5 @@ export async function writeFile(file: File, ignores: string[]) {
   await Bun.write(root(file.name), file.contents)
   if (!file.commitFile) {
     ignores.push(file.name)
-  }
-}
-
-export function checkDependency(dependency: string) {
-  if (isCi || process.env.NODE_ENV === 'test') {
-    return
-  }
-
-  const packageJsonPath = root('./package.json')
-
-  if (!existsSync(packageJsonPath)) {
-    log(`package.json not found in ${root('.')}`, 'warning')
-    return
-  }
-
-  const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf-8'))
-  const dependencies = {
-    ...packageJson.dependencies,
-    ...packageJson.devDependencies,
-    ...packageJson.peerDependencies,
-    ...packageJson.optionalDependencies,
-  }
-
-  if (!Object.hasOwn(dependencies, dependency)) {
-    log(`Dependency ${dependency} not installed in project but configuration exists`, 'warning')
   }
 }

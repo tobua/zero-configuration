@@ -226,6 +226,11 @@ test('Can add multiple files.', async () => {
   expect(existsSync(join(fixturePath, 'test/tsconfig.json'))).toBe(true)
   expect(await Bun.file(join(fixturePath, 'test/tsconfig.json')).text()).toContain('noUncheckedIndexedAccess')
   expect(existsSync(join(fixturePath, 'demo/web/tsconfig.json'))).toBe(true)
-  // Make sure folder is removed.
+  expect(existsSync(join(fixturePath, 'demo/mobile/tsconfig.json'))).toBe(true)
+  expect(existsSync(join(fixturePath, 'api/tsconfig.json'))).toBe(true)
+  // Make sure folders are removed.
   expect(await Bun.file(join(fixturePath, 'demo/web/tsconfig.json')).text()).not.toContain('demo/web')
+  expect(await Bun.file(join(fixturePath, 'api/tsconfig.json')).text()).not.toContain('api')
+  // Can use regular extend of file as well.
+  expect(await Bun.file(join(fixturePath, 'demo/mobile/tsconfig.json')).text()).toContain('"extends": "../tsconfig.json"')
 })

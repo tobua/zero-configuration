@@ -1,5 +1,5 @@
 import { existsSync, lstatSync, mkdirSync, symlinkSync } from 'node:fs'
-import { dirname, join } from 'node:path'
+import { basename, dirname, join } from 'node:path'
 import { it } from 'avait'
 import Bun from 'bun'
 import glob from 'fast-glob'
@@ -192,6 +192,10 @@ export function installLocalDependencies() {
 export async function writeFile(file: File, ignores: string[]) {
   await Bun.write(root(file.name), file.contents)
   if (!file.commitFile) {
-    ignores.push(file.name)
+    if (file.folder) {
+      ignores.push(basename(file.name))
+    } else {
+      ignores.push(file.name)
+    }
   }
 }

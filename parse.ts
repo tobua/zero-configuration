@@ -19,16 +19,19 @@ function extendTemplate(option: Option, configuration: Configuration['configurat
     typeof option !== 'object' ||
     !(typeof option.extends === 'string' && configuration.templates && Object.hasOwn(configuration.templates, option.extends))
   ) {
+    if (typeof option === 'object' && Object.hasOwn(option, 'folder')) {
+      option.folder = undefined
+    }
     return option
   }
 
   let template = configuration.templates[option.extends]
 
-  if (typeof template === 'string') {
-    option.extends = template
-  }
   if (typeof template === 'function') {
     template = template()
+  }
+  if (typeof template === 'string') {
+    option.extends = template
   }
   if (typeof template === 'object') {
     const optionWithoutPluginProperties = Object.fromEntries(Object.entries(option).filter(([key]) => !['extends', 'folder'].includes(key)))
@@ -71,6 +74,14 @@ async function parseOption(option: Option, configuration: Configuration['configu
     })
   } else if (typeof files === 'object') {
     files = addFolderToFile(files, folder)
+  }
+
+  if (folder) {
+    for (const file of Array.isArray(files) ? files : [files]) {
+      if (file) {
+        file.folder = true
+      }
+    }
   }
 
   return files

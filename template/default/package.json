@@ -1,22 +1,22 @@
 {
   "scripts": {
     "build": "bun build index.tsx --outdir public",
-    "check": "biome check --apply .",
+    "check": "biome check --write .",
     "server": "bun --watch server.ts",
     "start": "bun watch & bun server",
     "types": "tsc",
     "watch": "bun build index.tsx --outdir public --watch"
   },
   "dependencies": {
-    "@biomejs/biome": "^1.8.1",
+    "@biomejs/biome": "^1.8.3",
     "@elysiajs/static": "^1.0.3",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
-    "elysia": "^1.0.23",
+    "elysia": "^1.0.27",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "typescript": "^5.4.5",
-    "zero-configuration": "^0.11.3"
+    "typescript": "^5.5.3",
+    "zero-configuration": "^0.16.1"
   },
   "trustedDependencies": [
     "zero-configuration"

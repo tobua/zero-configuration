@@ -1,28 +1,38 @@
 {
 	"name": "package",
 	"author": {
-		"name": "Matthias Giger"
+	  "name": "Matthias Giger"
 	},
 	"configuration": {
-		"eslint": true,
-		"prettier": "recommended",
-		"biome": "recommended",
-		"playwright": true,
-		"license": "MIT",
-		"tsconfig": {
-			"compilerOptions": {
-				"target": "ES6"
+	  "eslint": true,
+	  "prettier": "recommended",
+	  "biome": {
+		"extends": "ninja",
+		"linter": {
+		  "rules": {
+			"style": {
+			  "noInferrableTypes": "off"
 			}
-		},
-		"vercel": {
-			"github": {
-				"silent": true
-			}
-		},
-		"metro": "react-native",
-		"react-native": {
-			"name": "hairplan",
-			"displayName": "hairplan"
+		  }
 		}
+	  },
+	  "playwright": true,
+	  "license": "MIT",
+	  "tsconfig": {
+		"compilerOptions": {
+		  "target": "ES6"
+		}
+	  },
+	  "vercel": {
+		"github": {
+		  "silent": true
+		}
+	  },
+	  "metro": "react-native",
+	  "react-native": {
+		"name": "hairplan",
+		"displayName": "hairplan"
+	  }
 	}
-}
+  }
+  

@@ -190,6 +190,13 @@ test("Doesn't add deployment files to gitignore in CI.", async () => {
 
   expect(gitignoreFile).not.toContain('vercel.json')
   expect(gitignoreFile).toContain('biome.json')
+
+  const biome = await Bun.file(join(fixturePath, 'biome.json')).json()
+
+  expect(biome.linter.rules.all).toBe(true)
+  expect(biome.linter.rules.style.useNamingConvention).toBe('off')
+  expect(biome.linter.rules.style.noInferrableTypes).toBe('off')
+  expect(biome.options.maxAllowedComplexity).toBeLessThanOrEqual(10)
 })
 
 test('Also parses JavaScript configuration.', async () => {

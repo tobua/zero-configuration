@@ -17,6 +17,18 @@ export const rsbuild = defineConfig({
   },
 })
 
+export const farm = {
+  server: {
+    hmr: false,
+  },
+  compilation: {
+    lazyCompilation: false,
+    persistentCache: false,
+    minify: false,
+    treeShake: false
+  },
+}
+
 /** @type {import('next').NextConfig} */
 export const next = defineConfig({
   appDir: 'application',

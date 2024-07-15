@@ -6,7 +6,7 @@ Many web development projects often contain numerous configuration files in the 
 
 - No configuration files in your source code.
 - Support for **gitignore**, **TypeScript**, **ESLint**, **Prettier**, **Biome**, **VS Code**, **Playwright**, **Cypress**, **Tailwind**, **PostCSS**, **babel**, **Metro**, **Drizzle**, **Vercel** and **Vitest**.
-- Quickly configure bundlers like **Vite** and **Rsbuild**.
+- Quickly configure bundlers like **Vite**, **Rsbuild** and **Farm**.
 - Generate boilerplate before publishing: **LICENSE.md**.
 - JSON based configuration in `package.json`.
 - Optional typed programmatic interface in `configuration.ts`.
@@ -24,6 +24,9 @@ bun create now zero-configuration . plugin-bun # TypeScript plugin
 bun create now zero-configuration . plugin-react # Plugin with JSX
 bun create now zero-configuration . desktop # Electron desktop application.
 bun create now zero-configuration . mobile # React Native mobile application for Android and iOS.
+
+# Instead of the "." (current folder) you can also specify any other directory:
+bun create now zero-configuration ./my-react-rsbuild-app web 
 ```
 
 ## Integration and Usage
@@ -93,6 +96,7 @@ export const vscode = true | 'biome' | 'prettier-eslint' | { settings: { ... }, 
 export const playwright = object | File
 export const vite = object | File
 export const rsbuild = object | File
+export const farm = object | File
 export const next = object | File
 export const vitest = object | File
 export const cypress = object | File

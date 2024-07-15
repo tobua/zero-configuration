@@ -122,6 +122,7 @@ test('Creates configuration files for various build-tool configurations.', () =>
   })
 
   expect(existsSync(join(fixturePath, 'rsbuild.config.ts'))).toBe(true)
+  expect(existsSync(join(fixturePath, 'farm.config.ts'))).toBe(true)
   expect(existsSync(join(fixturePath, 'vite.config.ts'))).toBe(true)
   expect(existsSync(join(fixturePath, 'tailwind.config.ts'))).toBe(true)
   // Only work with JavaScript configuration or serializable configuration.

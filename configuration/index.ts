@@ -1,3 +1,4 @@
+import { state } from '../state'
 import type { Configuration } from '../types'
 import * as babel from './babel'
 import * as biome from './biome'
@@ -12,7 +13,6 @@ import * as playwright from './playwright'
 import * as postcss from './postcss'
 import * as prettier from './prettier'
 import * as reactNative from './react-native'
-import * as rsbuild from './rsbuild'
 import * as tailwind from './tailwind'
 import * as typescript from './typescript'
 import * as vercel from './vercel'
@@ -32,6 +32,7 @@ export type ConfigurationKeys =
   | 'playwright'
   | 'vite'
   | 'rsbuild'
+  | 'farm'
   | 'next'
   | 'vitest'
   | 'cypress'
@@ -48,6 +49,22 @@ export type ConfigurationKeys =
   // Require separate logic, not found in configuraitons below.
   | 'ignore'
   | 'gitignore'
+
+const createFileConfiguration = (name: string) => ({
+  extension: (path: string) => ({ extends: path }),
+  createFile: function createFile(configuration: object | string) {
+    let contents = `import { ${name} } from './configuration.${state.extension}'
+import { extendConfiguration } from 'zero-configuration'
+
+export default extendConfiguration('${name}', ${name})`
+
+    if (typeof configuration === 'object' && state.extension === 'json') {
+      contents = `export default ${JSON.stringify(configuration, null, 2)}`
+    }
+
+    return { name: `${name}.config.${state.extension === 'json' ? 'js' : state.extension}`, contents }
+  },
+})
 
 export const configurations: Configuration[] = [
   {
@@ -81,7 +98,11 @@ export const configurations: Configuration[] = [
   },
   {
     name: 'rsbuild',
-    configuration: rsbuild,
+    configuration: createFileConfiguration('rsbuild'),
+  },
+  {
+    name: 'farm',
+    configuration: createFileConfiguration('farm'),
   },
   {
     name: 'next',

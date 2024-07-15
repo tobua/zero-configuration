@@ -16,7 +16,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "typescript": "^5.5.3",
-    "zero-configuration": "^0.16.1"
+    "zero-configuration": "^0.16.2"
   },
   "trustedDependencies": [
     "zero-configuration"

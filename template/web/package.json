@@ -6,14 +6,14 @@
   },
   "dependencies": {
     "@biomejs/biome": "^1.8.3",
-    "@rsbuild/core": "^1.0.1-beta.1",
-    "@rsbuild/plugin-react": "^1.0.1-beta.1",
+    "@rsbuild/core": "^1.0.1-beta.3",
+    "@rsbuild/plugin-react": "^1.0.1-beta.3",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "typescript": "^5.5.3",
-    "zero-configuration": "^0.16.2"
+    "zero-configuration": "^0.16.3"
   },
   "trustedDependencies": [
     "zero-configuration"

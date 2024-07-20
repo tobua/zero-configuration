@@ -28,7 +28,7 @@ function extendTemplate(option: Option, configuration: Configuration['configurat
   let template = configuration.templates[option.extends]
 
   if (typeof template === 'function') {
-    template = template()
+    template = template(option)
   }
   if (typeof template === 'string') {
     option.extends = template
@@ -49,24 +49,29 @@ function addFolderToFile(file: File | undefined, folder?: string | false) {
   return file
 }
 
-async function parseOption(option: Option, configuration: Configuration['configuration']) {
-  const folder = typeof option === 'object' && option.folder
-  let files: File | (File | undefined)[] | undefined = []
+async function getFiles(option: Option, configuration: Configuration['configuration']) {
   // Template.
   if (typeof option === 'string' && configuration.templates && Object.hasOwn(configuration.templates, option)) {
     const template = configuration.templates[option as keyof typeof configuration.templates]
-    const configurationTemplate = typeof template === 'function' ? template() : template
-    files = configuration.createFile(configurationTemplate)
-  } else if (typeof option === 'string' && (await isExtension(option)) && typeof configuration.extension === 'function') {
-    // File extension.
-    files = configuration.createFile(configuration.extension(option))
-  } else if (option === true) {
-    files = configuration.createFile(configuration.templates?.recommended)
-  } else {
-    // biome-ignore lint/style/noParameterAssign: Easier in this case.
-    option = extendTemplate(option, configuration)
-    files = configuration.createFile(option)
+    const configurationTemplate = typeof template === 'function' ? template(option) : template
+    return configuration.createFile(configurationTemplate)
   }
+
+  if (typeof option === 'string' && (await isExtension(option)) && typeof configuration.extension === 'function') {
+    // File extension.
+    return configuration.createFile(configuration.extension(option))
+  }
+
+  if (option === true) {
+    return configuration.createFile(configuration.templates?.recommended)
+  }
+
+  return configuration.createFile(extendTemplate(option, configuration))
+}
+
+async function parseOption(option: Option, configuration: Configuration['configuration']) {
+  const folder = typeof option === 'object' && option.folder
+  let files: File | (File | undefined)[] | undefined = await getFiles(option, configuration)
 
   if (Array.isArray(files)) {
     files = files.map((file) => {

@@ -1,6 +1,6 @@
 import type { ConfigurationKeys } from './configuration'
 
-export type Template<T> = { [key: string]: T | (() => T) }
+export type Template<T> = { [key: string]: T | ((option?: Option) => T) }
 
 type Dependencies = { [key: string]: string }
 

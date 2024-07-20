@@ -4,6 +4,9 @@
 		"gitignore": ["extends:bundle", "test-results"],
 		"eslint": "eslint-config-airbnb",
 		"typescript": "my-shared-tsconfig/tsconfig.json",
+		"license": {
+			"extends": "public"
+		},
 		"biome": {
 			"extends": "recommended",
 			"linter": {

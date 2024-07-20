@@ -107,7 +107,7 @@ export const metro = object | 'react-native' | File (JavaScript only)
 export const reactNative = object | File
 export const drizzle = 'basic' | object | File
 export const vercel = 'spa' | 'SPA' | 'single-page-application' | 'spa-routes' | 'github-silent' | { extends: 'spa', routes: { ... }}
-export const license = 'MIT' | 'mit'
+export const license = 'MIT' | 'mit' | 'public' | 'cc0' | 'commercial' | 'ccby4' | { extends: 'MIT', authors: [{  name: 'Anyone' }, { name: 'Someone', year: 2022 }]}
 export const ignore = true | 'recommended' | 'bundle' | 'numic' | string[] | ['extends:bundle', ...]
 export const gitignore = // Alias for ignore
 ```

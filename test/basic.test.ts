@@ -43,6 +43,7 @@ test('Adds configuration files for basic file setup.', async () => {
   expect(existsSync(join(fixturePath, 'cypress.config.ts'))).toBe(true)
   expect(existsSync(join(fixturePath, 'drizzle.config.ts'))).toBe(true)
   expect(existsSync(join(fixturePath, 'app.json'))).toBe(true)
+  expect(existsSync(join(fixturePath, 'LICENSE.md'))).toBe(true)
   // TODO should not work with TS.
   expect(existsSync(join(fixturePath, 'eslint.config.js'))).toBe(true)
 
@@ -55,6 +56,10 @@ test('Adds configuration files for basic file setup.', async () => {
   const prettierIgnoreFile = await Bun.file(join(fixturePath, '.prettierignore')).text()
   expect(prettierIgnoreFile).toContain('dist')
   expect(prettierIgnoreFile).toContain('test')
+
+  const license = await Bun.file(join(fixturePath, 'LICENSE.md')).text()
+
+  expect(license).toContain(`${new Date().getFullYear()} Matthias, 2018 Who's this?`)
 })
 
 test('Also parses JavaScript configuration.', async () => {
@@ -83,6 +88,7 @@ test('Extends existing configurations.', async () => {
   expect(existsSync(join(fixturePath, 'biome.json'))).toBe(true)
   expect(existsSync(join(fixturePath, '.vscode/settings.json'))).toBe(true)
   expect(existsSync(join(fixturePath, '.vscode/extensions.json'))).toBe(true)
+  expect(existsSync(join(fixturePath, 'LICENSE.md'))).toBe(true)
 
   const biome = await Bun.file(join(fixturePath, 'biome.json')).json()
 
@@ -100,6 +106,10 @@ test('Extends existing configurations.', async () => {
   expect(gitignore.match(/dist/g)).toHaveLength(1)
   expect(gitignore.match(/node_modules/g)).toHaveLength(1)
   expect(gitignore.match(/extends:bundle/g)).toBe(null)
+
+  const license = await Bun.file(join(fixturePath, 'LICENSE.md')).text()
+
+  expect(license).toContain('No Copyright')
 })
 
 test('Empty project will exit and not add default gitignore.', () => {
@@ -186,6 +196,7 @@ test("Doesn't add deployment files to gitignore in CI.", async () => {
   expect(existsSync(join(fixturePath, 'metro.config.js'))).toBe(true)
   expect(existsSync(join(fixturePath, '.gitignore'))).toBe(true)
   expect(existsSync(join(fixturePath, 'app.json'))).toBe(true)
+  expect(existsSync(join(fixturePath, 'LICENSE.md'))).toBe(true)
 
   const gitignoreFile = await Bun.file(join(fixturePath, '.gitignore')).text()
 
@@ -198,6 +209,10 @@ test("Doesn't add deployment files to gitignore in CI.", async () => {
   expect(biome.linter.rules.style.useNamingConvention).toBe('off')
   expect(biome.linter.rules.style.noInferrableTypes).toBe('off')
   expect(biome.options.maxAllowedComplexity).toBeLessThanOrEqual(10)
+
+  const license = await Bun.file(join(fixturePath, 'LICENSE.md')).text()
+
+  expect(license).toContain('MIT')
 })
 
 test('Also parses JavaScript configuration.', async () => {

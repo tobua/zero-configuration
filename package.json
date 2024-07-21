@@ -7,10 +7,11 @@
   "author": "Matthias Giger",
   "scripts": {
     "check": "biome check --write .",
+    "clean": "git clean -fdx test/fixture",
     "postinstall": "bun index.ts",
-    "types": "tsc",
+    "template": "folders 'template/*' 'update --no-install' --output",
     "test": "bun test ./test/*.test.ts",
-    "clean": "git clean -fdx test/fixture"
+    "types": "tsc"
   },
   "dependencies": {
     "avait": "^1.0.1",

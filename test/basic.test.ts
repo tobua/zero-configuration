@@ -123,7 +123,7 @@ test('Empty project will exit and not add default gitignore.', () => {
   expect(existsSync(join(fixturePath, '.gitignore'))).toBe(false)
 })
 
-test('Creates configuration files for various build-tool configurations.', () => {
+test('Creates configuration files for various build-tool configurations.', async () => {
   const fixturePath = './test/fixture/build'
 
   execSync('bun ./../../../index.ts', {
@@ -135,11 +135,16 @@ test('Creates configuration files for various build-tool configurations.', () =>
   expect(existsSync(join(fixturePath, 'farm.config.ts'))).toBe(true)
   expect(existsSync(join(fixturePath, 'vite.config.ts'))).toBe(true)
   expect(existsSync(join(fixturePath, 'tailwind.config.ts'))).toBe(true)
+  expect(existsSync(join(fixturePath, 'LICENSE.md'))).toBe(true)
   // Only work with JavaScript configuration or serializable configuration.
   // Not serializable in this case.
   expect(existsSync(join(fixturePath, 'next.config.js'))).toBe(false)
   // JavaScript only, but defined in package.json.
   expect(existsSync(join(fixturePath, 'postcss.config.ts'))).toBe(true)
+
+  const license = await Bun.file(join(fixturePath, 'LICENSE.md')).text()
+
+  expect(license).toContain('Copyright (c) Supports String, 2099 Even multiple strings!')
 })
 
 test('Creates configuration files in all workspaces including the root.', async () => {

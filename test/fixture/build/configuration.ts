@@ -59,3 +59,5 @@ export const tailwind = {
   },
   plugins: [],
 }
+
+export const license = { extends: 'recommended', authors: ["Supports String", "2099 Even multiple strings!"] }

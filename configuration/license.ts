@@ -13,7 +13,7 @@ const getNameFromPackageJson = () => {
   return state.packageJson.name
 }
 
-function listAuthors(authors?: { year?: string; name?: string }[]) {
+function listAuthors(authors?: ({ year?: string; name?: string } | string)[]) {
   if (!authors) {
     return `${new Date().getFullYear()} ${getNameFromPackageJson()}`
   }
@@ -24,7 +24,8 @@ function listAuthors(authors?: { year?: string; name?: string }[]) {
   }
 
   return authors.reduce((acc, author, index) => {
-    const authorString = `${author.year || new Date().getFullYear()} ${author.name || getNameFromPackageJson()}`
+    const authorString =
+      typeof author === 'string' ? author : `${author.year || new Date().getFullYear()} ${author.name || getNameFromPackageJson()}`
     return acc + (index > 0 ? ', ' : '') + authorString
   }, '')
 }
@@ -68,39 +69,42 @@ When using or citing the work, you should not imply [endorsement](https://creati
 
 [See the legal code](https://creativecommons.org/publicdomain/zero/1.0/legalcode.en)`
 
-// Creative Commons CC0 1.0 UNIVERSAL license, does not waive rights given under the publishing jurisdiction of the author.
-const commercialLicense = () => `# ATTRIBUTION 4.0 INTERNATIONAL
+// Creative Commons CC BY-NC 4.0 license, contents can be shared with attribution but not used for commercial purposes.
+const commercialLicense = () => `# ATTRIBUTION-NONCOMMERCIAL 4.0 INTERNATIONAL
 
 ## You are free to:
 
-**Share** — copy and redistribute the material in any medium or format for any purpose, even commercially.
+**Share** — copy and redistribute the material in any medium or format
 
-**Adapt** — remix, transform, and build upon the material for any purpose, even commercially.
+**Adapt** — remix, transform, and build upon the material
 
 The licensor cannot revoke these freedoms as long as you follow the license terms.
 
 ## Under the following terms:
 
-**Attribution** — You must give [appropriate credit](https://creativecommons.org/licenses/by/4.0/deed.en#ref-appropriate-credit) , provide a link to the license, and [indicate if changes were made](https://creativecommons.org/licenses/by/4.0/deed.en#ref-indicate-changes). You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+**Attribution** — You must give [appropriate credit](https://creativecommons.org/licenses/by-nc/4.0/deed.en#ref-appropriate-credit), provide a link to the license, and [indicate if changes were made](https://creativecommons.org/licenses/by-nc/4.0/deed.en#ref-indicate-changes). You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
 
-**No additional restrictions** — You may not apply legal terms or [technological measures](https://creativecommons.org/licenses/by/4.0/deed.en#ref-technological-measures) that legally restrict others from doing anything the license permits.
+**NonCommercial** — You may not use the material for [commercial purposes](https://creativecommons.org/licenses/by-nc/4.0/deed.en#ref-commercial-purposes).
+
+**No additional restrictions** — You may not apply legal terms or [technological measures](https://creativecommons.org/licenses/by-nc/4.0/deed.en#ref-technological-measures) that legally restrict others from doing anything the license permits.
 
 ## Notices:
 
-You do not have to comply with the license for elements of the material in the public domain or where your use is permitted by an applicable [exception or limitation](https://creativecommons.org/licenses/by/4.0/deed.en#ref-exception-or-limitation).
+You do not have to comply with the license for elements of the material in the public domain or where your use is permitted by an applicable [exception or limitation](https://creativecommons.org/licenses/by-nc/4.0/deed.en#ref-exception-or-limitation).
 
-No warranties are given. The license may not give you all of the permissions necessary for your intended use. For example, other rights such as [publicity, privacy, or moral rights](https://creativecommons.org/licenses/by/4.0/deed.en#ref-publicity-privacy-or-moral-rights) may limit how you use the material.
+No warranties are given. The license may not give you all of the permissions necessary for your intended use. For example, other rights such as [publicity, privacy, or moral rights](https://creativecommons.org/licenses/by-nc/4.0/deed.en#ref-publicity-privacy-or-moral-rights) may limit how you use the material.
 
-[See the legal code](https://creativecommons.org/licenses/by/4.0/legalcode.en)`
+[See the legal code](https://creativecommons.org/licenses/by-nc/4.0/legalcode.en)`
 
 export const templates: Template<string> = {
+  recommended: mitLicense,
   mit: mitLicense,
   // biome-ignore lint/style/useNamingConvention: Alias for upper case typed license.
   MIT: mitLicense,
   public: publicDomainLicense,
   cc0: publicDomainLicense,
   commercial: commercialLicense,
-  ccby4: commercialLicense,
+  ccbync4: commercialLicense,
 }
 
 export function createFile(content: string | object) {

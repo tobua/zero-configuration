@@ -33,6 +33,15 @@ export const templates = {
       noEmit: true,
     },
   },
+  server: {
+    compilerOptions: {
+      skipLibCheck: true,
+      target: 'ESNext',
+      lib: ['ESNext'],
+      module: 'Preserve',
+      noEmit: true,
+    },
+  },
   'react-native': {
     extends: '@react-native/typescript-config/tsconfig.json',
     compilerOptions: {

@@ -54,6 +54,21 @@ export const templates = {
       maxAllowedComplexity: 10, // Default is 15.
     },
   }),
+  server: base({
+    linter: {
+      rules: {
+        style: {
+          noNamespaceImport: 'off',
+        },
+        suspicious: {
+          noConsoleLog: 'off',
+        },
+        correctness: {
+          noNodejsModules: 'off',
+        },
+      },
+    },
+  }),
 }
 
 export function createFile(configuration: object) {

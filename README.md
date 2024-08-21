@@ -89,7 +89,7 @@ export const tsconfig = [
 ```ts
 export const typescript = true | 'recommended' | 'plugin' | 'web' | 'server' | { extends: 'web', include: ['index.tsx' ] }
 export const tsconfig // Alias for typescript
-export const biome = true | 'recommended' | 'ninja' | 'server' | { extends: 'recommended', files: { ignore: ['demo'] } }
+export const biome = true | 'recommended' | 'ninja' | 'test' | 'server' | { extends: 'recommended', files: { ignore: ['demo'] } }
 export const eslint = true | 'recommended' | [{ rules: { semi: 'error' } }]
 export const prettier = true | 'recommended' | { extends: 'recommended', printWidth: 140, ignore: ['test/fixture'] }
 export const vscode = true | 'biome' | 'prettier-eslint' | { settings: { ... }, extensions: { ... } } | { settings: { 'editor.defaultFormatter': 'biomejs.biome' } }

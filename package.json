@@ -14,7 +14,7 @@
     "types": "tsc"
   },
   "dependencies": {
-    "avait": "^1.0.1",
+    "avait": "^2.1.1",
     "fast-glob": "^3.3.2",
     "logua": "^3.0.3",
     "parse-gitignore": "^2.0.0",
@@ -26,7 +26,7 @@
     "@types/bun": "^1.1.6",
     "@types/parse-gitignore": "^1.0.2",
     "eslint-config-airbnb": "^19.0.4",
-    "typescript": "^5.5.3"
+    "typescript": "^5.5.4"
   },
   "peerDependencies": {
     "typescript": ">= 5"

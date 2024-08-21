@@ -25,7 +25,7 @@ export const farm = {
     lazyCompilation: false,
     persistentCache: false,
     minify: false,
-    treeShake: false
+    treeShake: false,
   },
 }
 
@@ -60,4 +60,14 @@ export const tailwind = {
   plugins: [],
 }
 
-export const license = { extends: 'recommended', authors: ["Supports String", "2099 Even multiple strings!"] }
+export const biome = [
+  {
+    extends: 'ninja',
+  },
+  {
+    extends: 'test',
+    folder: 'test',
+  },
+]
+
+export const license = { extends: 'recommended', authors: ['Supports String', '2099 Even multiple strings!'] }

@@ -54,6 +54,39 @@ export const templates = {
       maxAllowedComplexity: 10, // Default is 15.
     },
   }),
+  test: base({
+    linter: {
+      rules: {
+        style: {
+          useNamingConvention: 'off',
+          useBlockStatements: 'off',
+          noImplicitBoolean: 'off',
+          noDefaultExport: 'off',
+          noNamespace: 'off',
+          noParameterAssign: 'off',
+        },
+        correctness: {
+          noNodejsModules: 'off',
+          noUndeclaredVariables: 'off',
+          noUnusedVariables: 'off',
+        },
+        suspicious: {
+          noConsoleLog: 'off',
+          noExplicitAny: 'off',
+          noSkippedTests: 'off',
+          noEmptyBlockStatements: 'off',
+          noArrayIndexKey: 'off',
+        },
+        complexity: {
+          noForEach: 'off',
+          noBannedTypes: 'off',
+        },
+        performance: {
+          noDelete: 'off',
+        },
+      },
+    },
+  }),
   server: base({
     linter: {
       rules: {

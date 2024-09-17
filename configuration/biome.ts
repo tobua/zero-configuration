@@ -11,6 +11,9 @@ const base = (configuration: object) =>
         enabled: true,
         rules: {
           all: true,
+          correctness: {
+            useImportExtensions: 'off', // Always handled by bundler or runtime.
+          },
         },
       },
       javascript: {
@@ -72,6 +75,7 @@ export const templates = {
         },
         suspicious: {
           noConsoleLog: 'off',
+          noConsole: 'off',
           noExplicitAny: 'off',
           noSkippedTests: 'off',
           noEmptyBlockStatements: 'off',
@@ -95,6 +99,7 @@ export const templates = {
         },
         suspicious: {
           noConsoleLog: 'off',
+          noConsole: 'off',
         },
         correctness: {
           noNodejsModules: 'off',

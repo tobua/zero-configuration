@@ -4,9 +4,9 @@
     "types": "tsc"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.8.3",
-    "typescript": "^5.5.4",
-    "zero-configuration": "^0.17.2"
+    "@biomejs/biome": "^1.9.1",
+    "typescript": "^5.6.2",
+    "zero-configuration": "^0.17.3"
   },
   "peerDependencies": {
     "typescript": ">= 5"

@@ -17,21 +17,21 @@
   },
   "dependencies": {
     "react": "^18.3.1",
-    "react-native": "^0.75.2"
+    "react-native": "^0.75.3"
   },
   "devDependencies": {
-    "@types/jest": "^29.5.12",
-    "@types/react": "^18.3.4",
+    "@types/jest": "^29.5.13",
+    "@types/react": "^18.3.7",
     "@types/react-native": "^0.73.0",
     "@types/react-test-renderer": "^18.3.0",
     "android-sdk-numic-plugin": "^1.0.6",
     "babel-jest": "^29.7.0",
     "icon-numic-plugin": "^1.4.4",
     "jest": "^29.7.0",
-    "numic": "^2.4.1",
+    "numic": "^3.0.1",
     "react-test-renderer": "^18.3.1",
-    "typescript": "^5.5.4",
-    "zero-configuration": "^0.17.2"
+    "typescript": "^5.6.2",
+    "zero-configuration": "^0.17.3"
   },
   "trustedDependencies": [
     "zero-configuration",

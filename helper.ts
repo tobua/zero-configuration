@@ -61,7 +61,7 @@ export async function findConfiguration() {
   const userConfiguration = multipleConfigurations
     ? // Merge package configuration onto file configuration.
       merge(moduleContents as object, state.packageJson.configuration as object)
-    : state.packageJson.configuration ?? (moduleContents as object)
+    : (state.packageJson.configuration ?? (moduleContents as object))
 
   validate(userConfiguration)
   state.options = userConfiguration
@@ -79,7 +79,7 @@ async function addAdditionalGitignoreEntries(file: { name: string; contents: str
     }
   }
 
-  if (addedIgnores.length) {
+  if (addedIgnores.length > 0) {
     await Bun.write(
       root(file.name),
       `${existingFileContents}${existingFileContents.endsWith('\n') ? '' : '\n'}${addedIgnores.join('\n')}\n`,

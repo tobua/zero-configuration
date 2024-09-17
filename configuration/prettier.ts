@@ -26,7 +26,7 @@ export function createFile(configuration: Record<string, any>) {
     },
   ]
 
-  if (Array.isArray(ignores) && ignores.length) {
+  if (Array.isArray(ignores) && ignores.length > 0) {
     files.push({ name: '.prettierignore', contents: ignores.join('\n') })
   }
 

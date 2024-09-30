@@ -22,8 +22,8 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.9.1",
-    "@types/bun": "^1.1.9",
+    "@biomejs/biome": "^1.9.2",
+    "@types/bun": "^1.1.10",
     "@types/parse-gitignore": "^1.0.2",
     "eslint-config-airbnb": "^19.0.4",
     "typescript": "^5.6.2"

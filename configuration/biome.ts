@@ -67,6 +67,7 @@ export const templates = {
           noDefaultExport: 'off',
           noNamespace: 'off',
           noParameterAssign: 'off',
+          noNamespaceImport: 'off',
         },
         correctness: {
           noNodejsModules: 'off',
@@ -87,6 +88,7 @@ export const templates = {
         },
         performance: {
           noDelete: 'off',
+          useTopLevelRegex: 'off', // Often used in playwright tests.
         },
       },
     },

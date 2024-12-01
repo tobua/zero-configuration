@@ -8,15 +8,15 @@
     "watch": "bun build index.tsx --outdir public --watch"
   },
   "dependencies": {
-    "@biomejs/biome": "^1.9.1",
+    "@biomejs/biome": "^1.9.4",
     "@elysiajs/static": "^1.1.1",
-    "@types/react": "^18.3.7",
-    "@types/react-dom": "^18.3.0",
-    "elysia": "^1.1.12",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "elysia": "^1.1.25",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "typescript": "^5.6.2",
-    "zero-configuration": "^0.17.3"
+    "typescript": "^5.7.2",
+    "zero-configuration": "^0.17.6"
   },
   "trustedDependencies": [
     "zero-configuration"

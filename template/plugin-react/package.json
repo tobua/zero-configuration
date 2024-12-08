@@ -5,7 +5,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
-    "@types/react": "^18.3.12",
+    "@types/react": "^19.0.1",
     "typescript": "^5.7.2",
     "zero-configuration": "^0.17.6"
   },

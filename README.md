@@ -22,8 +22,9 @@ bun create now zero-configuration # Default template (React app built and served
 bun create now zero-configuration . web # Fully featured React application using Rsbuild
 bun create now zero-configuration . plugin-bun # TypeScript plugin
 bun create now zero-configuration . plugin-react # Plugin with JSX
-bun create now zero-configuration . desktop # Electron desktop application.
-bun create now zero-configuration . mobile # React Native mobile application for Android and iOS.
+bun create now zero-configuration . server # Elysia & drizzle server with eipiai routes
+bun create now zero-configuration . desktop # Electron desktop application
+bun create now zero-configuration . mobile # React Native mobile application for Android and iOS
 
 # Instead of the "." (current folder) you can also specify any other directory:
 bun create now zero-configuration ./my-react-rsbuild-app web 

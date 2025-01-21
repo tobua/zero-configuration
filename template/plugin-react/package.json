@@ -5,8 +5,8 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
-    "@types/react": "^19.0.1",
-    "typescript": "^5.7.2",
+    "@types/react": "^19.0.7",
+    "typescript": "^5.7.3",
     "zero-configuration": "^0.17.6"
   },
   "peerDependencies": {

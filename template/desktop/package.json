@@ -18,17 +18,17 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
-    "@playwright/test": "^1.49.0",
-    "@rsbuild/core": "^1.1.9",
+    "@playwright/test": "^1.49.1",
+    "@rsbuild/core": "^1.2.0",
     "@rsbuild/plugin-react": "^1.1.0",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "electron": "^33.2.1",
+    "electron": "^34.0.0",
     "electron-builder": "^25.1.8",
-    "playwright": "^1.49.0",
+    "playwright": "^1.49.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "typescript": "^5.7.2",
+    "typescript": "^5.7.3",
     "zero-configuration": "^0.17.6"
   },
   "trustedDependencies": [

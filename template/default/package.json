@@ -9,13 +9,13 @@
   },
   "dependencies": {
     "@biomejs/biome": "^1.9.4",
-    "@elysiajs/static": "^1.1.1",
-    "@types/react": "^19.0.1",
-    "@types/react-dom": "^19.0.1",
-    "elysia": "^1.1.26",
+    "@elysiajs/static": "^1.2.0",
+    "@types/react": "^19.0.7",
+    "@types/react-dom": "^19.0.3",
+    "elysia": "^1.2.10",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "typescript": "^5.7.2",
+    "typescript": "^5.7.3",
     "zero-configuration": "^0.17.6"
   },
   "trustedDependencies": [

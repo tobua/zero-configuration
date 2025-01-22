@@ -2,7 +2,7 @@ import { defineConfig as definePlaywrightConfig } from '@playwright/test'
 import { defineConfig } from '@rsbuild/core'
 import { pluginReact } from '@rsbuild/plugin-react'
 
-export const gitignore = ['node_modules', 'bun.lockb', 'dist', 'executable', 'test-results', 'test/screenshots']
+export const gitignore = ['node_modules', 'bun.lock', 'dist', 'executable', 'test-results', 'test/screenshots']
 export const vscode = 'biome'
 export const biome = {
   extends: 'recommended',

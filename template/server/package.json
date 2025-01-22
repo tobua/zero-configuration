@@ -9,13 +9,13 @@
     "@biomejs/biome": "^1.9.4",
     "@elysiajs/cors": "^1.2.0",
     "@neondatabase/serverless": "^0.10.4",
-    "@types/bun": "^1.1.18",
+    "@types/bun": "^1.2.0",
     "drizzle-kit": "^0.30.2",
     "drizzle-orm": "^0.38.4",
     "eipiai": "^0.5.3",
     "elysia": "^1.2.10",
     "typescript": "^5.7.3",
-    "zero-configuration": "^0.17.6",
+    "zero-configuration": "^0.18.0",
     "zod": "^3.24.1"
   },
   "trustedDependencies": [

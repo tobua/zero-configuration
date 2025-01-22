@@ -37,6 +37,15 @@ const base = (configuration: object) =>
 
 export const templates = {
   recommended: base({}),
+  epic: base({
+    linter: {
+      rules: {
+        correctness: {
+          useJsxKeyInIterable: 'off',
+        },
+      },
+    },
+  }),
   ninja: base({
     linter: {
       rules: {

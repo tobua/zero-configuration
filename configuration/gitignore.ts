@@ -1,6 +1,6 @@
 import type { Template } from '../types'
 
-const base = ['node_modules', 'bun.lockb', '.env']
+const base = ['node_modules', 'bun.lock', '.env']
 
 export const templates: Template<string[]> = {
   recommended: base,

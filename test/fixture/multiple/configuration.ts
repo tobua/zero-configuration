@@ -1,26 +1,26 @@
 export const typescript = [
   {
-    extends: 'recommended'
+    extends: 'recommended',
   },
   {
     folder: 'test',
-    extends: 'plugin'
+    extends: 'plugin',
   },
   {
     folder: 'demo/web',
-    extends: 'web'
+    extends: 'web',
   },
   {
     folder: 'api',
     compilerOptions: {
-      target: 'ESNext'
-    }
+      target: 'ESNext',
+    },
   },
   {
     extends: '../tsconfig.json',
     folder: 'demo/mobile',
     compilerOptions: {
-      moduleResolution: 'bundler'
-    }
-  }
+      moduleResolution: 'bundler',
+    },
+  },
 ]

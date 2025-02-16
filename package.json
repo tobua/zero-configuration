@@ -6,12 +6,12 @@
   "license": "MIT",
   "author": "Matthias Giger",
   "scripts": {
-    "check": "biome check --write .",
+    "check": "biome check --write . && biome check --write --config-path=test ./test/*",
     "clean": "git clean -fdx test/fixture",
     "postinstall": "bun index.ts",
     "template": "folders 'template/*' 'update --no-install' --output",
     "test": "bun test ./test/*.test.ts",
-    "types": "tsc"
+    "types": "tsc && tsc --project ./test/tsconfig.json"
   },
   "dependencies": {
     "avait": "^2.1.1",
@@ -19,11 +19,11 @@
     "logua": "^3.0.3",
     "parse-gitignore": "^2.0.0",
     "ts-deepmerge": "^7.0.2",
-    "zod": "^3.24.1"
+    "zod": "^3.24.2"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
-    "@types/bun": "^1.2.0",
+    "@types/bun": "^1.2.2",
     "@types/parse-gitignore": "^1.0.2",
     "eslint-config-airbnb": "^19.0.4",
     "typescript": "^5.7.3"
@@ -60,42 +60,58 @@
       "test/fixture/**/*"
     ],
     "license": "MIT",
-    "biome": {
-      "extends": "recommended",
-      "linter": {
-        "rules": {
-          "style": {
-            "useBlockStatements": "off",
-            "noNamespaceImport": "off"
-          },
-          "correctness": {
-            "noNodejsModules": "off"
+    "vscode": "biome",
+    "biome": [
+      {
+        "extends": "recommended",
+        "linter": {
+          "rules": {
+            "style": {
+              "useBlockStatements": "off",
+              "noNamespaceImport": "off"
+            },
+            "correctness": {
+              "noNodejsModules": "off"
+            }
           }
+        },
+        "files": {
+          "ignore": [
+            "test/fixture",
+            "template",
+            "test"
+          ]
         }
       },
-      "files": {
-        "ignore": [
-          "test/fixture",
-          "template"
-        ]
+      {
+        "folder": "test",
+        "extends": "test"
       }
-    },
-    "vscode": "biome",
-    "typescript": {
-      "compilerOptions": {
-        "target": "ES2022",
-        "lib": [
-          "DOM",
-          "ES2022"
+    ],
+    "typescript": [
+      {
+        "compilerOptions": {
+          "target": "ES2022",
+          "lib": [
+            "DOM",
+            "ES2022"
+          ]
+        },
+        "extends": "plugin",
+        "files": [
+          "index.ts"
+        ],
+        "exclude": [
+          "test/fixture"
         ]
       },
-      "extends": "plugin",
-      "files": [
-        "index.ts"
-      ],
-      "exclude": [
-        "test/fixture"
-      ]
-    }
+      {
+        "extends": "plugin",
+        "folder": "test",
+        "compilerOptions": {
+          "strict": false
+        }
+      }
+    ]
   }
 }

@@ -194,7 +194,6 @@ test("Doesn't add deployment files to gitignore in CI.", async () => {
     stdio: 'inherit',
     env: {
       ...process.env,
-      // biome-ignore lint/style/useNamingConvention: Casing used by Node.js.
       CI: 'true',
     },
   })

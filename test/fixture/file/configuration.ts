@@ -48,10 +48,10 @@ export const reactNative = {
 }
 
 export const drizzle = {
-  dialect: 'postgresql'
+  dialect: 'postgresql',
 }
 
 export const license = {
   extends: 'MIT',
-  authors: [{ name: 'Matthias' }, { name: "Who's this?", year: 2018 }]
+  authors: [{ name: 'Matthias' }, { name: "Who's this?", year: 2018 }],
 }

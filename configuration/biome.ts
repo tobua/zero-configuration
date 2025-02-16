@@ -99,6 +99,10 @@ export const templates = {
           noDelete: 'off',
           useTopLevelRegex: 'off', // Often used in playwright tests.
         },
+        a11y: {
+          noSvgWithoutTitle: 'off',
+          useButtonType: 'off',
+        },
       },
     },
   }),

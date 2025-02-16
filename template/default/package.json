@@ -10,13 +10,13 @@
   "dependencies": {
     "@biomejs/biome": "^1.9.4",
     "@elysiajs/static": "^1.2.0",
-    "@types/react": "^19.0.7",
+    "@types/react": "^19.0.9",
     "@types/react-dom": "^19.0.3",
-    "elysia": "^1.2.10",
+    "elysia": "^1.2.13",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "typescript": "^5.7.3",
-    "zero-configuration": "^0.18.0"
+    "zero-configuration": "^0.18.1"
   },
   "trustedDependencies": [
     "zero-configuration"

@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "production": "rsbuild build && rsbuild preview",
     "check": "biome check --write .",
     "start": "rsbuild dev --open",
     "types": "tsc"
@@ -8,10 +9,11 @@
     "@biomejs/biome": "^1.9.4",
     "@rsbuild/core": "^1.2.16",
     "@rsbuild/plugin-react": "^1.1.1",
-    "@types/react": "^19.0.10",
-    "@types/react-dom": "^19.0.4",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "@types/bun": "^1.2.4",
+    "epic-jsx": "^0.10.4",
+    "epic-state": "^0.15.6",
+    "epic-tag": "^0.9.2",
+    "optica": "^3.0.1",
     "typescript": "^5.8.2",
     "zero-configuration": "^0.18.2"
   },

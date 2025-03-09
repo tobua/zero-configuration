@@ -1,5 +1,7 @@
+/// <reference types="numic/types" />
 import React from 'react'
-import { SafeAreaView, StatusBar, StyleSheet, View, Text, Image } from 'react-native'
+import { StatusBar, StyleSheet, View, Text, Image } from 'react-native'
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import logo from './logo.png'
 
 const styles = StyleSheet.create({
@@ -31,15 +33,17 @@ const styles = StyleSheet.create({
 
 export function App() {
   return (
-    <SafeAreaView style={styles.safeArea}>
-      <StatusBar barStyle="dark-content" backgroundColor="#FFFFFF" />
-      <View style={styles.wrapper}>
-        <Image style={styles.image} source={logo} />
-        <Text style={styles.text}>
-          Welcome to <Text style={styles.green}>numic</Text>!
-        </Text>
-        <Text style={styles.mode}>Running in {__DEV__ ? 'Debug' : 'Release'} Mode</Text>
-      </View>
-    </SafeAreaView>
+    <SafeAreaProvider>
+      <SafeAreaView style={styles.safeArea}>
+        <StatusBar barStyle="dark-content" backgroundColor="#FFFFFF" />
+        <View style={styles.wrapper}>
+          <Image style={styles.image} source={logo} />
+          <Text style={styles.text}>
+            Welcome to <Text style={styles.green}>numic</Text>!
+          </Text>
+          <Text style={styles.mode}>Running in {__DEV__ ? 'Debug' : 'Release'} Mode</Text>
+        </View>
+      </SafeAreaView>
+    </SafeAreaProvider>
   )
 }

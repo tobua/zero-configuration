@@ -1,9 +1,8 @@
 import { cors } from '@elysiajs/cors'
 import { eq } from 'drizzle-orm'
-import { api, route } from 'eipiai'
+import { api, route, z } from 'eipiai'
 import { eipiai } from 'eipiai/elysia'
 import { Elysia } from 'elysia'
-import { z } from 'zod'
 import { connect } from './database'
 import * as schema from './schema'
 

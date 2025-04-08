@@ -23,10 +23,10 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
-    "@types/bun": "^1.2.4",
+    "@types/bun": "^1.2.8",
     "@types/parse-gitignore": "^1.0.2",
     "eslint-config-airbnb": "^19.0.4",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.3"
   },
   "peerDependencies": {
     "typescript": ">= 5"
@@ -85,18 +85,16 @@
       },
       {
         "folder": "test",
-        "extends": "test"
+        "extends": "test",
+        "files": {
+          "ignore": [
+            "test/fixture"
+          ]
+        }
       }
     ],
     "typescript": [
       {
-        "compilerOptions": {
-          "target": "ES2022",
-          "lib": [
-            "DOM",
-            "ES2022"
-          ]
-        },
         "extends": "plugin",
         "files": [
           "index.ts"
@@ -110,7 +108,10 @@
         "folder": "test",
         "compilerOptions": {
           "strict": false
-        }
+        },
+        "exclude": [
+          "fixture"
+        ]
       }
     ]
   }

@@ -15,8 +15,8 @@ export const templates = {
       // Force type annotations for imports.
       verbatimModuleSyntax: true,
       // Reasonably current target.
-      target: 'ES2020',
-      lib: ['DOM', 'ES2020'],
+      target: 'ES2022',
+      lib: ['DOM', 'ES2022'],
       // Implies module resolution through bundler.
       module: 'Preserve',
       noEmit: true,

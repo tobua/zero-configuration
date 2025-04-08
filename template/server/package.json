@@ -8,15 +8,14 @@
   "dependencies": {
     "@biomejs/biome": "^1.9.4",
     "@elysiajs/cors": "^1.2.0",
-    "@neondatabase/serverless": "^0.10.4",
-    "@types/bun": "^1.2.4",
-    "drizzle-kit": "^0.30.5",
-    "drizzle-orm": "^0.40.0",
-    "eipiai": "^0.6.2",
+    "@neondatabase/serverless": "^1.0.0",
+    "@types/bun": "^1.2.8",
+    "drizzle-kit": "^0.30.6",
+    "drizzle-orm": "^0.41.0",
+    "eipiai": "^0.6.3",
     "elysia": "^1.2.25",
-    "typescript": "^5.8.2",
-    "zero-configuration": "^0.18.2",
-    "zod": "^3.24.2"
+    "typescript": "^5.8.3",
+    "zero-configuration": "^0.19.0"
   },
   "trustedDependencies": [
     "zero-configuration"

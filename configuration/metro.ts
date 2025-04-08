@@ -5,7 +5,7 @@ export const templates = {
   'react-native': {
     resolver: {
       // biome-ignore lint/style/useNamingConvention: This is the required spelling for metro.
-      unstable_enablePackageExports: false,
+      unstable_enablePackageExports: true,
     },
   },
 }

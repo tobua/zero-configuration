@@ -20,6 +20,7 @@ The easiest way to get started is through a template. The following templates wi
 ```sh
 bun create now zero-configuration # Default template (React app built and served with Bun)
 bun create now zero-configuration . web # Fully featured React application using Rsbuild
+bun create now zero-configuration . epic # EPIC Framework (experimental React alternative)
 bun create now zero-configuration . plugin-bun # TypeScript plugin
 bun create now zero-configuration . plugin-react # Plugin with JSX
 bun create now zero-configuration . server # Elysia & drizzle server with eipiai routes

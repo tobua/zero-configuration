@@ -1,9 +1,9 @@
 {
-    "name": "demo-react",
-    "configuration": {
-        "typescript": "plugin",
-        "vite": true,
-        "vscode": "prettier-eslint",
-        "ignore": "bundle"
-    }
+  "name": "demo-react",
+  "configuration": {
+    "typescript": "plugin",
+    "vite": true,
+    "vscode": "prettier-eslint",
+    "ignore": "bundle"
+  }
 }

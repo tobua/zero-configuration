@@ -1,6 +1,6 @@
 {
-    "name": "plugin",
-    "configuration": {
-        "typescript": "plugin"
-    }
+  "name": "plugin",
+  "configuration": {
+    "typescript": "plugin"
+  }
 }

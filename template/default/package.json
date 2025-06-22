@@ -37,9 +37,9 @@
         }
       },
       "files": {
-        "ignore": [
-          "dist",
-          "rsbuild.config.ts"
+        "includes": [
+          "!dist",
+          "!rsbuild.config.ts"
         ]
       }
     },

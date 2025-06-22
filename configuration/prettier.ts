@@ -14,8 +14,6 @@ export const templates: Template<object> = {
 // biome-ignore lint/suspicious/noExplicitAny: Various configuration options.
 export function createFile(configuration: Record<string, any>) {
   const ignores = configuration.ignore
-
-  // biome-ignore lint/performance/noDelete: Not valid prettier property.
   delete configuration.ignore
 
   const files = [

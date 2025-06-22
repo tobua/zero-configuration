@@ -1,10 +1,10 @@
 {
-    "name": "workspaces",
-    "workspaces": [
-        "demo/*",
-        "plugin"
-    ],
-    "configuration": {
-        "typescript": "plugin"
-    }
+  "name": "workspaces",
+  "workspaces": [
+    "demo/*",
+    "plugin"
+  ],
+  "configuration": {
+    "typescript": "plugin"
+  }
 }

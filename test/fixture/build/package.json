@@ -1,10 +1,10 @@
 {
-	"name": "build",
-	"configuration": {
-		"postcss": {
-			"plugins": {
-				"tailwindcss": {}
-			}
-		}
-	}
+  "name": "build",
+  "configuration": {
+    "postcss": {
+      "plugins": {
+        "tailwindcss": {}
+      }
+    }
+  }
 }

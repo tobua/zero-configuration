@@ -1,5 +1,5 @@
 import { neon } from '@neondatabase/serverless'
-import { type NeonHttpDatabase, drizzle } from 'drizzle-orm/neon-http'
+import { drizzle, type NeonHttpDatabase } from 'drizzle-orm/neon-http'
 import * as schema from './schema'
 
 let database: NeonHttpDatabase<typeof schema>

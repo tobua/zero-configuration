@@ -47,7 +47,7 @@ test('Adds configuration files for basic file setup.', async () => {
   // TODO should not work with TS.
   expect(existsSync(join(fixturePath, 'eslint.config.js'))).toBe(true)
 
-  expect(await Bun.file(join(fixturePath, 'biome.json')).text()).not.toContain('recommended')
+  expect(await Bun.file(join(fixturePath, 'biome.json')).text()).not.toContain(': "recommended"')
 
   const cypressConfig = await import(join('..', fixturePath, 'cypress.config.ts'))
   // Configuration not serialized.
@@ -92,8 +92,8 @@ test('Extends existing configurations.', async () => {
 
   const biome = await Bun.file(join(fixturePath, 'biome.json')).json()
 
-  expect(biome.files.ignore[3]).toBe('test/fixture')
-  expect(biome.linter.rules.all).toBe(true)
+  expect(biome.files.includes[3]).toBe('!test/fixture')
+  expect(biome.linter.rules.recommended).toBe(true)
   expect(biome.linter.rules.style.useBlockStatements).toBe('off')
 
   const tsconfig = await Bun.file(join(fixturePath, 'tsconfig.json')).json()
@@ -211,7 +211,7 @@ test("Doesn't add deployment files to gitignore in CI.", async () => {
 
   const biome = await Bun.file(join(fixturePath, 'biome.json')).json()
 
-  expect(biome.linter.rules.all).toBe(true)
+  expect(biome.linter.rules.recommended).toBe(true)
   expect(biome.linter.rules.style.useNamingConvention).toBe('off')
   expect(biome.linter.rules.style.noInferrableTypes).toBe('off')
   expect(biome.options.maxAllowedComplexity).toBeLessThanOrEqual(10)

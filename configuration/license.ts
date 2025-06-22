@@ -99,7 +99,6 @@ No warranties are given. The license may not give you all of the permissions nec
 export const templates: Template<string> = {
   recommended: mitLicense,
   mit: mitLicense,
-  // biome-ignore lint/style/useNamingConvention: Alias for upper case typed license.
   MIT: mitLicense,
   public: publicDomainLicense,
   cc0: publicDomainLicense,

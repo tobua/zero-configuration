@@ -4,15 +4,23 @@ const base = (configuration: object) =>
   merge(
     {
       $schema: 'node_modules/@biomejs/biome/configuration_schema.json',
-      organizeImports: {
-        enabled: true,
-      },
       linter: {
         enabled: true,
+        domains: {
+          react: 'all',
+          project: 'all',
+        },
         rules: {
-          all: true,
+          recommended: true,
           correctness: {
             useImportExtensions: 'off', // Always handled by bundler or runtime.
+          },
+          style: {
+            noParameterAssign: 'error',
+            useNamingConvention: 'info',
+          },
+          nursery: {
+            noImportCycles: 'off',
           },
         },
       },
@@ -25,12 +33,24 @@ const base = (configuration: object) =>
       },
       files: {
         // Bundled dist files will make Biome hang forever.
-        ignore: ['node_modules', 'dist', 'package.json'],
+        includes: ['!node_modules/**', '!dist/**', '!package.json'],
       },
       formatter: {
         lineWidth: 140,
         formatWithErrors: true,
       },
+      overrides: [
+        {
+          includes: ['**/package.json'],
+          json: {
+            formatter: {
+              trailingCommas: 'none',
+              indentStyle: 'space',
+              indentWidth: 2,
+            },
+          },
+        },
+      ],
     },
     configuration,
   )
@@ -39,6 +59,9 @@ export const templates = {
   recommended: base({}),
   epic: base({
     linter: {
+      domains: {
+        react: 'all',
+      },
       rules: {
         correctness: {
           useJsxKeyInIterable: 'off',
@@ -68,6 +91,9 @@ export const templates = {
   }),
   test: base({
     linter: {
+      domains: {
+        test: 'all',
+      },
       rules: {
         style: {
           useNamingConvention: 'off',
@@ -76,7 +102,6 @@ export const templates = {
           noDefaultExport: 'off',
           noNamespace: 'off',
           noParameterAssign: 'off',
-          noNamespaceImport: 'off',
         },
         correctness: {
           noNodejsModules: 'off',
@@ -84,7 +109,6 @@ export const templates = {
           noUnusedVariables: 'off',
         },
         suspicious: {
-          noConsoleLog: 'off',
           noConsole: 'off',
           noExplicitAny: 'off',
           noSkippedTests: 'off',
@@ -98,6 +122,7 @@ export const templates = {
         performance: {
           noDelete: 'off',
           useTopLevelRegex: 'off', // Often used in playwright tests.
+          noNamespaceImport: 'off',
         },
         a11y: {
           noSvgWithoutTitle: 'off',
@@ -109,11 +134,10 @@ export const templates = {
   server: base({
     linter: {
       rules: {
-        style: {
+        performance: {
           noNamespaceImport: 'off',
         },
         suspicious: {
-          noConsoleLog: 'off',
           noConsole: 'off',
         },
         correctness: {
@@ -125,5 +149,8 @@ export const templates = {
 }
 
 export function createFile(configuration: object) {
-  return { name: 'biome.json', contents: JSON.stringify(configuration, null, 2) }
+  return {
+    name: 'biome.json',
+    contents: JSON.stringify(configuration, null, 2),
+  }
 }

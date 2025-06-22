@@ -26,9 +26,13 @@ function removeMatchingKeys(first: object, second: object) {
 }
 
 export function extendConfiguration(type: string, configuration: { extends?: string }) {
-  if (typeof type === 'string' && Object.keys(templates).includes(type) && Object.keys(templates[type]).includes(configuration.extends)) {
+  if (
+    typeof type === 'string' &&
+    Object.keys(templates).includes(type) &&
+    configuration.extends &&
+    Object.keys(templates[type]).includes(configuration.extends)
+  ) {
     const template = templates[type][configuration.extends as string]
-    // biome-ignore lint/performance/noDelete: Properties will be added, extends might cause issues.
     delete configuration.extends
     // Avoid overriding colliding values from configuration.
     removeMatchingKeys(template, configuration)

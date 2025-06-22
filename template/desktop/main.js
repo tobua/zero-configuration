@@ -1,6 +1,5 @@
 import { join } from 'node:path'
-import { BrowserWindow, app } from 'electron'
-import { ipcMain } from 'electron'
+import { app, BrowserWindow, ipcMain } from 'electron'
 
 function createWindow() {
   const mainWindow = new BrowserWindow({
@@ -19,7 +18,7 @@ function createWindow() {
   const messages = []
 
   ipcMain.on('message', (_, message) => {
-    // biome-ignore lint/suspicious/noConsoleLog: Useful for development, as it shows up in the initial console.
+    // biome-ignore lint/suspicious/noConsole: Useful for development, as it shows up in the initial console.
     console.log(`main.js: received message ${message}.`)
     messages.push(message)
     mainWindow.webContents.send('count', messages.length)

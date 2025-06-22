@@ -1,6 +1,6 @@
 /// <reference types="numic/types" />
 import React from 'react'
-import { StatusBar, StyleSheet, View, Text, Image } from 'react-native'
+import { Image, StatusBar, StyleSheet, Text, View } from 'react-native'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import logo from './logo.png'
 

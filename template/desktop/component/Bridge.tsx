@@ -48,7 +48,10 @@ export function Bridge() {
         Send Message
       </Button>
       <div>
-        Count: <span aria-label="count">{count}</span>
+        Count:{' '}
+        <button type="button" aria-label="count">
+          {count}
+        </button>
       </div>
     </form>
   )

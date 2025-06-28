@@ -14,10 +14,12 @@ const base = (configuration: object) =>
           recommended: true,
           correctness: {
             useImportExtensions: 'off', // Always handled by bundler or runtime.
+            noUndeclaredVariables: 'error',
           },
           style: {
             noParameterAssign: 'error',
             useNamingConvention: 'info',
+            noDefaultExport: 'warn',
           },
           nursery: {
             noImportCycles: 'off',

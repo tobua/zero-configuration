@@ -22,7 +22,7 @@
     "zod": "^3.25.67"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.0.4",
+    "@biomejs/biome": "^2.0.6",
     "@types/bun": "^1.2.17",
     "@types/parse-gitignore": "^1.0.2",
     "eslint-config-airbnb": "^19.0.4",
@@ -86,7 +86,7 @@
       {
         "folder": "test",
         "extends": "test",
-		"root": false,
+        "root": false,
         "files": {
           "includes": [
             "*.ts"

@@ -24,6 +24,9 @@ const base = (configuration: object) =>
           nursery: {
             noImportCycles: 'off',
           },
+          suspicious: {
+            noConsole: 'error',
+          },
         },
       },
       javascript: {

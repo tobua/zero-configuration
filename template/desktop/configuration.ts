@@ -7,7 +7,7 @@ export const vscode = 'biome'
 export const biome = {
   extends: 'recommended',
   linter: { rules: { correctness: { noNodejsModules: 'off' } } },
-  files: { ignore: ['executable', 'rsbuild.config.ts', 'playwright.config.ts'] },
+  files: { includes: ['**/*', '!executable'] },
 }
 export const typescript = { extends: 'web', compilerOptions: { types: ['@rsbuild/core/types'] }, include: ['index.tsx'] }
 

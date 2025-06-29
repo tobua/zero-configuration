@@ -38,7 +38,7 @@ export const biome = {
     },
   },
   files: {
-    ignore: ['dist', 'rsbuild.config.ts'],
+    includes: ['**/*', '!rsbuild.config.ts'],
   },
 }
 

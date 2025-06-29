@@ -31,9 +31,9 @@ export const routes = api({
 
 const port = 3000
 
-new Elysia()
+const { server } = new Elysia()
   .use(cors())
   .use(eipiai(routes, { path: 'data' }))
   .listen(port)
 
-console.log(`Server running on port ${port}!`)
+console.log(`Server running on ${server.url.href}!`)

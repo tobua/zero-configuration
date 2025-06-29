@@ -5,7 +5,7 @@ export const vscode = 'biome'
 export const biome = {
   extends: 'server',
   files: {
-    ignore: ['drizzle.config.ts'],
+    includes: ['**/*'],
   },
   linter: {
     rules: {

@@ -15,6 +15,7 @@ const base = (configuration: object) =>
           correctness: {
             useImportExtensions: 'off', // Always handled by bundler or runtime.
             noUndeclaredVariables: 'error',
+            noPrivateImports: 'error',
           },
           style: {
             noParameterAssign: 'error',
@@ -25,7 +26,24 @@ const base = (configuration: object) =>
             noImportCycles: 'off',
           },
           suspicious: {
-            noConsole: 'error',
+            noConsole: {
+              level: 'error',
+              fix: 'none', // Avoid removing on CMD + S in editor through quickfix.biome.
+            },
+            noDuplicateObjectKeys: 'error',
+          },
+          complexity: {
+            noExcessiveCognitiveComplexity: {
+              level: 'warn',
+              options: {
+                maxAllowedComplexity: 15,
+              },
+            },
+            noForEach: 'error',
+            noUselessStringConcat: 'error',
+            noVoid: 'error',
+            useSimplifiedLogicExpression: 'error',
+            useWhile: 'error',
           },
         },
       },

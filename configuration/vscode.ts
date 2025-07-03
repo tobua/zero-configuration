@@ -6,6 +6,7 @@ export const templates: Template<object> = {
     settings: {
       'editor.defaultFormatter': 'biomejs.biome',
       'editor.codeActionsOnSave': {
+        'source.fixAll.biome': 'explicit',
         'quickfix.biome': 'explicit',
         'source.organizeImports.biome': 'explicit',
       },

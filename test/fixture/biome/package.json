@@ -1,0 +1,16 @@
+{
+  "name": "biome",
+  "scripts": {
+    "lint": "biome check --write --verbose ."
+  },
+  "configuration": {
+    "biome": {
+      "extends": "recommended",
+      "files": {
+        "includes": [
+          "**/*"
+        ]
+      }
+    }
+  }
+}

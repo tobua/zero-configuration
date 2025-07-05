@@ -7,7 +7,6 @@ const base = (configuration: object) =>
       linter: {
         enabled: true,
         domains: {
-          react: 'all',
           project: 'all',
         },
         rules: {
@@ -16,6 +15,11 @@ const base = (configuration: object) =>
             useImportExtensions: 'off', // Always handled by bundler or runtime.
             noUndeclaredVariables: 'error',
             noPrivateImports: 'error',
+            noUndeclaredDependencies: 'error',
+            noRenderReturnValue: 'error', // React domain recommended.
+            useJsxKeyInIterable: 'error', // React domain recommended.
+            useHookAtTopLevel: 'error', // React domain recommended.
+            useExhaustiveDependencies: 'error', // React domain recommended.
           },
           style: {
             noParameterAssign: 'error',
@@ -23,7 +27,47 @@ const base = (configuration: object) =>
             noDefaultExport: 'warn',
           },
           nursery: {
-            noImportCycles: 'off',
+            noNestedComponentDefinitions: 'error', // React domain optional.
+            useUniqueElementIds: 'off', // React domain optional.
+            noAwaitInLoop: 'info',
+            noBitwiseOperators: 'off',
+            noConstantBinaryExpression: 'error',
+            noExcessiveLinesPerFunction: 'off', // No need to limit LOC per function.
+            noFloatingPromises: 'warn',
+            noGlobalDirnameFilename: 'error', // Usage outdated.
+            noImplicitCoercion: 'error',
+            noImportCycles: 'warn', // Application usually still works fine.
+            // BETA noMagicNumbers: 'warn',
+            // BETA noMisusedPromises: 'error',
+            noNoninteractiveElementInteractions: 'error',
+            noProcessGlobal: 'warn', // Possibly error in the future.
+            noReactPropAssign: 'error',
+            noSecrets: 'error',
+            noShadow: 'error',
+            noTsIgnore: 'off',
+            noUnassignedVariables: 'error',
+            noUnresolvedImports: 'error',
+            noUselessBackrefInRegex: 'warn',
+            noUselessEscapeInString: 'error',
+            noUselessUndefined: 'error',
+            useAdjacentGetterSetter: 'warn',
+            useConsistentObjectDefinition: 'error',
+            useConsistentResponse: 'error',
+            useExhaustiveSwitchCases: 'warn',
+            useExplicitType: 'off', // Might be useful for plugins to avoid costly inference.
+            useExportsLast: 'off', // Fine to place exports first.
+            useGoogleFontPreconnect: 'error',
+            useIndexOf: 'error',
+            useIterableCallbackReturn: 'error',
+            useJsonImportAttribute: 'off', // Bundler specific, not standardized yet.
+            useNumericSeparators: 'off', // Never do this.
+            useObjectSpread: 'error',
+            useParseIntRadix: 'error',
+            useReadonlyClassProperties: 'error',
+            useSingleJsDocAsterisk: 'error',
+            useSortedClasses: 'off', // Makes no sense to sort classes.
+            useSymbolDescription: 'error',
+            useUnifiedTypeSignature: 'error',
           },
           suspicious: {
             noConsole: {
@@ -36,7 +80,7 @@ const base = (configuration: object) =>
             noExcessiveCognitiveComplexity: {
               level: 'warn',
               options: {
-                maxAllowedComplexity: 15,
+                maxAllowedComplexity: 20,
               },
             },
             noForEach: 'error',
@@ -88,6 +132,7 @@ export const templates = {
       rules: {
         correctness: {
           useJsxKeyInIterable: 'off',
+          noUndeclaredDependencies: 'off', // Absolute imports used.
         },
       },
     },
@@ -105,11 +150,14 @@ export const templates = {
         },
         complexity: {
           noForEach: 'off',
+          noExcessiveCognitiveComplexity: {
+            level: 'warn',
+            options: {
+              maxAllowedComplexity: 10,
+            },
+          },
         },
       },
-    },
-    options: {
-      maxAllowedComplexity: 10, // Default is 15.
     },
   }),
   test: base({

@@ -1,6 +1,6 @@
 import { expect, test } from 'bun:test'
 import { execSync } from 'node:child_process'
-import { existsSync, writeFileSync } from 'node:fs'
+import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 
 test('Lints a project, reports and fixes errors.', async () => {
@@ -8,10 +8,8 @@ test('Lints a project, reports and fixes errors.', async () => {
 
   writeFileSync(
     join(fixturePath, 'index.ts'),
-    `// console.log('Hello, world!')
-
-const count = 10
-let result = count * 2`,
+    `const count = 10
+let result = count * 2;`,
   )
 
   execSync('bun ./../../../index.ts', {
@@ -34,4 +32,9 @@ let result = count * 2`,
   expect(output).toContain('Checked 3 files') // Time can vary.
   expect(output).toContain('Fixed 2 files.')
   expect(output).toContain('Found 1 warning.')
+
+  const fixedContent = readFileSync(join(fixturePath, 'index.ts'), 'utf-8')
+
+  expect(fixedContent).not.toContain('let')
+  expect(fixedContent).not.toContain(';')
 })

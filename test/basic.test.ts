@@ -214,7 +214,7 @@ test("Doesn't add deployment files to gitignore in CI.", async () => {
   expect(biome.linter.rules.recommended).toBe(true)
   expect(biome.linter.rules.style.useNamingConvention).toBe('off')
   expect(biome.linter.rules.style.noInferrableTypes).toBe('off')
-  expect(biome.options.maxAllowedComplexity).toBeLessThanOrEqual(10)
+  expect(biome.linter.rules.complexity.noExcessiveCognitiveComplexity.options.maxAllowedComplexity).toBeLessThanOrEqual(10)
 
   const license = await Bun.file(join(fixturePath, 'LICENSE.md')).text()
 

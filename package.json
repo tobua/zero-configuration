@@ -19,11 +19,11 @@
     "logua": "^3.0.3",
     "parse-gitignore": "^2.0.0",
     "ts-deepmerge": "^7.0.3",
-    "zod": "^3.25.71"
+    "zod": "^3.25.74"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.0.6",
-    "@types/bun": "^1.2.17",
+    "@types/bun": "^1.2.18",
     "@types/parse-gitignore": "^1.0.2",
     "eslint-config-airbnb": "^19.0.4",
     "typescript": "^5.8.3"

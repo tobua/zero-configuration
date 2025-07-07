@@ -2,6 +2,7 @@ import { expect, test } from 'bun:test'
 import { execSync } from 'node:child_process'
 import { existsSync, rmSync } from 'node:fs'
 import { join } from 'node:path'
+import process from 'node:process'
 import Bun from 'bun'
 
 // To include additional files in fixtures remove the ignore entries temporarly from .gitignore in root and fixtures and add the specific files needed.

@@ -52,7 +52,7 @@ export type ConfigurationKeys =
 
 const createFileConfiguration = (name: string) => ({
   extension: (path: string) => ({ extends: path }),
-  createFile: function createFile(configuration: object | string) {
+  createFile(configuration: object | string) {
     let contents = `import { ${name} } from './configuration.${state.extension}'
 import { extendConfiguration } from 'zero-configuration'
 

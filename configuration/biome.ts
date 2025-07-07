@@ -11,6 +11,21 @@ const base = (configuration: object) =>
         },
         rules: {
           recommended: true,
+          // a11y All enabled in recommended.
+          complexity: {
+            noExcessiveCognitiveComplexity: {
+              level: 'warn',
+              options: {
+                maxAllowedComplexity: 20,
+              },
+            },
+            noExcessiveNestedTestSuites: 'error',
+            noForEach: 'error',
+            noUselessStringConcat: 'error',
+            noVoid: 'error',
+            useSimplifiedLogicExpression: 'error',
+            useWhile: 'error',
+          },
           correctness: {
             useImportExtensions: 'off', // Always handled by bundler or runtime.
             noUndeclaredVariables: 'error',
@@ -20,11 +35,6 @@ const base = (configuration: object) =>
             useJsxKeyInIterable: 'error', // React domain recommended.
             useHookAtTopLevel: 'error', // React domain recommended.
             useExhaustiveDependencies: 'error', // React domain recommended.
-          },
-          style: {
-            noParameterAssign: 'error',
-            useNamingConvention: 'info',
-            noDefaultExport: 'warn',
           },
           nursery: {
             noNestedComponentDefinitions: 'error', // React domain optional.
@@ -69,25 +79,80 @@ const base = (configuration: object) =>
             useSymbolDescription: 'error',
             useUnifiedTypeSignature: 'error',
           },
+          performance: {
+            noBarrelFile: 'off', // Difficult choice.
+            noDelete: 'error',
+            noNamespaceImport: 'off', // Makes some patterns much easier.
+            noReExportAll: 'off',
+            useTopLevelRegex: 'error',
+          },
+          // security All enabled in recommended.
+          style: {
+            noCommonJs: 'error', // No brainer at this point.
+            noDefaultExport: 'off', // Decice on project-to-project basis.
+            noDoneCallback: 'error',
+            noEnum: 'off', // Debateable.
+            noExportedImports: 'error',
+            noImplicitBoolean: 'off',
+            noInferrableTypes: 'error',
+            noNamespace: 'error',
+            noNegationElse: 'error',
+            noNestedTernary: 'error',
+            noNonNullAssertion: 'warn',
+            noParameterAssign: 'error', // TODO continue here.
+            noParameterProperties: 'warn',
+            noProcessEnv: 'off',
+            noRestrictedGlobals: 'off',
+            noShoutyConstants: 'error',
+            noSubstr: 'error',
+            noUnusedTemplateLiteral: 'error',
+            noUselessElse: 'error',
+            noYodaExpression: 'error',
+            useAsConstAssertion: 'error',
+            useAtIndex: 'error',
+            useBlockStatements: 'error',
+            useCollapsedElseIf: 'error',
+            useCollapsedIf: 'error',
+            useComponentExportOnlyModules: 'warn',
+            useConsistentArrayType: 'error',
+            useConsistentBuiltinInstantiation: 'error',
+            useConsistentCurlyBraces: 'error',
+            useConsistentMemberAccessibility: 'error',
+            useDefaultParameterLast: 'error',
+            useDefaultSwitchClause: 'warn',
+            useEnumInitializers: 'error',
+            useExplicitLengthCheck: 'error',
+            useFilenamingConvention: 'error', // ???
+            useForOf: 'error',
+            useFragmentSyntax: 'error',
+            useNamingConvention: 'info',
+            useNumberNamespace: 'error',
+            useSelfClosingElements: 'error',
+            useShorthandAssign: 'error',
+            useSingleVarDeclarator: 'off',
+            useThrowNewError: 'error',
+            useThrowOnlyError: 'error',
+            useTrimStartEnd: 'error',
+          },
           suspicious: {
+            noAlert: 'error',
             noConsole: {
               level: 'error',
               fix: 'none', // Avoid removing on CMD + S in editor through quickfix.biome.
             },
-            noDuplicateObjectKeys: 'error',
-          },
-          complexity: {
-            noExcessiveCognitiveComplexity: {
-              level: 'warn',
-              options: {
-                maxAllowedComplexity: 20,
-              },
-            },
-            noForEach: 'error',
-            noUselessStringConcat: 'error',
-            noVoid: 'error',
-            useSimplifiedLogicExpression: 'error',
-            useWhile: 'error',
+            noDuplicateTestHooks: 'error',
+            noEmptyBlockStatements: 'error',
+            noEvolvingTypes: 'error',
+            noExportsInTest: 'error',
+            noFocusedTests: 'error', // Should not be committed.
+            noMisplacedAssertion: 'error',
+            noSkippedTests: 'warn', // Warning is enough.
+            noVar: 'error',
+            useAwait: 'error',
+            useErrorMessage: 'error',
+            useGuardForIn: 'warn',
+            useNumberToFixedDigitsArgument: 'error',
+            useStrictMode: 'off',
           },
         },
       },
@@ -126,9 +191,6 @@ export const templates = {
   recommended: base({}),
   epic: base({
     linter: {
-      domains: {
-        react: 'all',
-      },
       rules: {
         correctness: {
           useJsxKeyInIterable: 'off',

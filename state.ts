@@ -1,4 +1,5 @@
 import { join } from 'node:path'
+import process from 'node:process'
 import Bun from 'bun'
 import type { State } from './types'
 

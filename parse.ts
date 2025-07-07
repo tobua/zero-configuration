@@ -1,5 +1,6 @@
 import { existsSync } from 'node:fs'
 import { join } from 'node:path'
+import process from 'node:process'
 import { it } from 'avait'
 import { merge } from 'ts-deepmerge'
 import type { Configuration, File, Option, Options } from './types'

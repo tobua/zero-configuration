@@ -29,7 +29,7 @@ export const biome = {
     },
   },
   files: {
-    includes: ['**/*', '!rsbuild.config.ts'],
+    includes: ['**/*', '!dist', '!rsbuild.config.ts'],
   },
 }
 

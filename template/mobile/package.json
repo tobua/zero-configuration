@@ -12,18 +12,18 @@
   },
   "dependencies": {
     "react": "^19.1.0",
-    "react-native": "^0.80.0",
-    "react-native-safe-area-context": "^5.5.0"
+    "react-native": "^0.80.1",
+    "react-native-safe-area-context": "^5.5.1"
   },
   "devDependencies": {
     "@types/jest": "^30.0.0",
     "@types/react": "^19.1.8",
     "@types/react-test-renderer": "^19.1.0",
-    "jest": "^30.0.3",
+    "jest": "^30.0.4",
     "numic": "^5.5.0",
     "react-test-renderer": "^19.1.0",
     "typescript": "^5.8.3",
-    "zero-configuration": "^1.0.1"
+    "zero-configuration": "^1.0.3"
   },
   "trustedDependencies": [
     "zero-configuration",

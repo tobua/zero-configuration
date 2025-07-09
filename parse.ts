@@ -15,6 +15,27 @@ const isExtension = async (value: string) => {
   return false
 }
 
+function mergeBiomeIncludes(template: { files?: { includes?: any } }, optionWithoutPluginProperties: { files?: { includes?: any } }) {
+  if (
+    !(
+      Object.hasOwn(template, 'files') &&
+      Object.hasOwn(optionWithoutPluginProperties, 'files') &&
+      template.files &&
+      optionWithoutPluginProperties.files &&
+      Object.hasOwn(template.files, 'includes') &&
+      Object.hasOwn(optionWithoutPluginProperties.files, 'includes')
+    )
+  ) {
+    return optionWithoutPluginProperties
+  }
+
+  template.files.includes = optionWithoutPluginProperties.files.includes
+  // biome-ignore lint/performance/noDelete: Needs delete for proper merge later.
+  delete optionWithoutPluginProperties.files.includes
+
+  return optionWithoutPluginProperties
+}
+
 function extendTemplate(option: Option, configuration: Configuration['configuration']) {
   if (
     typeof option !== 'object' ||
@@ -35,7 +56,10 @@ function extendTemplate(option: Option, configuration: Configuration['configurat
     option.extends = template
   }
   if (typeof template === 'object') {
-    const optionWithoutPluginProperties = Object.fromEntries(Object.entries(option).filter(([key]) => !['extends', 'folder'].includes(key)))
+    let optionWithoutPluginProperties: object = Object.fromEntries(
+      Object.entries(option).filter(([key]) => !['extends', 'folder'].includes(key)),
+    )
+    optionWithoutPluginProperties = mergeBiomeIncludes(template, optionWithoutPluginProperties)
     return merge(template, optionWithoutPluginProperties)
   }
 

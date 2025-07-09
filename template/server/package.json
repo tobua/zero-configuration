@@ -6,16 +6,16 @@
     "database": "drizzle-kit push"
   },
   "dependencies": {
-    "@biomejs/biome": "^2.0.6",
+    "@biomejs/biome": "^2.1.1",
     "@elysiajs/cors": "^1.3.3",
     "@neondatabase/serverless": "^1.0.1",
-    "@types/bun": "^1.2.17",
+    "@types/bun": "^1.2.18",
     "drizzle-kit": "^0.31.4",
     "drizzle-orm": "^0.44.2",
     "eipiai": "^0.7.0",
     "elysia": "^1.3.5",
     "typescript": "^5.8.3",
-    "zero-configuration": "^1.0.1"
+    "zero-configuration": "^1.0.3"
   },
   "trustedDependencies": [
     "zero-configuration"

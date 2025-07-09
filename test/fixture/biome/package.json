@@ -8,7 +8,8 @@
       "extends": "recommended",
       "files": {
         "includes": [
-          "**/*"
+          "**/*",
+          "!dist"
         ]
       }
     }

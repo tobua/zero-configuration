@@ -19,6 +19,8 @@ let result = count * 2;`,
 
   expect(existsSync(join(fixturePath, 'biome.json'))).toBe(true)
   expect(existsSync(join(fixturePath, '.gitignore'))).toBe(true)
+  const biomeFile = await Bun.file(join(fixturePath, 'biome.json')).json()
+  expect(biomeFile.files.includes).toEqual(['**/*', '!dist'])
   const gitignoreFile = await Bun.file(join(fixturePath, '.gitignore')).text()
   expect(gitignoreFile).toContain('biome.json')
 
@@ -29,6 +31,8 @@ let result = count * 2;`,
   })
 
   expect(output).toContain('- index.ts')
+  expect(output).not.toContain('- dist/skip.ts')
+  expect(output).not.toContain('- node_modules/my-plugin/skip.ts')
   expect(output).toContain('Checked 3 files') // Time can vary.
   expect(output).toContain('Fixed 2 files.')
   expect(output).toContain('Found 1 warning.')

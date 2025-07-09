@@ -163,7 +163,7 @@ const base = (configuration: object) =>
       },
       files: {
         // Bundled dist files will make Biome hang forever.
-        includes: ['!node_modules/**', '!dist/**', '!package.json'],
+        includes: ['**/*', '!dist'],
       },
       formatter: {
         lineWidth: 140,

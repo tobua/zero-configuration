@@ -6,9 +6,6 @@ const base = (configuration: object) =>
       $schema: 'node_modules/@biomejs/biome/configuration_schema.json',
       linter: {
         enabled: true,
-        domains: {
-          project: 'all',
-        },
         rules: {
           recommended: true,
           // a11y All enabled in recommended.
@@ -39,7 +36,7 @@ const base = (configuration: object) =>
           nursery: {
             noNestedComponentDefinitions: 'error', // React domain optional.
             useUniqueElementIds: 'off', // React domain optional.
-            noAwaitInLoop: 'info',
+            noAwaitInLoop: 'off', // More of a performance rule.
             noBitwiseOperators: 'off',
             noConstantBinaryExpression: 'error',
             noExcessiveLinesPerFunction: 'off', // No need to limit LOC per function.
@@ -52,11 +49,11 @@ const base = (configuration: object) =>
             noNoninteractiveElementInteractions: 'error',
             noProcessGlobal: 'warn', // Possibly error in the future.
             noReactPropAssign: 'error',
-            noSecrets: 'error',
+            noSecrets: 'off', // Not reliable at all yet.
             noShadow: 'error',
             noTsIgnore: 'off',
             noUnassignedVariables: 'error',
-            noUnresolvedImports: 'error',
+            noUnresolvedImports: 'off', // Doesn't support node dependencies yet, TypeScript does the same checks.
             noUselessBackrefInRegex: 'warn',
             noUselessEscapeInString: 'error',
             noUselessUndefined: 'error',
@@ -85,6 +82,7 @@ const base = (configuration: object) =>
             noNamespaceImport: 'off', // Makes some patterns much easier.
             noReExportAll: 'off',
             useTopLevelRegex: 'error',
+            noDynamicNamespaceImportAccess: 'info',
           },
           // security All enabled in recommended.
           style: {

@@ -1,5 +1,3 @@
-import type { ConfigurationKeys } from './configuration'
-
 export type Template<T> = { [key: string]: T | ((option?: Option) => T) }
 
 type Dependencies = { [key: string]: string }
@@ -36,3 +34,31 @@ export interface State {
   root: boolean
   pendingIgnores: string[]
 }
+
+export type ConfigurationKeys =
+  | 'typescript'
+  | 'tsconfig'
+  | 'biome'
+  | 'eslint'
+  | 'prettier'
+  | 'vscode'
+  | 'playwright'
+  | 'vite'
+  | 'rsbuild'
+  | 'farm'
+  | 'next'
+  | 'vitest'
+  | 'cypress'
+  | 'tailwind'
+  | 'tailwindcss'
+  | 'postcss'
+  | 'babel'
+  | 'metro'
+  | 'react-native'
+  | 'reactNative'
+  | 'drizzle'
+  | 'vercel'
+  | 'license'
+  // Require separate logic, not found in configuraitons below.
+  | 'ignore'
+  | 'gitignore'

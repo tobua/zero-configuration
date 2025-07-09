@@ -18,7 +18,7 @@ const isExtension = async (value: string) => {
 function extendTemplate(option: Option, configuration: Configuration['configuration']) {
   if (
     typeof option !== 'object' ||
-    !(typeof option.extends === 'string' && configuration.templates && Object.hasOwn(configuration.templates, option.extends))
+    !(typeof option.extends === 'string' && configuration.templates && Object.hasOwn(configuration.templates, option.extends.toLowerCase()))
   ) {
     if (typeof option === 'object' && Object.hasOwn(option, 'folder')) {
       option.folder = undefined
@@ -26,7 +26,7 @@ function extendTemplate(option: Option, configuration: Configuration['configurat
     return option
   }
 
-  let template = configuration.templates[option.extends]
+  let template = configuration.templates[option.extends.toLowerCase()]
 
   if (typeof template === 'function') {
     template = template(option)
@@ -52,9 +52,9 @@ function addFolderToFile(file: File | undefined, folder?: string | false) {
 
 async function getFiles(option: Option, configuration: Configuration['configuration']) {
   // Template.
-  if (typeof option === 'string' && configuration.templates && Object.hasOwn(configuration.templates, option)) {
-    const template = configuration.templates[option as keyof typeof configuration.templates]
-    const configurationTemplate = typeof template === 'function' ? template(option) : template
+  if (typeof option === 'string' && configuration.templates && Object.hasOwn(configuration.templates, option.toLowerCase())) {
+    const template = configuration.templates[option.toLowerCase() as keyof typeof configuration.templates]
+    const configurationTemplate = typeof template === 'function' ? template(option.toLowerCase()) : template
     return configuration.createFile(configurationTemplate)
   }
 

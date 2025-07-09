@@ -6,7 +6,7 @@
   "license": "MIT",
   "author": "Matthias Giger",
   "scripts": {
-    "check": "biome check --write .",
+    "check": "bun clean && biome check --write .",
     "clean": "git clean -fdx test/fixture",
     "postinstall": "bun index.ts",
     "template": "folders 'template/*' 'update --no-install' --output",
@@ -19,10 +19,10 @@
     "logua": "^3.0.3",
     "parse-gitignore": "^2.0.0",
     "ts-deepmerge": "^7.0.3",
-    "zod": "^3.25.75"
+    "zod": "^3.25.76"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.0.6",
+    "@biomejs/biome": "^2.1.1",
     "@types/bun": "^1.2.18",
     "@types/parse-gitignore": "^1.0.2",
     "eslint-config-airbnb": "^19.0.4",

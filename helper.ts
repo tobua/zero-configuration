@@ -17,9 +17,9 @@ export const validate = (configuration: unknown) => {
 
   const keys = Object.fromEntries(configurations.map((current) => [current.name, NestedFileSchema]))
 
-  for (const configuration of configurations) {
-    if (configuration.alias) {
-      keys[configuration.alias] = NestedFileSchema
+  for (const currentConfiguration of configurations) {
+    if (currentConfiguration.alias) {
+      keys[currentConfiguration.alias] = NestedFileSchema
     }
   }
 
@@ -92,7 +92,7 @@ const removeDuplicates = (input: string[]) => Array.from(new Set(input))
 export async function writeGitIgnore(ignores: string[]) {
   // For files in specific configuration folders (like .vscode/settings.json), ignore the directory everywhere.
   // biome-ignore lint/style/noParameterAssign: Easier in this case.
-  ignores = ignores.map((ignore) => (ignore.includes('/') ? (ignore.split('/')[0] as string) : ignore))
+  ignores = ignores.map((currentIgnore) => (currentIgnore.includes('/') ? (currentIgnore.split('/')[0] as string) : currentIgnore))
 
   let userIgnores = (state.options.ignore ?? state.options.gitignore ?? []) as string[]
 

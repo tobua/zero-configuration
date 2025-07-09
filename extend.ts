@@ -33,7 +33,7 @@ export function extendConfiguration(type: string, configuration: { extends?: str
     Object.keys(templates[type]).includes(configuration.extends)
   ) {
     const template = templates[type][configuration.extends as string]
-    delete configuration.extends
+    configuration.extends = undefined
     // Avoid overriding colliding values from configuration.
     removeMatchingKeys(template, configuration)
     // Merge template, preserving complex types.

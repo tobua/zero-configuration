@@ -4,9 +4,7 @@ import { state } from '../state'
 export const extension = (path: string) => ({ extends: path })
 
 export function createFile(configuration: object | string) {
-  let contents = `import { postcss } from './configuration.${state.extension}'
-
-export default postcss`
+  let contents = `export { postcss as default } from './configuration.${state.extension}'`
 
   if (state.extension === 'ts') {
     if (typeof configuration === 'object' && isSerializable(configuration)) {

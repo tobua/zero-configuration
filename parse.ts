@@ -15,7 +15,10 @@ const isExtension = async (value: string) => {
   return false
 }
 
-function mergeBiomeIncludes(template: { files?: { includes?: any } }, optionWithoutPluginProperties: { files?: { includes?: any } }) {
+function mergeBiomeIncludes(
+  template: { files?: { includes?: string[] } },
+  optionWithoutPluginProperties: { files?: { includes?: string[] } },
+) {
   if (
     !(
       Object.hasOwn(template, 'files') &&

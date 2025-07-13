@@ -193,6 +193,7 @@ export const templates = {
         correctness: {
           useJsxKeyInIterable: 'off',
           noUndeclaredDependencies: 'off', // Absolute imports used.
+          noNodejsModules: 'error',
         },
       },
     },

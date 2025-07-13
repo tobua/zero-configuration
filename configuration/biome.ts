@@ -47,7 +47,7 @@ const base = (configuration: object) =>
             // BETA noMagicNumbers: 'warn',
             // BETA noMisusedPromises: 'error',
             noNoninteractiveElementInteractions: 'error',
-            noProcessGlobal: 'warn', // Possibly error in the future.
+            noProcessGlobal: 'off', // Importing from Node will not work in client.
             noReactPropAssign: 'error',
             noSecrets: 'off', // Not reliable at all yet.
             noShadow: 'error',
@@ -260,6 +260,9 @@ export const templates = {
           noSvgWithoutTitle: 'off',
           useButtonType: 'off',
         },
+        nursery: {
+          noProcessGlobal: 'warn', // Possibly error in the future.
+        },
       },
     },
   }),
@@ -274,6 +277,9 @@ export const templates = {
         },
         correctness: {
           noNodejsModules: 'off',
+        },
+        nursery: {
+          noProcessGlobal: 'warn', // Possibly error in the future.
         },
       },
     },

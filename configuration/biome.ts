@@ -8,7 +8,9 @@ const base = (configuration: object) =>
         enabled: true,
         rules: {
           recommended: true,
-          // a11y All enabled in recommended.
+          a11y: {
+            noNoninteractiveElementInteractions: 'error',
+          },
           complexity: {
             noExcessiveCognitiveComplexity: {
               level: 'warn',
@@ -22,6 +24,9 @@ const base = (configuration: object) =>
             noVoid: 'error',
             useSimplifiedLogicExpression: 'error',
             useWhile: 'error',
+            noExcessiveLinesPerFunction: 'off', // No need to limit LOC per function.
+            noImplicitCoercions: 'error',
+            useIndexOf: 'error',
           },
           correctness: {
             useImportExtensions: 'off', // Always handled by bundler or runtime.
@@ -32,49 +37,27 @@ const base = (configuration: object) =>
             useJsxKeyInIterable: 'error', // React domain recommended.
             useHookAtTopLevel: 'error', // React domain recommended.
             useExhaustiveDependencies: 'error', // React domain recommended.
-          },
-          nursery: {
             noNestedComponentDefinitions: 'error', // React domain optional.
             useUniqueElementIds: 'off', // React domain optional.
-            noAwaitInLoop: 'off', // More of a performance rule.
-            noBitwiseOperators: 'off',
-            noConstantBinaryExpression: 'error',
-            noExcessiveLinesPerFunction: 'off', // No need to limit LOC per function.
-            noFloatingPromises: 'warn',
             noGlobalDirnameFilename: 'error', // Usage outdated.
-            noImplicitCoercion: 'error',
+            noProcessGlobal: 'off', // Importing from Node will not work in client.
+            noReactPropAssignments: 'error',
+            useJsonImportAttributes: 'off', // Bundler specific, not standardized yet.
+            useParseIntRadix: 'error',
+            useSingleJsDocAsterisk: 'error',
+          },
+          nursery: {
+            noFloatingPromises: 'warn',
             noImportCycles: 'warn', // Application usually still works fine.
             // BETA noMagicNumbers: 'warn',
             // BETA noMisusedPromises: 'error',
-            noNoninteractiveElementInteractions: 'error',
-            noProcessGlobal: 'off', // Importing from Node will not work in client.
-            noReactPropAssign: 'error',
             noSecrets: 'off', // Not reliable at all yet.
             noShadow: 'error',
-            noTsIgnore: 'off',
-            noUnassignedVariables: 'error',
             noUnresolvedImports: 'off', // Doesn't support node dependencies yet, TypeScript does the same checks.
-            noUselessBackrefInRegex: 'warn',
-            noUselessEscapeInString: 'error',
             noUselessUndefined: 'error',
-            useAdjacentGetterSetter: 'warn',
-            useConsistentObjectDefinition: 'error',
-            useConsistentResponse: 'error',
             useExhaustiveSwitchCases: 'warn',
             useExplicitType: 'off', // Might be useful for plugins to avoid costly inference.
-            useExportsLast: 'off', // Fine to place exports first.
-            useGoogleFontPreconnect: 'error',
-            useIndexOf: 'error',
-            useIterableCallbackReturn: 'error',
-            useJsonImportAttribute: 'off', // Bundler specific, not standardized yet.
-            useNumericSeparators: 'off', // Never do this.
-            useObjectSpread: 'error',
-            useParseIntRadix: 'error',
-            useReadonlyClassProperties: 'error',
-            useSingleJsDocAsterisk: 'error',
             useSortedClasses: 'off', // Makes no sense to sort classes.
-            useSymbolDescription: 'error',
-            useUnifiedTypeSignature: 'error',
           },
           performance: {
             noBarrelFile: 'off', // Difficult choice.
@@ -83,6 +66,8 @@ const base = (configuration: object) =>
             noReExportAll: 'off',
             useTopLevelRegex: 'error',
             noDynamicNamespaceImportAccess: 'info',
+            noAwaitInLoops: 'off',
+            useGoogleFontPreconnect: 'error',
           },
           // security All enabled in recommended.
           style: {
@@ -131,6 +116,14 @@ const base = (configuration: object) =>
             useThrowNewError: 'error',
             useThrowOnlyError: 'error',
             useTrimStartEnd: 'error',
+            useGroupedAccessorPairs: 'warn',
+            useConsistentObjectDefinitions: 'error',
+            useExportsLast: 'off', // Fine to place exports first.
+            useNumericSeparators: 'off', // Never do this.
+            useObjectSpread: 'error',
+            useReadonlyClassProperties: 'error',
+            useSymbolDescription: 'error',
+            useUnifiedTypeSignatures: 'error',
           },
           suspicious: {
             noAlert: 'error',
@@ -151,6 +144,14 @@ const base = (configuration: object) =>
             useGuardForIn: 'warn',
             useNumberToFixedDigitsArgument: 'error',
             useStrictMode: 'off',
+            noBitwiseOperators: 'off',
+            noConstantBinaryExpressions: 'error',
+            noTsIgnore: 'off',
+            noUnassignedVariables: 'error',
+            noUselessRegexBackrefs: 'warn',
+            noUselessEscapeInString: 'error',
+            useStaticResponseMethods: 'error',
+            useIterableCallbackReturn: 'error',
           },
         },
       },
@@ -239,6 +240,7 @@ export const templates = {
           noNodejsModules: 'off',
           noUndeclaredVariables: 'off',
           noUnusedVariables: 'off',
+          noProcessGlobal: 'warn', // Possibly error in the future.
         },
         suspicious: {
           noConsole: 'off',
@@ -260,9 +262,6 @@ export const templates = {
           noSvgWithoutTitle: 'off',
           useButtonType: 'off',
         },
-        nursery: {
-          noProcessGlobal: 'warn', // Possibly error in the future.
-        },
       },
     },
   }),
@@ -277,8 +276,6 @@ export const templates = {
         },
         correctness: {
           noNodejsModules: 'off',
-        },
-        nursery: {
           noProcessGlobal: 'warn', // Possibly error in the future.
         },
       },

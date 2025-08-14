@@ -4,10 +4,10 @@
     "types": "tsc"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.1.1",
-    "@types/bun": "^1.2.18",
-    "typescript": "^5.8.3",
-    "zero-configuration": "^1.0.3"
+    "@biomejs/biome": "^2.2.0",
+    "@types/bun": "^1.2.20",
+    "typescript": "^5.9.2",
+    "zero-configuration": "^1.0.5"
   },
   "peerDependencies": {
     "typescript": ">= 5"

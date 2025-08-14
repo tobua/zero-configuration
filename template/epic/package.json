@@ -6,16 +6,16 @@
     "types": "tsc"
   },
   "dependencies": {
-    "@biomejs/biome": "^2.1.1",
-    "@rsbuild/core": "^1.4.5",
-    "@rsbuild/plugin-react": "^1.3.4",
-    "@types/bun": "^1.2.18",
-    "epic-jsx": "^0.10.4",
+    "@biomejs/biome": "^2.2.0",
+    "@rsbuild/core": "^1.4.15",
+    "@rsbuild/plugin-react": "^1.3.5",
+    "@types/bun": "^1.2.20",
+    "epic-jsx": "^0.11.3",
     "epic-state": "^0.17.3",
     "epic-tag": "^0.9.5",
     "optica": "^3.0.1",
-    "typescript": "^5.8.3",
-    "zero-configuration": "^1.0.3"
+    "typescript": "^5.9.2",
+    "zero-configuration": "^1.0.5"
   },
   "trustedDependencies": [
     "zero-configuration"

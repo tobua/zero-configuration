@@ -15,7 +15,7 @@
     "epic-tag": "^0.9.5",
     "optica": "^3.0.1",
     "typescript": "^5.9.2",
-    "zero-configuration": "^1.0.5"
+    "zero-configuration": "^1.0.7"
   },
   "trustedDependencies": [
     "zero-configuration"

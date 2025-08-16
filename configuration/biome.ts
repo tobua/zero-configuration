@@ -49,8 +49,7 @@ const base = (configuration: object) =>
           nursery: {
             noFloatingPromises: 'warn',
             noImportCycles: 'warn', // Application usually still works fine.
-            // BETA noMagicNumbers: 'warn',
-            // BETA noMisusedPromises: 'error',
+            noMisusedPromises: 'error',
             noSecrets: 'off', // Not reliable at all yet.
             noShadow: 'error',
             noUnresolvedImports: 'off', // Doesn't support node dependencies yet, TypeScript does the same checks.
@@ -124,6 +123,7 @@ const base = (configuration: object) =>
             useReadonlyClassProperties: 'error',
             useSymbolDescription: 'error',
             useUnifiedTypeSignatures: 'error',
+            noMagicNumbers: 'warn',
           },
           suspicious: {
             noAlert: 'error',
@@ -270,6 +270,7 @@ export const templates = {
       rules: {
         performance: {
           noNamespaceImport: 'off',
+          noDynamicNamespaceImportAccess: 'off',
         },
         suspicious: {
           noConsole: 'off',

@@ -13,7 +13,7 @@
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "typescript": "^5.9.2",
-    "zero-configuration": "^1.0.7"
+    "zero-configuration": "^1.0.8"
   },
   "trustedDependencies": [
     "zero-configuration"

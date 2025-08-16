@@ -7,7 +7,7 @@
     "@biomejs/biome": "^2.2.0",
     "@types/react": "^19.1.10",
     "typescript": "^5.9.2",
-    "zero-configuration": "^1.0.7"
+    "zero-configuration": "^1.0.8"
   },
   "peerDependencies": {
     "react": ">= 18",

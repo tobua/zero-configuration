@@ -235,6 +235,7 @@ export const templates = {
           noDefaultExport: 'off',
           noNamespace: 'off',
           noParameterAssign: 'off',
+          noMagicNumbers: 'off',
         },
         correctness: {
           noNodejsModules: 'off',

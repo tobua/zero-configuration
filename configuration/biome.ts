@@ -50,7 +50,6 @@ const base = (configuration: object) =>
             noFloatingPromises: 'warn',
             noImportCycles: 'warn', // Application usually still works fine.
             noMisusedPromises: 'error',
-            noSecrets: 'off', // Not reliable at all yet.
             noShadow: 'error',
             noUnresolvedImports: 'off', // Doesn't support node dependencies yet, TypeScript does the same checks.
             noUselessUndefined: 'error',
@@ -124,6 +123,8 @@ const base = (configuration: object) =>
             useSymbolDescription: 'error',
             useUnifiedTypeSignatures: 'error',
             noMagicNumbers: 'warn',
+            useReactFunctionComponents: 'info', // React domain recommended.
+            useConsistentTypeDefinitions: 'off', // Useful, but will require lots of refactoring.
           },
           suspicious: {
             noAlert: 'error',
@@ -152,6 +153,9 @@ const base = (configuration: object) =>
             noUselessEscapeInString: 'error',
             useStaticResponseMethods: 'error',
             useIterableCallbackReturn: 'error',
+          },
+          security: {
+            noSecrets: 'off', // Not reliable at all yet.
           },
         },
       },

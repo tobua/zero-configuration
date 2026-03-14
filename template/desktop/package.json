@@ -17,19 +17,19 @@
     }
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.3.10",
-    "@playwright/test": "^1.57.0",
-    "@rsbuild/core": "^1.6.15",
-    "@rsbuild/plugin-react": "^1.4.2",
+    "@biomejs/biome": "^2.4.7",
+    "@playwright/test": "^1.58.2",
+    "@rsbuild/core": "^1.7.3",
+    "@rsbuild/plugin-react": "^1.4.6",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "electron": "^39.2.7",
-    "electron-builder": "^26.0.12",
-    "playwright": "^1.57.0",
-    "react": "^19.2.3",
-    "react-dom": "^19.2.3",
+    "electron": "^41.0.2",
+    "electron-builder": "^26.8.1",
+    "playwright": "^1.58.2",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
     "typescript": "^5.9.3",
-    "zero-configuration": "^1.0.10"
+    "zero-configuration": "^1.0.11"
   },
   "trustedDependencies": [
     "zero-configuration",

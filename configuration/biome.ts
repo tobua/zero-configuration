@@ -12,6 +12,7 @@ const base = (configuration: object) =>
             noNoninteractiveElementInteractions: 'error',
           },
           complexity: {
+            noUselessUndefined: 'error',
             noExcessiveCognitiveComplexity: {
               level: 'warn',
               options: {
@@ -29,6 +30,7 @@ const base = (configuration: object) =>
             useIndexOf: 'error',
           },
           correctness: {
+            noUnresolvedImports: 'off', // Doesn't support node dependencies yet, TypeScript does the same checks.
             useImportExtensions: 'off', // Always handled by bundler or runtime.
             noUndeclaredVariables: 'error',
             noPrivateImports: 'error',
@@ -48,11 +50,8 @@ const base = (configuration: object) =>
           },
           nursery: {
             noFloatingPromises: 'warn',
-            noImportCycles: 'warn', // Application usually still works fine.
             noMisusedPromises: 'error',
             noShadow: 'error',
-            noUnresolvedImports: 'off', // Doesn't support node dependencies yet, TypeScript does the same checks.
-            noUselessUndefined: 'error',
             useExhaustiveSwitchCases: 'warn',
             useExplicitType: 'off', // Might be useful for plugins to avoid costly inference.
             useSortedClasses: 'off', // Makes no sense to sort classes.
@@ -127,6 +126,7 @@ const base = (configuration: object) =>
             useConsistentTypeDefinitions: 'off', // Useful, but will require lots of refactoring.
           },
           suspicious: {
+            noImportCycles: 'warn', // Application usually still works fine.
             noAlert: 'error',
             noConsole: {
               level: 'error',

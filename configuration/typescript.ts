@@ -25,12 +25,14 @@ export const templates = {
   web: {
     compilerOptions: {
       skipLibCheck: true,
-      baseUrl: '.',
       target: 'ESNext',
       lib: ['DOM', 'ESNext'],
       module: 'Preserve',
       jsx: 'react-jsx',
       noEmit: true,
+      paths: {
+        '*': ['./*'],
+      },
     },
   },
   server: {

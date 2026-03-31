@@ -22,8 +22,8 @@
     "jest": "^30.3.0",
     "numic": "^5.5.4",
     "react-test-renderer": "19.1.0",
-    "typescript": "^5.9.3",
-    "zero-configuration": "^1.0.11"
+    "typescript": "^6.0.2",
+    "zero-configuration": "^1.1.0"
   },
   "trustedDependencies": [
     "zero-configuration",

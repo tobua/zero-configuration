@@ -5,15 +5,15 @@
     "types": "tsc"
   },
   "dependencies": {
-    "@biomejs/biome": "^2.4.7",
-    "@rsbuild/core": "^1.7.3",
+    "@biomejs/biome": "^2.4.10",
+    "@rsbuild/core": "^1.7.5",
     "@rsbuild/plugin-react": "^1.4.6",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
-    "typescript": "^5.9.3",
-    "zero-configuration": "^1.0.11"
+    "typescript": "^6.0.2",
+    "zero-configuration": "^1.1.0"
   },
   "trustedDependencies": [
     "zero-configuration"

@@ -1,0 +1,16 @@
+{
+    "name": "typescript",
+    "scripts": {
+      "types": "tsc"
+    },
+    "configuration": {
+      "tsconfig": {
+        "extends": "web",
+        "compilerOptions": {
+          "paths": {
+            "@/*": ["./modules/*"]
+          }
+        }
+    }
+  }
+}

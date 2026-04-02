@@ -12,8 +12,14 @@ export const state: State = {
   pendingIgnores: [],
 }
 
-export const root = (file: string) =>
-  process.cwd().includes('node_modules') ? join(process.cwd(), '../..', state.directory, file) : join(process.cwd(), state.directory, file)
+export const root = (file: string) => {
+  if (process.cwd().includes('node_modules')) {
+    const inFrontFirstNodeModules = process.cwd().split('node_modules')[0]
+    return join(inFrontFirstNodeModules ?? process.env.INIT_CWD ?? process.cwd(), state.directory, file)
+  }
+
+  return join(process.cwd(), state.directory, file)
+}
 
 export async function reset({ path, root: isRoot }: { path: string; root: boolean }) {
   state.options = {}

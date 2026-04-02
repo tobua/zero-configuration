@@ -13,7 +13,7 @@
     "epic-jsx": "^0.11.3",
     "epic-state": "^0.17.3",
     "epic-tag": "^0.9.5",
-    "optica": "^3.0.1",
+    "optica": "^3.1.1",
     "typescript": "^6.0.2",
     "zero-configuration": "^1.1.0"
   },

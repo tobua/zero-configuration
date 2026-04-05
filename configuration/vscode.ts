@@ -11,6 +11,7 @@ export const templates: Template<object> = {
         'source.organizeImports.biome': 'explicit',
       },
       'editor.formatOnSave': true,
+      'typescript.tsdk': 'node_modules/typescript/lib',
     },
   },
   'prettier-eslint': {

@@ -45,7 +45,7 @@ export const templates = {
     },
   },
   'react-native': {
-    extends: '@react-native/typescript-config/tsconfig.json',
+    extends: '@react-native/typescript-config',
     compilerOptions: {
       module: 'Preserve',
       moduleResolution: 'Bundler',

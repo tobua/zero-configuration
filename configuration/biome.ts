@@ -7,7 +7,7 @@ const base = (configuration: object) =>
       linter: {
         enabled: true,
         rules: {
-          recommended: true,
+          preset: 'recommended',
           a11y: {
             noNoninteractiveElementInteractions: 'error',
           },
@@ -51,7 +51,6 @@ const base = (configuration: object) =>
           nursery: {
             noFloatingPromises: 'warn',
             noMisusedPromises: 'error',
-            noShadow: 'error',
             useExhaustiveSwitchCases: 'warn',
             useExplicitType: 'off', // Might be useful for plugins to avoid costly inference.
             useSortedClasses: 'off', // Makes no sense to sort classes.
@@ -268,6 +267,9 @@ export const templates = {
           useButtonType: 'off',
         },
       },
+    },
+    javascript: {
+      globals: ['Bun'],
     },
   }),
   server: base({

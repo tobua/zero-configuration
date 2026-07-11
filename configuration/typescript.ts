@@ -7,16 +7,18 @@ export const templates = {
   plugin: {
     compilerOptions: {
       // Maximum strictness for compatibility.
-      strict: true,
+      strict: true, // Default as of TypeScript 7, but for clarity.
       noUncheckedIndexedAccess: true,
       noImplicitOverride: true,
+      // Common, avoids issues with configuration objects.
+      exactOptionalPropertyTypes: true,
       // Many existing definitions will error.
       skipLibCheck: true,
       // Force type annotations for imports.
       verbatimModuleSyntax: true,
       // Reasonably current target.
-      target: 'ES2022',
-      lib: ['DOM', 'ES2022'],
+      target: 'ES2024',
+      lib: ['DOM', 'ES2024'],
       // Implies module resolution through bundler.
       module: 'Preserve',
       noEmit: true,

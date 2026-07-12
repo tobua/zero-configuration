@@ -11,13 +11,13 @@ jobs:
       id-token: write
       contents: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+      - uses: actions/checkout@v7
       - uses: oven-sh/setup-bun@v2
       - run: bun install
       - run: bun check
       - run: bun types
       - run: bun run test
-      - name: 📢 Release
-        uses: tobua/release-npm-action@v3
-        with:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - uses: tobua/release-npm-action@v5

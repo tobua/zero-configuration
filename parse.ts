@@ -32,7 +32,7 @@ function mergeBiomeIncludes(
     return optionWithoutPluginProperties
   }
 
-  template.files.includes = optionWithoutPluginProperties.files.includes
+  template.files.includes = optionWithoutPluginProperties.files.includes ?? []
   // biome-ignore lint/performance/noDelete: Needs delete for proper merge later.
   delete optionWithoutPluginProperties.files.includes
 
@@ -45,7 +45,8 @@ function extendTemplate(option: Option, configuration: Configuration['configurat
     !(typeof option.extends === 'string' && configuration.templates && Object.hasOwn(configuration.templates, option.extends.toLowerCase()))
   ) {
     if (typeof option === 'object' && Object.hasOwn(option, 'folder')) {
-      option.folder = undefined
+      // biome-ignore lint/performance/noDelete: Needs delete for types.
+      delete option.folder
     }
     return option
   }

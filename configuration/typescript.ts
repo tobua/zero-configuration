@@ -12,6 +12,7 @@ export const templates = {
       noImplicitOverride: true,
       // Common, avoids issues with configuration objects.
       exactOptionalPropertyTypes: true,
+      strictNullChecks: true,
       // Many existing definitions will error.
       skipLibCheck: true,
       // Force type annotations for imports.

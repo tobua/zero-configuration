@@ -14,7 +14,7 @@
     "types": "tsc && tsc --project ./test/tsconfig.json"
   },
   "dependencies": {
-    "avait": "^2.1.1",
+    "avait": "^2.1.4",
     "fast-glob": "^3.3.3",
     "logua": "^3.0.3",
     "parse-gitignore": "^2.0.0",
@@ -50,9 +50,6 @@
     "webdevelopment",
     "zero-config"
   ],
-  "publishConfig": {
-    "provenance": true
-  },
   "configuration": {
     "gitignore": [
       "extends:recommended",

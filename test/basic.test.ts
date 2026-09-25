@@ -18,6 +18,7 @@ test('Adds configuration files for basic package setup.', async () => {
   expect(existsSync(join(fixturePath, 'prettier.config.js'))).toBe(true)
   expect(existsSync(join(fixturePath, '.prettierignore'))).toBe(true)
   expect(existsSync(join(fixturePath, 'biome.json'))).toBe(true)
+  expect(existsSync(join(fixturePath, 'AGENTS.md'))).toBe(true)
   expect(existsSync(join(fixturePath, 'LICENSE.md'))).toBe(true)
   expect(existsSync(join(fixturePath, 'vercel.json'))).toBe(true)
   expect(existsSync(join(fixturePath, '.gitignore'))).toBe(true)
@@ -44,6 +45,7 @@ test('Adds configuration files for basic file setup.', async () => {
   expect(existsSync(join(fixturePath, 'cypress.config.ts'))).toBe(true)
   expect(existsSync(join(fixturePath, 'drizzle.config.ts'))).toBe(true)
   expect(existsSync(join(fixturePath, 'app.json'))).toBe(true)
+  expect(existsSync(join(fixturePath, 'AGENTS.md'))).toBe(true)
   expect(existsSync(join(fixturePath, 'LICENSE.md'))).toBe(true)
   // TODO should not work with TS.
   expect(existsSync(join(fixturePath, 'eslint.config.js'))).toBe(true)
@@ -57,6 +59,10 @@ test('Adds configuration files for basic file setup.', async () => {
   const prettierIgnoreFile = await Bun.file(join(fixturePath, '.prettierignore')).text()
   expect(prettierIgnoreFile).toContain('dist')
   expect(prettierIgnoreFile).toContain('test')
+
+  const agentsFile = await Bun.file(join(fixturePath, 'AGENTS.md')).text()
+
+  expect(agentsFile).toContain('Project Instructions')
 
   const license = await Bun.file(join(fixturePath, 'LICENSE.md')).text()
 

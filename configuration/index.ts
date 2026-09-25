@@ -1,5 +1,6 @@
 import { state } from '../state'
 import type { Configuration } from '../types'
+import * as ai from './ai'
 import * as babel from './babel'
 import * as biome from './biome'
 import * as cypress from './cypress'
@@ -116,6 +117,10 @@ export const configurations: Configuration[] = [
   {
     name: 'vercel',
     configuration: vercel,
+  },
+  {
+    name: 'ai',
+    configuration: ai,
   },
   {
     name: 'license',

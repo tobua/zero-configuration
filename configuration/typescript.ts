@@ -54,6 +54,16 @@ export const templates = {
       moduleResolution: 'Bundler',
     },
   },
+  test: {
+    compilerOptions: {
+      strict: false,
+      strictNullChecks: false,
+      noUncheckedIndexedAccess: false,
+      exactOptionalPropertyTypes: false,
+      noImplicitOverride: false,
+      types: ['bun'],
+    },
+  },
 }
 
 export const extension = (path: string) => ({ extends: path })

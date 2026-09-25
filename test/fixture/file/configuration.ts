@@ -55,3 +55,5 @@ export const license = {
   extends: 'MIT',
   authors: [{ name: 'Matthias' }, { name: "Who's this?", year: 2018 }],
 }
+
+export const ai = 'bun'

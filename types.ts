@@ -58,6 +58,7 @@ export type ConfigurationKeys =
   | 'reactNative'
   | 'drizzle'
   | 'vercel'
+  | 'ai'
   | 'license'
   // Require separate logic, not found in configuraitons below.
   | 'ignore'

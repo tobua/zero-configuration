@@ -17,6 +17,7 @@
       }
     },
     "playwright": true,
+    "ai": true,
     "license": "MIT",
     "tsconfig": {
       "compilerOptions": {

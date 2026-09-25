@@ -7,6 +7,7 @@ Many web development projects often contain numerous configuration files in the 
 - No configuration files in your source code.
 - Support for **gitignore**, **TypeScript**, **ESLint**, **Prettier**, **Biome**, **VS Code**, **Playwright**, **Cypress**, **Tailwind**, **PostCSS**, **babel**, **Metro**, **Drizzle**, **Vercel** and **Vitest**.
 - Quickly configure bundlers like **Vite**, **Rsbuild** and **Farm**.
+- Generate AI agent instructions: **AGENTS.md**.
 - Generate boilerplate before publishing: **LICENSE.md**.
 - JSON based configuration in `package.json`.
 - Optional typed programmatic interface in `configuration.ts`.

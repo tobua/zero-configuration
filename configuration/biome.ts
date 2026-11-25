@@ -53,7 +53,7 @@ const base = (configuration: object) =>
             noMisusedPromises: 'error',
             useExhaustiveSwitchCases: 'warn',
             useExplicitType: 'off', // Might be useful for plugins to avoid costly inference.
-            useSortedClasses: 'off', // Makes no sense to sort classes.
+            useTailwindSortedClasses: 'off', // Makes no sense to sort classes.
           },
           performance: {
             noBarrelFile: 'off', // Difficult choice.

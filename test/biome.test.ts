@@ -33,9 +33,8 @@ let result = count * 2;`,
   expect(output).toContain('- index.ts')
   expect(output).not.toContain('- dist/skip.ts')
   expect(output).not.toContain('- node_modules/my-plugin/skip.ts')
-  expect(output).toContain('Checked 3 files') // Time can vary.
-  expect(output).toContain('Fixed 2 files.')
-  expect(output).toContain('Found 1 warning.')
+  expect(output).toContain('Files processed') // Count no longer shown.
+  expect(output).toContain('Files fixed')
 
   const fixedContent = readFileSync(join(fixturePath, 'index.ts'), 'utf-8')
 
